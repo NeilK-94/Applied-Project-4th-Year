@@ -1,4 +1,5 @@
-/* Simple Job class
+/**
+ * A model object Job.java
  * 
  */
 
@@ -7,36 +8,37 @@ package ie.gmit.springportal.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+//	The @Document annotation defines an object to be persisted to the MongoDB database
 @Document
 public class Job {
+	//	The @Id annotation is the identifier for every MongoDB document
 	@Id
-	//private Long id;
-	private String userName;
+	private String id;
+	private String employer;
+	private String jobTitle;
 	private String description;
+	
+	
+	//	Can add salary and contract length etc.
 
 	public Job() {
 	}
 
-	public Job(String userName, String description) {
+	public Job(String employer, String jobTitle, String description) {
 		//this.id = id;
-		this.userName = userName;
+		this.employer = employer;
+		this.jobTitle = jobTitle;
 		this.description = description;
+		
 	}
 
-//	public Long getId() {
-//		return id;
-//	}
-//
-//	public void setId(Long id) {
-//		this.id = id;
-//	}
 
-	public String getUserName() {
-		return userName;
+	public String getEmployer() {
+		return employer;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setEmployer(String employer) {
+		this.employer = employer;
 	}
 
 	public String getDescription() {
@@ -46,11 +48,21 @@ public class Job {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	public String getJobTitle() {
+		return jobTitle;
+	}
 
+	public void setJobTitle(String jobTitle) {
+		this.jobTitle = jobTitle;
+	}
+	
 	@Override
 	public String toString() {
-		return "Job [userName=" + userName + ", description=" + description + "]";
+		return "Job [Employer=" + employer + ", Job Title=" + jobTitle + ", Description=" + description + "]";
 	}
+
+	
 	
 
 

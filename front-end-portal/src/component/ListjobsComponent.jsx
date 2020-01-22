@@ -37,7 +37,8 @@ class ListjobsComponent extends Component {
                     <table className="table">
                         <thead>
                             <tr>
-                                <th>Id</th>
+                                <th>Employer</th>
+                                <th>Title</th>
                                 <th>Description</th>
                             </tr>
                         </thead>
@@ -46,7 +47,8 @@ class ListjobsComponent extends Component {
                                 this.state.jobs.map(    //  map allows you to loop around items
                                     job =>  //  a key is used to identify a row
                                         <tr key={job.id}>
-                                            <td>{job.id}</td>
+                                            <td>{job.employer}</td>
+                                            <td>{job.jobTitle}</td>
                                             <td>{job.description}</td>
                                         </tr>
                                 )
