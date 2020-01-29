@@ -5,11 +5,14 @@
 
 package ie.gmit.springportal.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 //	The @Document annotation defines an object to be persisted to the MongoDB database
 @Document
+@XmlRootElement
 public class Job {
 	//	The @Id annotation is the identifier for every MongoDB document
 	@Id
