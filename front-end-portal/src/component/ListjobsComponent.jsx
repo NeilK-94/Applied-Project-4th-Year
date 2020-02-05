@@ -3,8 +3,6 @@
 import React, { Component } from 'react';
 import JobDataService from '../service/JobDataService';
 
-const USER = 'Cisco'
-
 class ListjobsComponent extends Component {
 
     constructor(props) {
@@ -15,12 +13,15 @@ class ListjobsComponent extends Component {
             message: null
         }
         this.refreshJobs = this.refreshJobs.bind(this)
+        this.deleteJobClicked = this.deleteJobClicked.bind(this)
     }
+
     componentDidMount() {   //  React makes componentDidMount be called as soon as the component is mounted
         this.refreshJobs(); //  Call refreshJobs
     }
+
     refreshJobs() {
-        JobDataService.retrieveAllJobs(USER)    //  Make call to the REST API
+        JobDataService.retrieveAllJobs()    //  Make call to the REST API
             .then(  //  Decide what to do once call is made
                 response => {
                     console.log(response);
@@ -29,16 +30,27 @@ class ListjobsComponent extends Component {
             )
     }
 
+    deleteJobClicked(employer) {
+        JobDataService.deleteJob(employer)
+            .then(
+                response => {
+                    this.setState({ message: `Succesfully deleted the job posting` })
+                    this.refreshJobs()
+                }
+            )
+    }
+
     render() {
         return (
             <div className="container">
                 <h3>All Jobs</h3>
+                {this.state.message && <div class="alert alert-success">{this.state.message}</div>}
                 <div className="container">
                     <table className="table">
                         <thead>
                             <tr>
                                 <th>Employer</th>
-                                <th>Title</th>
+                                <th>Job Title</th>
                                 <th>Description</th>
                             </tr>
                         </thead>
@@ -50,6 +62,7 @@ class ListjobsComponent extends Component {
                                             <td>{job.employer}</td>
                                             <td>{job.jobTitle}</td>
                                             <td>{job.description}</td>
+                                            <td><button className="btn btn-warning" onClick={() => this.deleteJobClicked(job.employer)}>Delete</button></td>
                                         </tr>
                                 )
                             }

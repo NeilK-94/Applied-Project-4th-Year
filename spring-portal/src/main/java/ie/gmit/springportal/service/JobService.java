@@ -39,8 +39,11 @@ public class JobService {
 		jobRepository.deleteAll();
 	}
 	//	Delete specific job
-	public void delete(String employer) {
+	public Job delete(String employer) {	//	replace with delete by id
 		Job j = jobRepository.findByEmployer(employer);
 		jobRepository.delete(j);
+		return j;
 	}
+	
+	
 }
