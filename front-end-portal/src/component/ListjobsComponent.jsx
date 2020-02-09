@@ -3,17 +3,20 @@
 import React, { Component } from 'react';
 import JobDataService from '../service/JobDataService';
 
-class ListjobsComponent extends Component {
+class ListJobsComponent extends Component {
 
     constructor(props) {
         super(props)
-         //  To display jobs, need to make them available to the component. We add jobs to the state of                 the component and initialize it in the constructor.
+         //  To display jobs, need to make them available to the component. We add jobs to the state of the component and initialize it in the constructor.
         this.state = { 
             jobs: [],
             message: null
         }
         this.refreshJobs = this.refreshJobs.bind(this)
         this.deleteJobClicked = this.deleteJobClicked.bind(this)
+        this.updateJobClicked = this.updateJobClicked.bind(this)
+        this.addJobClicked = this.addJobClicked.bind(this)
+
     }
 
     componentDidMount() {   //  React makes componentDidMount be called as soon as the component is mounted
@@ -39,6 +42,12 @@ class ListjobsComponent extends Component {
                 }
             )
     }
+    updateJobClicked(employer) {
+        this.props.history.push(`/jobs/${employer}`)
+    }
+    addJobClicked() {
+        this.props.history.push(`/jobs/-1`) 
+    }
 
     render() {
         return (
@@ -52,6 +61,8 @@ class ListjobsComponent extends Component {
                                 <th>Employer</th>
                                 <th>Job Title</th>
                                 <th>Description</th>
+                                <th>Update</th>
+                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -62,15 +73,19 @@ class ListjobsComponent extends Component {
                                             <td>{job.employer}</td>
                                             <td>{job.jobTitle}</td>
                                             <td>{job.description}</td>
+                                            <td><button className="btn btn-success" onClick={() => this.updateJobClicked(job.employer)}>Update</button></td>
                                             <td><button className="btn btn-warning" onClick={() => this.deleteJobClicked(job.employer)}>Delete</button></td>
                                         </tr>
-                                )
+                                )   //  will need to change job.employer to job.id
                             }
                         </tbody>
                     </table>
+                    <div className="row">
+                        <button className="btn btn-success" onClick={this.addJobClicked}>Add</button>
+                    </div>
                 </div>
             </div>
         )
     }
 }
-export default ListjobsComponent
+export default ListJobsComponent
