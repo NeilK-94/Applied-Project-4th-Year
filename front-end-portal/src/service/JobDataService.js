@@ -10,6 +10,9 @@ class JobDataService {
     retrieveAllJobs(name) {
         return axios.get(`${GET_ALL_JOBS_URL}`);   //  Call the REST API with the GET method.
     }
+    retrieveJob(name, employer) {
+        return axios.get(`${JOB_API_URL}/jobs/${employer}`);
+    }
 
     deleteJob(employer) {
         return axios.delete(`${JOB_API_URL}/delete/${employer}`);

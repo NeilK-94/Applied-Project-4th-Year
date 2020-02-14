@@ -55,6 +55,11 @@ class ListJobsComponent extends Component {
                 <h3>All Jobs</h3>
                 {this.state.message && <div class="alert alert-success">{this.state.message}</div>}
                 <div className="container">
+                <br></br>
+                    <div className="row">
+                        <button className="btn btn-success" onClick={this.addJobClicked}>Add</button>
+                    </div>
+                    <br></br>
                     <table className="table">
                         <thead>
                             <tr>
@@ -80,9 +85,6 @@ class ListJobsComponent extends Component {
                             }
                         </tbody>
                     </table>
-                    <div className="row">
-                        <button className="btn btn-success" onClick={this.addJobClicked}>Add</button>
-                    </div>
                 </div>
             </div>
         )

@@ -1,5 +1,6 @@
 package ie.gmit.springportal.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,39 +12,48 @@ import ie.gmit.springportal.repository.JobRepository;
 @Service
 public class JobService {
 	@Autowired
-	private JobRepository jobRepository;	//	Hold a reference to our repository
-	
-	//	Create job
+	private JobRepository jobRepository; // Hold a reference to our repository
+	private static List<Job> jobs = new ArrayList<>();
+
+	// Create job
 	public Job create(String employer, String jobTitle, String description) {
-		return jobRepository.save(new Job(employer, jobTitle, description));	//	create job object then call the save method which is
-																	//	automatically implemented with the repository interface
+		return jobRepository.save(new Job(employer, jobTitle, description)); // create job object then call the save
+																				// method automatically implemented with
+																				// the repository interface
 	}
-	//	Retrieve all jobs
+
+	// Retrieve all jobs
 	public List<Job> retrieveAll() {
-		return jobRepository.findAll();	//	Another mongoRepository interface method
+		return jobRepository.findAll(); // Another mongoRepository interface method
 	}
-	//	Return a list of all jobs offered by a company
-	public List<Job> findAllByEmployer(String employer) {
-		return jobRepository.findAllByEmployer(employer);
-	}
-	//	Update job
+
+	// Update job
 	public Job update(String employer, String jobTitle, String description) {
-		Job j = jobRepository.findByEmployer(employer);	//	First find the job to update
+		Job j = jobRepository.findByEmployer(employer); // First find the job to update
 		j.setJobTitle(jobTitle);
 		j.setDescription(description);
-		//	Not sure if call setUserName yet.
+		// Not sure if call setUserName yet.
 		return jobRepository.save(j);
 	}
-	//	Delete all jobs
+
+	// Delete all jobs
 	public void deleteAll() {
 		jobRepository.deleteAll();
 	}
-	//	Delete specific job
-	public Job delete(String employer) {	//	replace with delete by id
+
+	// Delete specific job
+	public Job delete(String employer) { // replace with delete by id
 		Job j = jobRepository.findByEmployer(employer);
 		jobRepository.delete(j);
 		return j;
 	}
-	
-	
+
+	// Return a list of all jobs offered by a company
+	public List<Job> findAllByEmployer(String employer) {
+		return jobRepository.findAllByEmployer(employer);
+	}
+
+	//
+
+
 }
