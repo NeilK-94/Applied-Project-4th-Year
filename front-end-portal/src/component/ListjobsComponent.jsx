@@ -71,7 +71,7 @@ class ListJobsComponent extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {
+                            {   
                                 this.state.jobs.map(    //  map allows you to loop around items
                                     job =>  //  a key is used to identify a row
                                         <tr key={job.id}>

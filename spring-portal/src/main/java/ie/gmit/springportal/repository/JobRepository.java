@@ -13,6 +13,6 @@ public interface JobRepository extends MongoRepository<Job, String>{	//	Add job 
 	
 	//	We can also add our own operations
 	public Job findByEmployer(String employer);
-	public List<Job> findAllByEmployer(String employer);
+	public List<Job> findAllByEmployer(String employer, String description);
 	public List<Job> findByJobTitle(String jobTitle);
 }

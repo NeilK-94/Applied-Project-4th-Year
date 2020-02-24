@@ -49,11 +49,8 @@ public class JobService {
 	}
 
 	// Return a list of all jobs offered by a company
-	public List<Job> findAllByEmployer(String employer) {
-		return jobRepository.findAllByEmployer(employer);
+	public List<Job> findAllByEmployer(String employer, String description) {
+		return jobRepository.findAllByEmployer(employer, description);
 	}
-
-	//
-
 
 }

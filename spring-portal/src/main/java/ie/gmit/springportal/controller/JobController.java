@@ -6,12 +6,15 @@ package ie.gmit.springportal.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,8 +41,8 @@ public class JobController {
 
 	@RequestMapping(method = RequestMethod.GET, path = "/{employer}/jobs", produces = {
 			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	public List<Job> getAllJobs(@PathVariable String employer) {
-		return jobService.findAllByEmployer(employer);
+	public List<Job> getAllJobs(@PathVariable String employer, String description) {
+		return jobService.findAllByEmployer(employer, description);
 	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "/jobs/", produces = { MediaType.APPLICATION_JSON_VALUE,
@@ -67,13 +70,14 @@ public class JobController {
 		return ResponseEntity.noContent().build();
 	}
 
-	@DeleteMapping("/delete/{employer}")	//	will need to delete by id NOT employer. Employer could have two jobs up..
+	@DeleteMapping("/delete/{employer}") // will need to delete by id NOT employer. Employer could have two jobs up..
 	public ResponseEntity<Void> deleteJob(@PathVariable String employer) {
 		Job j = jobService.delete(employer);
 		if (j != null) {
-			return ResponseEntity.noContent().build();	//	If Request is successful, return no content back.
+			return ResponseEntity.noContent().build(); // If Request is successful, return no content back.
 		}
-		return ResponseEntity.notFound().build();	//	 If delete failed, return error - resource not found.
+		return ResponseEntity.notFound().build(); // If delete failed, return error - resource not found.
 	}
+
 
 }
