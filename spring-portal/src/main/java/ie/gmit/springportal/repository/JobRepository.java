@@ -15,4 +15,5 @@ public interface JobRepository extends MongoRepository<Job, String>{	//	Add job 
 	public Job findByEmployer(String employer);
 	public List<Job> findAllByEmployer(String employer, String description);
 	public List<Job> findByJobTitle(String jobTitle);
+	public Job findById(int jobId);
 }

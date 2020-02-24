@@ -4,6 +4,7 @@ package ie.gmit.springportal.controller;
  * The JobController exposes the REST API endpoints. 
  */
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,8 @@ import ie.gmit.springportal.service.JobService;
 @CrossOrigin(origins = { "http://localhost:3000" })
 @RestController
 public class JobController {
+	
+	private int idCounter = 100;
 
 	@Autowired
 	private JobService jobService;
@@ -35,7 +38,7 @@ public class JobController {
 			MediaType.APPLICATION_XML_VALUE })
 	public String create(@PathVariable String employer, @PathVariable String jobTitle,
 			@PathVariable String description) {
-		Job j = jobService.create(employer, jobTitle, description);
+		Job j = jobService.create(idCounter++, employer, jobTitle, description);
 		return j.toString();
 	}
 
@@ -43,6 +46,13 @@ public class JobController {
 			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public List<Job> getAllJobs(@PathVariable String employer, String description) {
 		return jobService.findAllByEmployer(employer, description);
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, path = "/jobs/{jobId}", produces = {
+			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	public Job getById(@PathVariable int jobId) {
+		return jobService.findById(jobId);
+		
 	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "/jobs/", produces = { MediaType.APPLICATION_JSON_VALUE,
@@ -58,26 +68,29 @@ public class JobController {
 		return j.toString();
 	}
 
-//	@RequestMapping("/delete")
-//	public String delete(@RequestParam String employer) {
-//		jobService.delete(employer);
-//		return "Deleteddddddddddddddddddddddddddddddddddddddddd: " + employer;
-//	}
-
 	@DeleteMapping("/deleteAll")
 	public ResponseEntity<Void> deleteAll() {
 		jobService.deleteAll();
 		return ResponseEntity.noContent().build();
 	}
 
-	@DeleteMapping("/delete/{employer}") // will need to delete by id NOT employer. Employer could have two jobs up..
-	public ResponseEntity<Void> deleteJob(@PathVariable String employer) {
-		Job j = jobService.delete(employer);
-		if (j != null) {
-			return ResponseEntity.noContent().build(); // If Request is successful, return no content back.
-		}
-		return ResponseEntity.notFound().build(); // If delete failed, return error - resource not found.
-	}
+//	@DeleteMapping("/delete/{employer}") // will need to delete by id NOT employer. Employer could have two jobs up..
+//	public ResponseEntity<Void> deleteJob(@PathVariable String employer) {
+//		Job j = jobService.delete(employer);
+//		if (j != null) {
+//			return ResponseEntity.noContent().build(); // If Request is successful, return no content back.
+//		}
+//		return ResponseEntity.notFound().build(); // If delete failed, return error - resource not found.
+//	}
+	
+	@DeleteMapping("/delete/{jobId}")
+	  public ResponseEntity<Void> deleteJob(@PathVariable int jobId) {
+	    Job j = jobService.deleteById(jobId);
+	    if (j != null) {
+	      return ResponseEntity.noContent().build();
+	    }
+	    return ResponseEntity.notFound().build();
+	  }
 
 
 }

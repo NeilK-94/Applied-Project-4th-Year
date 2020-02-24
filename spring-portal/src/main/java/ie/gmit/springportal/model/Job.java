@@ -17,6 +17,7 @@ public class Job {
 	//	The @Id annotation is the identifier for every MongoDB document
 	@Id
 	private String id;
+	private int jobId;
 	private String employer;
 	private String jobTitle;
 	private String description;
@@ -24,17 +25,21 @@ public class Job {
 	
 	//	Can add salary and contract length etc.
 
-	public Job() {
-	}
-
-	public Job(String employer, String jobTitle, String description) {
-		//this.id = id;
+	public Job(int jobId, String employer, String jobTitle, String description) {
+		this.setJobId(jobId);
 		this.employer = employer;
 		this.jobTitle = jobTitle;
 		this.description = description;
 		
 	}
+	
+	public int getJobId() {
+		return jobId;
+	}
 
+	public void setJobId(int jobId) {
+		this.jobId = jobId;
+	}
 
 	public String getEmployer() {
 		return employer;
@@ -59,11 +64,17 @@ public class Job {
 	public void setJobTitle(String jobTitle) {
 		this.jobTitle = jobTitle;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Job [Employer=" + employer + ", Job Title=" + jobTitle + ", Description=" + description + "]";
+		return "Job [jobId=" + jobId + ", employer=" + employer + ", jobTitle=" + jobTitle + ", description="
+				+ description + "]";
 	}
+
+
+
+
+	
 
 	
 	
