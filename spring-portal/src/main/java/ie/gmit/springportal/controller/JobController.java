@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -22,75 +23,43 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ie.gmit.springportal.model.Job;
+import ie.gmit.springportal.model.User;
 import ie.gmit.springportal.service.JobService;
+import ie.gmit.springportal.service.UserService;
 
 //CrossOrigin allows requests from specific origins, in this case, our React address
 @CrossOrigin(origins = { "http://localhost:3000" })
 @RestController
 public class JobController {
-	
-	private int idCounter = 100;
 
 	@Autowired
 	private JobService jobService;
 
-	@PostMapping(path = "/{employer}/{jobTitle}/{description}", produces = { MediaType.APPLICATION_JSON_VALUE,
-			MediaType.APPLICATION_XML_VALUE })
-	public String create(@PathVariable String employer, @PathVariable String jobTitle,
-			@PathVariable String description) {
-		Job j = jobService.create(idCounter++, employer, jobTitle, description);
-		return j.toString();
+	@GetMapping("/jobs")
+	public ResponseEntity<List<Job>> getAllJob() {
+		return ResponseEntity.ok().body(jobService.getAllJob());
 	}
 
-	@RequestMapping(method = RequestMethod.GET, path = "/{employer}/jobs", produces = {
-			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	public List<Job> getAllJobs(@PathVariable String employer, String description) {
-		return jobService.findAllByEmployer(employer, description);
-	}
-	
-	@RequestMapping(method = RequestMethod.GET, path = "/jobs/{jobId}", produces = {
-			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	public Job getById(@PathVariable int jobId) {
-		return jobService.findById(jobId);
-		
+	@GetMapping("/jobs/{id}")
+	public ResponseEntity<Job> getJobById(@PathVariable long id) {
+		return ResponseEntity.ok().body(jobService.getJobById(id));
 	}
 
-	@RequestMapping(method = RequestMethod.GET, path = "/jobs/", produces = { MediaType.APPLICATION_JSON_VALUE,
-			MediaType.APPLICATION_XML_VALUE })
-	public List<Job> getAll() {
-		return jobService.retrieveAll();
+	@PostMapping("/jobs")
+	public ResponseEntity<Job> createJob(@RequestBody Job job) {
+		return ResponseEntity.ok().body(this.jobService.createJob(job));
 	}
 
-	@RequestMapping("/update") // use pathVariable, look into RequestBody
-	public String update(@RequestParam String employer, @RequestParam String jobTitle,
-			@RequestParam String description) {
-		Job j = jobService.update(employer, jobTitle, description);
-		return j.toString();
+	@PutMapping("/jobs/{id}")
+	public ResponseEntity<Job> updateJob(@PathVariable long id, @RequestBody Job job) {
+		job.setId(id);
+		return ResponseEntity.ok().body(this.jobService.updateJob(job));
 	}
 
-	@DeleteMapping("/deleteAll")
-	public ResponseEntity<Void> deleteAll() {
-		jobService.deleteAll();
-		return ResponseEntity.noContent().build();
+	@DeleteMapping("/jobs/{id}")
+	public HttpStatus deleteJob(@PathVariable long id) {
+		this.jobService.deleteJob(id);
+		return HttpStatus.OK;
 	}
-
-//	@DeleteMapping("/delete/{employer}") // will need to delete by id NOT employer. Employer could have two jobs up..
-//	public ResponseEntity<Void> deleteJob(@PathVariable String employer) {
-//		Job j = jobService.delete(employer);
-//		if (j != null) {
-//			return ResponseEntity.noContent().build(); // If Request is successful, return no content back.
-//		}
-//		return ResponseEntity.notFound().build(); // If delete failed, return error - resource not found.
-//	}
-	
-	@DeleteMapping("/delete/{jobId}")
-	  public ResponseEntity<Void> deleteJob(@PathVariable int jobId) {
-	    Job j = jobService.deleteById(jobId);
-	    if (j != null) {
-	      return ResponseEntity.noContent().build();
-	    }
-	    return ResponseEntity.notFound().build();
-	  }
-
 
 }

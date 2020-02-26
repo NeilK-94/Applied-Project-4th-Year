@@ -6,69 +6,68 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import ie.gmit.springportal.exception.ResourceNotFoundException;
 import ie.gmit.springportal.model.Job;
+import ie.gmit.springportal.model.User;
 import ie.gmit.springportal.repository.JobRepository;
+import ie.gmit.springportal.repository.UserRepository;
 
 @Service
+@Transactional
 public class JobService {
-	@Autowired
-	private JobRepository jobRepository; // Hold a reference to our repository
-	private static List<Job> jobs = new ArrayList<>();
 
-//*****************************************************************************************************************************//
-	// Create job
-	public Job create(int jobId, String employer, String jobTitle, String description) {
-		jobs.add(new Job(jobId, employer, jobTitle, description));
-		return jobRepository.save(new Job(jobId, employer, jobTitle, description));
-	}
+    @Autowired
+    private JobRepository jobRepository;
 
-	// Retrieve all jobs
-	public List<Job> retrieveAll() {
-		return jobRepository.findAll();
-	}
+//*******************************************************************************************************//
+    public Job createJob(Job job) {
+        return jobRepository.save(job);
+    }
 
-	// Retrieve by Id
-	public Job findById(int jobId) {
-		return jobRepository.findById(jobId);
+    public Job updateJob(Job job) {
+        Optional < Job > jobDb = this.jobRepository.findById(job.getId());
 
-	}
+        if (jobDb.isPresent()) {
+            Job jobUpdate = jobDb.get();
+            jobUpdate.setId(job.getId());
+            jobUpdate.setEmployer(job.getEmployer());
+            jobUpdate.setJobTitle(job.getJobTitle());
+            jobUpdate.setDescription(job.getDescription());
+            jobUpdate.setSalary(job.getSalary());
+            jobRepository.save(jobUpdate);
+            return jobUpdate;
+        } else {
+            throw new ResourceNotFoundException("Record not found with id : " + job.getId());
+        }
+    }
 
-	// Return a list of all jobs offered by a company
-	public List<Job> findAllByEmployer(String employer, String description) {
-		return jobRepository.findAllByEmployer(employer, description);
-	}
+    public List < Job > getAllJob() {
+        return this.jobRepository.findAll();
+    }
 
-	// Update job
-	public Job update(String employer, String jobTitle, String description) {
-		Job j = jobRepository.findByEmployer(employer); // First find the job to update
-		j.setJobTitle(jobTitle);
-		j.setDescription(description);
-		// Not sure if call setUserName yet.
-		return jobRepository.save(j);
-	}
+    public Job getJobById(long jobId) {
 
-	// Delete all jobs
-	public void deleteAll() {
-		jobRepository.deleteAll();
-	}
+        Optional < Job > jobDb = this.jobRepository.findById(jobId);
 
-	// Delete specific job
-	public Job delete(String employer) { // replace with delete by id
-		Job j = jobRepository.findByEmployer(employer);
-		jobRepository.delete(j);
-		return j;
-	}
+        if (jobDb.isPresent()) {
+            return jobDb.get();
+        } else {
+            throw new ResourceNotFoundException("Record not found with id : " + jobId);
+        }
+    }
 
-	public Job deleteById(int jobId) {
-		Job j = findById(jobId);
-		if (j == null)
-			return null;
-		if (jobs.remove(j)) {
-			return j;
-		}
-		return null;
-	}
-	// *****************************************************************************************************************************//
+    public void deleteJob(long jobId) {
+        Optional < Job > jobDb = this.jobRepository.findById(jobId);
+
+        if (jobDb.isPresent()) {
+            this.jobRepository.delete(jobDb.get());
+        } else {
+            throw new ResourceNotFoundException("Record not found with id : " + jobId);
+        }
+
+    }
+//*******************************************************************************************************//
 
 }

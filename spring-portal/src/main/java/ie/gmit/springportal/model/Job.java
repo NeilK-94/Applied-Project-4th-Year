@@ -5,71 +5,62 @@
 
 package ie.gmit.springportal.model;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 //	The @Document annotation defines an object to be persisted to the MongoDB database
-@Document
-@XmlRootElement
+//@XmlRootElement
+@Document(collection = "jobs")
 public class Job {
 	//	The @Id annotation is the identifier for every MongoDB document
 	@Id
-	private String id;
-	private int jobId;
+    private long id;
 	private String employer;
+	@NotBlank
+    @Size(max = 100)
 	private String jobTitle;
 	private String description;
-	
-	
+	private float salary;
 	//	Can add salary and contract length etc.
-
-	public Job(int jobId, String employer, String jobTitle, String description) {
-		this.setJobId(jobId);
-		this.employer = employer;
-		this.jobTitle = jobTitle;
-		this.description = description;
-		
-	}
 	
-	public int getJobId() {
-		return jobId;
+	public long getId() {
+		return id;
 	}
-
-	public void setJobId(int jobId) {
-		this.jobId = jobId;
+	public void setId(long id) {
+		this.id = id;
 	}
-
 	public String getEmployer() {
 		return employer;
 	}
-
 	public void setEmployer(String employer) {
 		this.employer = employer;
 	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	
 	public String getJobTitle() {
 		return jobTitle;
 	}
-
 	public void setJobTitle(String jobTitle) {
 		this.jobTitle = jobTitle;
 	}
-
-	@Override
-	public String toString() {
-		return "Job [jobId=" + jobId + ", employer=" + employer + ", jobTitle=" + jobTitle + ", description="
-				+ description + "]";
+	public String getDescription() {
+		return description;
 	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public float getSalary() {
+		return salary;
+	}
+	public void setSalary(float salary) {
+		this.salary = salary;
+	}
+	
+	
+
+
 
 
 
