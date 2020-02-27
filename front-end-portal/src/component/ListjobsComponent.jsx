@@ -33,17 +33,18 @@ class ListJobsComponent extends Component {
             )
     }
 
-    deleteJobClicked(employer) {
-        JobDataService.deleteJob(employer)
+    deleteJobClicked(id) {
+        JobDataService.deleteJob(id)
             .then(
                 response => {
+                    console.log(response);
                     this.setState({ message: `Succesfully deleted the job posting` })
                     this.refreshJobs()
                 }
             )
     }
-    updateJobClicked(employer) {
-        this.props.history.push(`/jobs/${employer}`)
+    updateJobClicked(id) {
+        this.props.history.push(`/jobs/${id}`)
     }
     addJobClicked() {
         this.props.history.push(`/jobs/-1`) 
@@ -78,8 +79,8 @@ class ListJobsComponent extends Component {
                                             <td>{job.employer}</td>
                                             <td>{job.jobTitle}</td>
                                             <td>{job.description}</td>
-                                            <td><button className="btn btn-success" onClick={() => this.updateJobClicked(job.employer)}>Update</button></td>
-                                            <td><button className="btn btn-warning" onClick={() => this.deleteJobClicked(job.employer)}>Delete</button></td>
+                                            <td><button className="btn btn-success" onClick={() => this.updateJobClicked(job.id)}>Update</button></td>
+                                            <td><button className="btn btn-warning" onClick={() => this.deleteJobClicked(job.id)}>Delete</button></td>
                                         </tr>
                                 )   //  will need to change job.employer to job.id
                             }
