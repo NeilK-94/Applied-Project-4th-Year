@@ -14,5 +14,11 @@ class JobDataService {
     deleteJob(id) {
         return axios.delete(`${GET_ALL_JOBS_URL}${id}`);
     }
+    updateJob(name, id, job) {
+        return axios.put(`${GET_ALL_JOBS_URL}${id}`, job);
+    }
+    createJob(name, job) {
+        return axios.post(`${GET_ALL_JOBS_URL}`, job);
+    }
 }
 export default new JobDataService() //  create an instance of JobDataService and make it available for other components.

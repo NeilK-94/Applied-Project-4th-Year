@@ -35,18 +35,18 @@ class JobComponent extends Component {
   }
 
   onSubmit(values) {
-    // let employer = this.state
-    // let job = {
-    //     id: this.state.id,
-    //     description: values.description
-    // }
-    // if (this.state.id === -1) {
-    //     JobDataService.createJob(employer, job)
-    //         .then(() => this.props.history.push('/jobs'))
-    // } else {
-    //     JobDataService.updateJob(employer, this.state.id, job)
-    //         .then(() => this.props.history.push('/jobs'))
-    // }
+    let employer = this.state.employer
+    let job = {
+        id: this.state.id,
+        description: values.description
+    }
+    if (this.state.id === -1) {
+        JobDataService.createJob(employer, job)
+            .then(() => this.props.history.push('/jobs'))
+    } else {
+        JobDataService.updateJob(employer, this.state.id, job)
+            .then(() => this.props.history.push('/jobs'))
+    }
     console.log(values);
   }
 
