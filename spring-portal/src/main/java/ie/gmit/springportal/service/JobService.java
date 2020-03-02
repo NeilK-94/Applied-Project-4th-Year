@@ -67,6 +67,10 @@ public class JobService {
         }
 
     }
+    
+    public void deleteAllJobs() {
+    	jobRepository.deleteAll();
+    }
 //*******************************************************************************************************//
 
 }

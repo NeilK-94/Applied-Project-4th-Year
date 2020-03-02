@@ -8,56 +8,66 @@ class JobComponent extends Component {
 
       this.state = {
         id: this.props.match.params.id,
-          description: ''
+        employer: this.props.match.employer,
+        description: ''
       }
       this.onSubmit = this.onSubmit.bind(this)
       this.validate = this.validate.bind(this)
   }
   componentDidMount() {
-      console.log(this.state.id)
-      if (this.state.id == -1) {
+
+      if (this.state.id === -1) {
           return
       }
       JobDataService.retrieveJob(this.state.employer, this.state.id)
       .then(response => this.setState({
-          description: response.data.description
+          description: response.data.description,
+          employer: response.data.employer,
+          jobTitle: response.data.jobTitle
           }))
   }
 
+  //    Error handling for form
   validate(values) {
     let errors = {}
     if (!values.description) {
         errors.description = 'Enter a description'
     } else if (values.description.length < 5) {
-        errors.description = 'Enter atleast 5 characters in description'
+        errors.description = 'Description must be at least 5 characters long'
     }
     return errors
   }
 
   onSubmit(values) {
     let employer = this.state.employer
+    let id = this.state.id
+    let jobTitle = this.state.jobTitle
     let job = {
         id: this.state.id,
+        employer: this.state.employer,
+        jobTitle: this.state.jobTitle,
         description: values.description
     }
+    //  For create, if getting promise error check params in data service. 
+
     if (this.state.id === -1) {
-        JobDataService.createJob(employer, job)
+        JobDataService.createJob(jobTitle, employer, id, job)
             .then(() => this.props.history.push('/jobs'))
     } else {
-        JobDataService.updateJob(employer, this.state.id, job)
+        JobDataService.updateJob(jobTitle, employer, id, job)
             .then(() => this.props.history.push('/jobs'))
     }
     console.log(values);
   }
 
   render() {
-    let { description, id } = this.state
+    let { description, id, employer, jobTitle } = this.state
     return (
-        <div>
-            <h3>Job</h3>
+        <div>            
+            <h3>Update A Job</h3>
             <div className="container">
                 <Formik
-                    initialValues={{}}
+                    initialValues={{id: id, description: description, employer: employer, jobTitle: jobTitle}}
                     onSubmit={this.onSubmit}
                     validateOnChange={false}
                     validateOnBlur={false}
@@ -74,10 +84,25 @@ class JobComponent extends Component {
                                     <Field className="form-control" type="text" name="id" disabled />
                                 </fieldset>
                                 <fieldset className="form-group">
+                                    <label>Employer</label>
+                                    <Field className="form-control" type="text" name="employer" />
+                                </fieldset>
+                                <fieldset className="form-group">
+                                    <label>Job Title</label>
+                                    <Field className="form-control" type="text" name="jobTitle" />
+                                </fieldset>
+                                <fieldset className="form-group">
                                     <label>Description</label>
                                     <Field className="form-control" type="text" name="description" />
                                 </fieldset>
-                                <button className="btn btn-success" type="submit">Save</button>
+                                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                                    <div class="btn-group mr-2" role="group" aria-label="First group">
+                                        <button className="btn btn-success" type="submit">Save</button>
+                                    </div>
+                                    <div class="btn-group mr-2" role="group" aria-label="Second group">
+                                        <button className="btn btn-sm" type="back">Back</button>
+                                    </div>
+                                </div>
                             </Form>
                         )
                     }

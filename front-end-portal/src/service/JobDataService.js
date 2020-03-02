@@ -8,16 +8,16 @@ class JobDataService {
     retrieveAllJobs() {
         return axios.get(`${GET_ALL_JOBS_URL}`);   //  Call the /jobs endpoint to retrieve all jobs
     }
-    retrieveJob(name, id) {
+    retrieveJob(employer, id) {
         return axios.get(`${GET_ALL_JOBS_URL}${id}`);
     }
     deleteJob(id) {
         return axios.delete(`${GET_ALL_JOBS_URL}${id}`);
     }
-    updateJob(name, id, job) {
+    updateJob(jobTitle, employer, id, job) {
         return axios.put(`${GET_ALL_JOBS_URL}${id}`, job);
     }
-    createJob(name, job) {
+    createJob(jobTitle, employer, id, job) {
         return axios.post(`${GET_ALL_JOBS_URL}`, job);
     }
 }

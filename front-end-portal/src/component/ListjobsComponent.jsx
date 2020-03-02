@@ -83,7 +83,7 @@ class ListJobsComponent extends Component {
                                             <td><button className="btn btn-success" onClick={() => this.updateJobClicked(job.id)}>Update</button></td>
                                             <td><button className="btn btn-warning" onClick={() => this.deleteJobClicked(job.id)}>Delete</button></td>
                                         </tr>
-                                )   //  will need to change job.employer to job.id
+                                )
                             }
                         </tbody>
                     </table>

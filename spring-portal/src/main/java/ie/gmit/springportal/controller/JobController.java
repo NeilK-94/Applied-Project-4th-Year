@@ -61,5 +61,12 @@ public class JobController {
 		this.jobService.deleteJob(id);
 		return HttpStatus.OK;
 	}
+	
+	@DeleteMapping("/jobs")
+	public HttpStatus deleteAllJobs() {
+		this.jobService.deleteAllJobs();
+		return HttpStatus.OK;
+	}
+	
 
 }
