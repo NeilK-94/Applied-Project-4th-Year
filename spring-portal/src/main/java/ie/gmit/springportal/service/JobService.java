@@ -48,7 +48,6 @@ public class JobService {
     }
 
     public Job getJobById(long jobId) {
-
         Optional < Job > jobDb = this.jobRepository.findById(jobId);
 
         if (jobDb.isPresent()) {

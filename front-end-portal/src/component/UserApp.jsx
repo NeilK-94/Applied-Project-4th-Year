@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import ListJobsComponent from './ListJobsComponent';
 import JobComponent from './JobComponent';
 import ListUsersComponent from './ListUsersComponent';
-//import JobComponent from './JobComponent';
+import UserComponent from './UserComponent';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 //  Will change so '/' has a welcome, index page. from there you're pointed to others
@@ -20,7 +20,7 @@ class UserApp extends Component {
                         <Route path="/jobs" exact component={ListJobsComponent} />
                         <Route path="/jobs/:id" component={JobComponent} />
                         <Route path="/users" component={ListUsersComponent} />
-                        <Route path="/users/:id" component={JobComponent} />
+                        <Route path="/users/:id" component={UserComponent} />
                     </Switch>
                 </>
             </Router>

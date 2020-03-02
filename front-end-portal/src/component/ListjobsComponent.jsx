@@ -44,6 +44,7 @@ class ListJobsComponent extends Component {
             )
     }
     updateJobClicked(id) {
+        //console.log('update ' + id)
         this.props.history.push(`/jobs/${id}`)
     }
     addJobClicked() {
