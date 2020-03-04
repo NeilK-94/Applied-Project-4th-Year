@@ -4,6 +4,7 @@
 import React, { Component } from 'react';
 import ListJobsComponent from './ListJobsComponent';
 import JobComponent from './JobComponent';
+import NewJobComponent from './NewJobComponent';
 import ListUsersComponent from './ListUsersComponent';
 import UserComponent from './UserComponent';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -19,6 +20,7 @@ class UserApp extends Component {
                         <Route path="/" exact component={ListJobsComponent} />
                         <Route path="/jobs" exact component={ListJobsComponent} />
                         <Route path="/jobs/:id" component={JobComponent} />
+                        <Route path="/jobs/new" component={NewJobComponent} />
                         <Route path="/users" component={ListUsersComponent} />
                         <Route path="/users/:id" component={UserComponent} />
                     </Switch>

@@ -48,7 +48,7 @@ class ListJobsComponent extends Component {
         this.props.history.push(`/jobs/${id}`)
     }
     addJobClicked() {
-        this.props.history.push(`/jobs/-1`) 
+        this.props.history.push(`/jobs/new`) 
     }
 
     render() {

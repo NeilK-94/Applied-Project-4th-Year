@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import JobDataService from '../service/JobDataService';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 
-class JobComponent extends Component {
+class NewJobComponent extends Component {
   constructor(props) {
       super(props)
 
@@ -44,15 +44,15 @@ class JobComponent extends Component {
     let jobTitle = this.state.jobTitle
     let job = {
         id: this.state.id,
-        employer: values.employer,
-        jobTitle: values.jobTitle,
+        employer: this.state.employer,
+        jobTitle: this.state.jobTitle,
         description: values.description
     }
     //  For create, if getting promise error check params in data service. 
 
     if (this.state.id === -1) { //  going to need to add an id for new job. increment it? I think we need a new state altogether so may have to just create a new component. Can duplicate most of the code 
         JobDataService.createJob(jobTitle, employer, job)
-            .then(() => this.props.history.push('/jobs/'))
+            .then(() => this.props.history.push('/jobs'))
     } else {
         JobDataService.updateJob(jobTitle, employer, id, job)
             .then(() => this.props.history.push('/jobs'))
@@ -64,7 +64,7 @@ class JobComponent extends Component {
     let { description, id, employer, jobTitle } = this.state
     return (
         <div>            
-            <h3>Update A Job</h3>
+            <h3>Create A Job</h3>
             <div className="container">
                 <Formik
                     initialValues={{id: id, description: description, employer: employer, jobTitle: jobTitle}}
@@ -112,4 +112,4 @@ class JobComponent extends Component {
     )
 }
 }
-export default JobComponent
+export default NewJobComponent
