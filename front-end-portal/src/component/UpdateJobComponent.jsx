@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import JobDataService from '../service/JobDataService';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 
-class JobComponent extends Component {
+class UpdateJobComponent extends Component {
   constructor(props) {
       super(props)
 
@@ -52,7 +52,7 @@ class JobComponent extends Component {
 
     if (this.state.id === -1) { //  going to need to add an id for new job. increment it? I think we need a new state altogether so may have to just create a new component. Can duplicate most of the code 
         JobDataService.createJob(jobTitle, employer, job)
-            .then(() => this.props.history.push('/jobs/'))
+            .then(() => this.props.history.push('/jobs'))
     } else {
         JobDataService.updateJob(jobTitle, employer, id, job)
             .then(() => this.props.history.push('/jobs'))
@@ -95,11 +95,11 @@ class JobComponent extends Component {
                                     <label>Description</label>
                                     <Field className="form-control" type="text" name="description" />
                                 </fieldset>
-                                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                                    <div class="btn-group mr-2" role="group" aria-label="First group">
+                                <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                                    <div className="btn-group mr-2" role="group" aria-label="First group">
                                         <button className="btn btn-success" type="submit">Save</button>
                                     </div>
-                                    <div class="btn-group mr-2" role="group" aria-label="Second group">
+                                    <div className="btn-group mr-2" role="group" aria-label="Second group">
                                         <button className="btn btn-sm" type="back">Back</button>
                                     </div>
                                 </div>
@@ -112,4 +112,4 @@ class JobComponent extends Component {
     )
 }
 }
-export default JobComponent
+export default UpdateJobComponent

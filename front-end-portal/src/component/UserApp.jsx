@@ -3,10 +3,10 @@
 
 import React, { Component } from 'react';
 import ListJobsComponent from './ListJobsComponent';
-import JobComponent from './JobComponent';
+import UpdateJobComponent from './UpdateJobComponent';
 import NewJobComponent from './NewJobComponent';
-import ListUsersComponent from './ListUsersComponent';
-import UserComponent from './UserComponent';
+// import ListUsersComponent from './ListUsersComponent';
+// import UserComponent from './UserComponent';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 //  Will change so '/' has a welcome, index page. from there you're pointed to others
@@ -19,10 +19,10 @@ class UserApp extends Component {
                     <Switch>
                         <Route path="/" exact component={ListJobsComponent} />
                         <Route path="/jobs" exact component={ListJobsComponent} />
-                        <Route path="/jobs/:id" component={JobComponent} />
-                        <Route path="/jobs/new" component={NewJobComponent} />
-                        <Route path="/users" component={ListUsersComponent} />
-                        <Route path="/users/:id" component={UserComponent} />
+                        <Route path="/jobs/:id" component={UpdateJobComponent} />
+                        <Route path="/jobs/create/" component={NewJobComponent} />
+                        {/* <Route path="/users" component={ListUsersComponent} />
+                        <Route path="/users/:id" component={UserComponent} /> */}
                     </Switch>
                 </>
             </Router>

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import ie.gmit.springportal.model.Job;
 import ie.gmit.springportal.service.JobService;
@@ -38,21 +39,21 @@ public class JobController {
 		return ResponseEntity.ok().body(jobService.getJobById(id));
 	}
 
-	@PostMapping("/jobs")
-	public ResponseEntity<Job> createJob(@RequestBody Job job) {
-		return ResponseEntity.ok().body(this.jobService.createJob(job));
-	}
-
-//	@PostMapping("/jobs/")
-//	public ResponseEntity<Job> createJob(@PathVariable String username, @RequestBody Job job) {
-//		Job createdJob = JobService.updateJob(job);
-//		// Location
-//		// Get current resource url
-//		/// {id}
-//		java.net.URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(createdJob.getId())
-//				.toUri();
-//		return ResponseEntity.created(uri).build();
+//	@PostMapping("/jobs/new")
+//	public ResponseEntity<Job> createJob(@RequestBody Job job) {
+//		return ResponseEntity.ok().body(this.jobService.createJob(job));
 //	}
+
+	@PostMapping("/jobs/{id}")
+	public ResponseEntity<Job> createJob(@PathVariable long id, @RequestBody Job job) {
+		Job createdJob = jobService.createJob(id, job);
+		// Location
+		// Get current resource url
+		/// {id}
+		java.net.URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(createdJob.getId())
+				.toUri();
+		return ResponseEntity.created(uri).build();
+	}
 
 	@PutMapping("/jobs/{id}")
 	public ResponseEntity<Job> updateJob(@PathVariable long id, @RequestBody Job job) {

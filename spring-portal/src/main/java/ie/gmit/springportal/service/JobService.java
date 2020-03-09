@@ -22,7 +22,9 @@ public class JobService {
     private JobRepository jobRepository;
 
 //*******************************************************************************************************//
-    public Job createJob(Job job) {
+    public Job createJob(long id, Job job) {
+    	job.setId(id);
+    	job.getId();
         return jobRepository.save(job);
     }
 

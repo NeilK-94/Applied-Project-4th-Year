@@ -3,6 +3,7 @@ import axios from 'axios'
 
 const API_URL = 'http://localhost:8080'
 const GET_ALL_JOBS_URL = `${API_URL}/jobs/`
+const CREATE_JOB_URL = `${API_URL}/jobs/create/`
 
 class JobDataService {    
     retrieveAllJobs() {
@@ -18,7 +19,8 @@ class JobDataService {
         return axios.put(`${GET_ALL_JOBS_URL}${id}`, job);
     }
     createJob(jobTitle, employer, id, job) {
-        return axios.post(`${GET_ALL_JOBS_URL}`, job);
+        let urlId = 304
+        return axios.post(`${CREATE_JOB_URL}urlId`, job);    //  put user id here as url path
     }
 }
 export default new JobDataService() //  create an instance of JobDataService and make it available for other components.
