@@ -5,14 +5,12 @@ import JobDataService from '../service/JobDataService';
 import { Redirect } from 'react-router';
 
 class ListJobsComponent extends Component {
-
     constructor(props) {
         super(props)
          //  To display jobs, need to make them available to the component. We add jobs to the state of the component and initialize it in the constructor.
         this.state = { 
             jobs: [],
             message: null,
-            toNewJob: false
         }
         this.refreshJobs = this.refreshJobs.bind(this)
         this.deleteJobClicked = this.deleteJobClicked.bind(this)
@@ -50,7 +48,8 @@ class ListJobsComponent extends Component {
         this.props.history.push(`/jobs/${id}`)
     }
     addJobClicked(job) {
-        this.props.history.push(`/jobs/-1`) //  cant use props history???
+        let urlId = 304
+        JobDataService.createJob(urlId)
     }
 
     render() {

@@ -18,9 +18,8 @@ class JobDataService {
     updateJob(jobTitle, employer, id, job) {
         return axios.put(`${GET_ALL_JOBS_URL}${id}`, job);
     }
-    createJob(jobTitle, employer, id, job) {
-        let urlId = 304
-        return axios.post(`${CREATE_JOB_URL}urlId`, job);    //  put user id here as url path
+    createJob(id) {
+        return axios.post(`${CREATE_JOB_URL}${id}`);    //  put user id here as url path
     }
 }
 export default new JobDataService() //  create an instance of JobDataService and make it available for other components.

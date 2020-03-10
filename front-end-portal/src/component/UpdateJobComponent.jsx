@@ -13,6 +13,8 @@ class UpdateJobComponent extends Component {
       }
       this.onSubmit = this.onSubmit.bind(this)
       this.validate = this.validate.bind(this)
+      this.backButton = this.backButton.bind(this)
+
   }
   componentDidMount() {
 
@@ -51,13 +53,15 @@ class UpdateJobComponent extends Component {
     //  For create, if getting promise error check params in data service. 
 
     if (this.state.id === -1) { //  going to need to add an id for new job. increment it? I think we need a new state altogether so may have to just create a new component. Can duplicate most of the code 
-        JobDataService.createJob(jobTitle, employer, job)
-            .then(() => this.props.history.push('/jobs'))
+        return
     } else {
         JobDataService.updateJob(jobTitle, employer, id, job)
             .then(() => this.props.history.push('/jobs'))
     }
     console.log(values);
+  }
+  backButton(){
+    this.props.history.goBack();
   }
 
   render() {
@@ -100,7 +104,7 @@ class UpdateJobComponent extends Component {
                                         <button className="btn btn-success" type="submit">Save</button>
                                     </div>
                                     <div className="btn-group mr-2" role="group" aria-label="Second group">
-                                        <button className="btn btn-sm" type="back">Back</button>
+                                        <button className="btn btn-sm" onClick={this.backButton}>Back</button>
                                     </div>
                                 </div>
                             </Form>
