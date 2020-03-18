@@ -7,6 +7,13 @@ class AuthenticationService {
     logout(){
         sessionStorage.removeItem("User");
     }
+    //  Check if a user is logged in
+    isLoggedIn(){
+        let user = sessionStorage.getItem("User");
+
+        if(user === null) return false
+        return true
+    }
 }
 
 export default new AuthenticationService()

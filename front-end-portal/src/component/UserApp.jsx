@@ -14,6 +14,7 @@ import ErrorComponent from './ErrorComponent'
 import FooterComponent from './FooterComponent'
 import HeaderComponent from './HeaderComponent'
 import HomeComponent from './HomeComponent'
+import AuthenticatedRoute from './AuthenticatedRoute'
 
 
 export class UserApp extends Component {
@@ -26,10 +27,10 @@ export class UserApp extends Component {
                             <Route path="/" exact component={LoginComponent} />
                             <Route path="/login" component={LoginComponent} />
                             <Route path="/logout" component={LogoutComponent} />
-                            <Route path="/home/:userName" component={HomeComponent} />
-                            <Route path="/jobs" component={ListJobsComponent} />
-                            <Route path="/jobs/:id" component={UpdateJobComponent} />
-                            <Route path="/jobs/create/:id" component={NewJobComponent} />
+                            <AuthenticatedRoute path="/home/:userName" component={HomeComponent} />
+                            <AuthenticatedRoute path="/jobs" component={ListJobsComponent} />
+                            <AuthenticatedRoute path="/jobs/:id" component={UpdateJobComponent} />
+                            <AuthenticatedRoute path="/jobs/create/:id" component={NewJobComponent} />
                             {/* <Route path="/users" component={ListUsersComponent} />
                             <Route path="/users/:id" component={UserComponent} /> */}
                             <Route component={ErrorComponent} />
