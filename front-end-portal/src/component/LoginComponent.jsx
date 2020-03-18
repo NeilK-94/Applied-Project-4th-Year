@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import AuthenticationService from '../service/AuthenticationService';
 class LoginComponent extends Component {
     constructor(props){
         super(props)
@@ -37,6 +37,8 @@ class LoginComponent extends Component {
 
     loginClicked(){
         if(this.state.userName === "Neil" && this.state.password === "password"){
+            //  Send userName and password to authentication service
+            AuthenticationService.registerLogin(this.state.userName, this.state.password)
             this.setState(
                 {
                     SuccessfulLogin: true,
