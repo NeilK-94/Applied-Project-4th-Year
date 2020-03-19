@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import AuthenticationService from '../service/AuthenticationService'
+import { withRouter } from 'react-router';
 
 export class HeaderComponent extends Component {
     render() {
@@ -14,7 +15,7 @@ export class HeaderComponent extends Component {
                         {isLoggedIn && <li><Link className="nav-link" to="/jobs">Jobs</Link></li>}
                     </ul>
                     <ul className="navbar-nav navbar-collapse justify-content-end">
-                        {isLoggedIn && <li><Link className="nav-link" to="/login">Login</Link></li>}
+                        {!isLoggedIn && <li><Link className="nav-link" to="/login">Login</Link></li>}
                         {isLoggedIn && <li><Link className="nav-link" to="/logout" onClick={AuthenticationService.logout}>Logout</Link></li>}
                     </ul>
                     
@@ -24,4 +25,4 @@ export class HeaderComponent extends Component {
     }
 }
 
-export default HeaderComponent
+export default withRouter(HeaderComponent);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export class LogoutComponent extends Component {
+class LogoutComponent extends Component {
     render() {
         return (
             <>

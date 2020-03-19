@@ -26,7 +26,7 @@ export class UserApp extends Component {
                         <Switch>
                             <Route path="/" exact component={LoginComponent} />
                             <Route path="/login" component={LoginComponent} />
-                            <Route path="/logout" component={LogoutComponent} />
+                            <AuthenticatedRoute path="/logout" component={LogoutComponent} />
                             <AuthenticatedRoute path="/home/:userName" component={HomeComponent} />
                             <AuthenticatedRoute path="/jobs" component={ListJobsComponent} />
                             <AuthenticatedRoute path="/jobs/:id" component={UpdateJobComponent} />
