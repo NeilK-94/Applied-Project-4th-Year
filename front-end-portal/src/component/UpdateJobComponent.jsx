@@ -59,7 +59,7 @@ class UpdateJobComponent extends Component {
     //  For create, if getting promise error check params in data service. 
 
     if (this.state.id === -1) {
-        JobDataService.createJob(job)
+        JobDataService.createJob(job.jobTitle, job.employer, this.state.id, job)
             .then(() => this.props.history.push('/jobs'))
     } else {
         JobDataService.updateJob(job.jobTitle, job.employer, this.state.id, job)

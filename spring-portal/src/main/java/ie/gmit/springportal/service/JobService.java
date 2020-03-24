@@ -17,7 +17,7 @@ import ie.gmit.springportal.repository.UserRepository;
 @Service
 @Transactional
 public class JobService {
-	int idCounter = 400;
+	int idCounter = 900;
     @Autowired
     private JobRepository jobRepository;
 
@@ -40,6 +40,10 @@ public class JobService {
     public Job updateJob(Job job) {
         Optional < Job > jobDb = this.jobRepository.findById(job.getId());
 
+        if(job.getId() == -1) {
+        	createJob(job);
+        	return job;
+        }
         if (jobDb.isPresent()) {
             Job jobUpdate = jobDb.get();
             jobUpdate.setId(job.getId());

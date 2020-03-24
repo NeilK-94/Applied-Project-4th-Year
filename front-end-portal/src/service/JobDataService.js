@@ -19,7 +19,7 @@ class JobDataService {
     updateJob(jobTitle, employer, id, job) {
         return axios.put(`${GET_ALL_JOBS_URL}${id}`, job);
     }
-    createJob(job) {
+    createJob(jobTitle, employer, id, job) {
         return axios.post(`${CREATE_JOB_URL}`, job);    //  put user id here as url path
     }
 }
