@@ -17,7 +17,7 @@ import ie.gmit.springportal.repository.UserRepository;
 @Service
 @Transactional
 public class JobService {
-	int idCounter = 900;
+	int idCounter = (int)(Math.random() * 1000);
     @Autowired
     private JobRepository jobRepository;
 
@@ -40,7 +40,7 @@ public class JobService {
     public Job updateJob(Job job) {
         Optional < Job > jobDb = this.jobRepository.findById(job.getId());
 
-        if(job.getId() == -1) {
+        if(job.getId() == -1) {	//	Bad practice but can't get it to use POST controller method
         	createJob(job);
         	return job;
         }
