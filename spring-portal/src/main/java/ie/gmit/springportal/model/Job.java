@@ -16,6 +16,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 //@XmlRootElement
 @Document(collection = "jobs")
 public class Job {
+	protected Job() {
+		
+	}
 	//	The @Id annotation is the identifier for every MongoDB document
 	@Id
     private long id;
@@ -24,7 +27,7 @@ public class Job {
     @Size(max = 100)
 	private String jobTitle;
 	private String description;
-	private float salary;
+	//private float salary;
 	//	Can add salary and contract length etc.
 	
 	public long getId() {
@@ -51,12 +54,12 @@ public class Job {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public float getSalary() {
-		return salary;
-	}
-	public void setSalary(float salary) {
-		this.salary = salary;
-	}
+//	public float getSalary() {
+//		return salary;
+//	}
+//	public void setSalary(float salary) {
+//		this.salary = salary;
+//	}
 	
 	
 

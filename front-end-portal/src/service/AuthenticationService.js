@@ -7,6 +7,12 @@ class AuthenticationService {
     logout(){
         sessionStorage.removeItem("User");
     }
+    getLoggedUser() {
+    //  Get the currently logged in user
+        let userName = sessionStorage.getItem("User")
+        if(userName===null) return ''
+        return userName
+    }
     //  Check if a user is logged in
     isLoggedIn(){
         let user = sessionStorage.getItem("User");

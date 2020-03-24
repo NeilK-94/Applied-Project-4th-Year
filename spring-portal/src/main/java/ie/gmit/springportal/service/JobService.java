@@ -17,15 +17,24 @@ import ie.gmit.springportal.repository.UserRepository;
 @Service
 @Transactional
 public class JobService {
-
+	int idCounter = 400;
     @Autowired
     private JobRepository jobRepository;
 
 //*******************************************************************************************************//
-    public Job createJob(long id, Job job) {
-    	job.setId(id);
-    	job.getId();
-        return jobRepository.save(job);
+//			WORKING
+//    public Job createJob(long id, Job job) {
+//    	job.setId(id);
+//    	job.getId();
+//        return jobRepository.save(job);
+//    }
+    public Job createJob(Job job) {
+    	if(job.getId() == -1 || job.getId() == 0) {
+    		job.setId(++idCounter);
+        	jobRepository.insert(job); 
+    	}
+    	return jobRepository.save(job);
+    	
     }
 
     public Job updateJob(Job job) {
@@ -37,7 +46,7 @@ public class JobService {
             jobUpdate.setEmployer(job.getEmployer());
             jobUpdate.setJobTitle(job.getJobTitle());
             jobUpdate.setDescription(job.getDescription());
-            jobUpdate.setSalary(job.getSalary());
+            //jobUpdate.setSalary(job.getSalary());
             jobRepository.save(jobUpdate);
             return jobUpdate;
         } else {

@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import ListJobsComponent from './ListJobsComponent';
 import UpdateJobComponent from './UpdateJobComponent';
-import NewJobComponent from './NewJobComponent';
+//import NewJobComponent from './NewJobComponent';
 // import ListUsersComponent from './ListUsersComponent';
 // import UserComponent from './UserComponent';
 import LoginComponent from './LoginComponent'
@@ -28,9 +28,9 @@ export class UserApp extends Component {
                             <Route path="/login" component={LoginComponent} />
                             <AuthenticatedRoute path="/logout" component={LogoutComponent} />
                             <AuthenticatedRoute path="/home/:userName" component={HomeComponent} />
-                            <AuthenticatedRoute path="/jobs" component={ListJobsComponent} />
                             <AuthenticatedRoute path="/jobs/:id" component={UpdateJobComponent} />
-                            <AuthenticatedRoute path="/jobs/create/:id" component={NewJobComponent} />
+                            {/*<AuthenticatedRoute path="/jobs/create/:id" component={NewJobComponent} />*/}
+                            <AuthenticatedRoute path="/jobs" component={ListJobsComponent} />
                             {/* <Route path="/users" component={ListUsersComponent} />
                             <Route path="/users/:id" component={UserComponent} /> */}
                             <Route component={ErrorComponent} />

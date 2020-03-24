@@ -44,12 +44,21 @@ public class JobController {
 //		return ResponseEntity.ok().body(this.jobService.createJob(job));
 //	}
 
-	@PostMapping("/jobs/{id}")
-	public ResponseEntity<Job> createJob(@PathVariable long id, @RequestBody Job job) {
-		Job createdJob = jobService.createJob(id, job);
-		// Location
-		// Get current resource url
-		/// {id}
+	//			WORKING
+//	@PostMapping("/jobs/{id}")
+//	public ResponseEntity<Job> createJob(@PathVariable long id, @RequestBody Job job) {
+//		Job createdJob = jobService.createJob(id, job);
+//		// Location
+//		// Get current resource url
+//		/// {id}
+//		java.net.URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(createdJob.getId())
+//				.toUri();
+//		return ResponseEntity.created(uri).build();
+//	}
+	
+	@PostMapping("/jobs/")
+	public ResponseEntity<Job> createJob(@RequestBody Job job) {
+		Job createdJob = jobService.createJob(job);
 		java.net.URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(createdJob.getId())
 				.toUri();
 		return ResponseEntity.created(uri).build();

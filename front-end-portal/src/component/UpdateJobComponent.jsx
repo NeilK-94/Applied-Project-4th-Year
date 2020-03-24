@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import JobDataService from '../service/JobDataService';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import AuthenticationService from '../service/AuthenticationService';
 
 class UpdateJobComponent extends Component {
   constructor(props) {
@@ -17,21 +18,25 @@ class UpdateJobComponent extends Component {
 
   }
   componentDidMount() {
+    if (this.state.id == -1) {
+        console.log("Not mounting")
+        return;
+    }
+    console.log(this.state.id)
+    console.log("mounting")
+    let userName = AuthenticationService.getLoggedUser()
 
-      if (this.state.id === -1) {
-          return
-      }
-      JobDataService.retrieveJob(this.state.employer, this.state.id)
-      .then(response => this.setState({
-          description: response.data.description,
-          employer: response.data.employer,
-          jobTitle: response.data.jobTitle
-          }))
+    JobDataService.retrieveJob(userName, this.state.id)
+    .then(response => this.setState({
+        description: response.data.description,
+        employer: response.data.employer,
+        jobTitle: response.data.jobTitle
+        }))
   }
 
   //    Error handling for form
   validate(values) {
-    let errors = {}
+    let errors = {} //  add validation for every field!!!!!!
     if (!values.description) {
         errors.description = 'Enter a description'
     } else if (values.description.length < 5) {
@@ -40,10 +45,11 @@ class UpdateJobComponent extends Component {
     return errors
   }
 
+  //    When save is clicked
   onSubmit(values) {
-    let employer = this.state.employer
-    let id = this.state.id
-    let jobTitle = this.state.jobTitle
+    // let employer = this.state.employer
+    // let id = this.state.id
+    // let jobTitle = this.state.jobTitle
     let job = {
         id: this.state.id,
         employer: values.employer,
@@ -52,64 +58,61 @@ class UpdateJobComponent extends Component {
     }
     //  For create, if getting promise error check params in data service. 
 
-    if (this.state.id === -1) { //  going to need to add an id for new job. increment it? I think we need a new state altogether so may have to just create a new component. Can duplicate most of the code 
-        return
+    if (this.state.id === -1) {
+        JobDataService.createJob(job)
+            .then(() => this.props.history.push('/jobs'))
     } else {
-        JobDataService.updateJob(jobTitle, employer, id, job)
+        JobDataService.updateJob(job.jobTitle, job.employer, this.state.id, job)
             .then(() => this.props.history.push('/jobs'))
     }
-    console.log(values);
   }
   backButton(){
     this.props.history.goBack();
   }
 
   render() {
-    let { description, id, employer, jobTitle } = this.state
+    let { description, employer, jobTitle } = this.state
     return (
         <div>            
-            <h3>Update A Job</h3>
+            <h3>Update {this.state.employer}'s {this.state.jobTitle} Job</h3>
             <div className="container">
                 <Formik
-                    initialValues={{id: id, description: description, employer: employer, jobTitle: jobTitle}}
+                    initialValues={{description: description, employer: employer, jobTitle: jobTitle}}
+                    
                     onSubmit={this.onSubmit}
                     validateOnChange={false}
                     validateOnBlur={false}
                     validate={this.validate}
                     enableReinitialize={true}    
                 >
-                    {
-                        (props) => (
-                            <Form>
-                                <ErrorMessage name="description" component="div"
-                                    className="alert alert-warning" />
-                                <fieldset className="form-group">
-                                    <label>Id</label>
-                                    <Field className="form-control" type="text" name="id" disabled />
-                                </fieldset>
-                                <fieldset className="form-group">
-                                    <label>Employer</label>
-                                    <Field className="form-control" type="text" name="employer" />
-                                </fieldset>
-                                <fieldset className="form-group">
-                                    <label>Job Title</label>
-                                    <Field className="form-control" type="text" name="jobTitle" />
-                                </fieldset>
-                                <fieldset className="form-group">
-                                    <label>Description</label>
-                                    <Field className="form-control" type="text" name="description" />
-                                </fieldset>
-                                <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                                    <div className="btn-group mr-2" role="group" aria-label="First group">
-                                        <button className="btn btn-success" type="submit">Save</button>
-                                    </div>
-                                    <div className="btn-group mr-2" role="group" aria-label="Second group">
-                                        <button className="btn btn-sm" onClick={this.backButton}>Back</button>
-                                    </div>
+                {
+                    (props) => (
+                        <Form>
+                            <ErrorMessage name="description" component="div"
+                                className="alert alert-warning" />
+                            <fieldset className="form-group">
+                                <label>Employer</label>
+                                <Field className="form-control" type="text" name="employer" />
+                            </fieldset>
+                            <fieldset className="form-group">
+                                <label>Job Title</label>
+                                <Field className="form-control" type="text" name="jobTitle" />
+                            </fieldset>
+                            <fieldset className="form-group">
+                                <label>Description</label>
+                                <Field className="form-control" type="text" name="description" />
+                            </fieldset>
+                            <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                                <div className="btn-group mr-2" role="group" aria-label="First group">
+                                    <button className="btn btn-success" type="submit">Save</button>
                                 </div>
-                            </Form>
-                        )
-                    }
+                                <div className="btn-group mr-2" role="group" aria-label="Second group">
+                                    <button className="btn btn-sm" onClick={this.backButton}>Back</button>
+                                </div>
+                            </div>
+                        </Form>
+                    )
+                }
                 </Formik>
             </div>
         </div>

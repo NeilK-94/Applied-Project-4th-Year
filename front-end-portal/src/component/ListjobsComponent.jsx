@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import JobDataService from '../service/JobDataService';
-import { Redirect } from 'react-router';
+import AuthenticationService from '../service/AuthenticationService';
 
 class ListJobsComponent extends Component {
     constructor(props) {
@@ -25,16 +25,18 @@ class ListJobsComponent extends Component {
 
     refreshJobs() {
         JobDataService.retrieveAllJobs()    //  Make call to the REST API
-            .then(  //  Decide what to do once call is made
+            .then(  //  Decide what to do once call is made succesfully
                 response => {
-                    console.log(response);
+                    //console.log(response);
                     this.setState({ jobs: response.data })  //  When response comes back with data, update the state.
                 }
-            )
+            )   //  .catch handles unsuccessful. Add later
     }
 
     deleteJobClicked(id) {
-        JobDataService.deleteJob(id)
+        let userName = AuthenticationService.getLoggedUser()
+        //console.log(id + userName)
+        JobDataService.deleteJob(userName, id)
             .then(
                 response => {
                     console.log(response);
@@ -47,16 +49,15 @@ class ListJobsComponent extends Component {
         //console.log('update ' + id)
         this.props.history.push(`/jobs/${id}`)
     }
-    addJobClicked(job) {
-        let urlId = 304
-        JobDataService.createJob(urlId)
+    addJobClicked() {
+        this.props.history.push(`/jobs/-1`)
     }
 
     render() {
         return (
             <div className="container">
                 <h3>All Jobs</h3>
-                {this.state.message && <div class="alert alert-success">{this.state.message}</div>}
+                {this.state.message && <div className="alert alert-success">{this.state.message}</div>}
                 <div className="container">
                 <br></br>
                     <div className="row">
