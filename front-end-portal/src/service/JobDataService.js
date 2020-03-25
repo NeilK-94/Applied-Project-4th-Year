@@ -5,9 +5,8 @@ const API_URL = 'http://localhost:8080'
 const GET_ALL_JOBS_URL = `${API_URL}/jobs/`
 const CREATE_JOB_URL = `${API_URL}/jobs/`
 
-class JobDataService {    
+class JobDataService {
     retrieveAllJobs() {
-        //  Call the /jobs endpoint to retrieve all jobs. There are axios promises.
         return axios.get(`${GET_ALL_JOBS_URL}`);
     }
     retrieveJob(employer, id) {

@@ -19,11 +19,11 @@ class UpdateJobComponent extends Component {
   }
   componentDidMount() {
     if (this.state.id == -1) {
-        console.log("Not mounting")
+        console.log("Not mounting, (Create job)")
         return;
     }
     console.log(this.state.id)
-    console.log("mounting")
+    console.log("mounting, (Update job)")
     let userName = AuthenticationService.getLoggedUser()
 
     JobDataService.retrieveJob(userName, this.state.id)

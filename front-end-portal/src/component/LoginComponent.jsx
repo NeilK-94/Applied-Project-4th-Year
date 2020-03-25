@@ -36,26 +36,35 @@ class LoginComponent extends Component {
     }
 
     loginClicked(){
-        if(this.state.userName === "Neil" && this.state.password === "password"){
-            //  Send userName and password to authentication service
-            AuthenticationService.registerLogin(this.state.userName, this.state.password)
-            this.setState(
-                {
-                    SuccessfulLogin: true,
-                    hasLoginFailed: false,
-                }
-            )
-            this.props.history.push(`/home/${this.state.userName}`)
-        } else{
-            this.setState(
-                {
-                    hasLoginFailed: true,
-                    SuccessfulLogin: false
-                }
-            )
-        
-            
-        }
+        // if(this.state.userName === "Neil" && this.state.password === "password"){
+        //     //  Send userName and password to authentication service
+        //     AuthenticationService.registerLogin(this.state.userName, this.state.password)
+        //     this.setState(
+        //         {
+        //             SuccessfulLogin: true,
+        //             hasLoginFailed: false,
+        //         }
+        //     )
+        //     this.props.history.push(`/home/${this.state.userName}`)
+        // } else{
+        //     this.setState(
+        //         {
+        //             hasLoginFailed: true,
+        //             SuccessfulLogin: false
+        //         }
+        //     )
+        // }
+        AuthenticationService.executeBasicAuthenticationService(this.state.userName, this.state.password)
+        .then(
+            () => {
+                AuthenticationService.registerLogin(this.state.userName, this.state.password)
+                this.setState({ SuccessfulLogin: true, hasLoginFailed: false})  //  dont need!!!!!!!!!!!!!!!!!!
+                this.props.history.push(`/home/${this.state.userName}`)
+            }
+        ).catch( ()=> {
+            this.setState({hasLoginFailed: true})
+            this.setState({SuccessfulLogin: false})
+        })
     }
 }
 
