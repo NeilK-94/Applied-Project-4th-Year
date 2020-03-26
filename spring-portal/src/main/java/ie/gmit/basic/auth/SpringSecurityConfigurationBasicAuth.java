@@ -1,4 +1,4 @@
-package ie.gmit.springportal.basic.auth;
+package ie.gmit.basic.auth;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

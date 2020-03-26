@@ -1,4 +1,4 @@
-package ie.gmit.springportal.basic.auth;
+package ie.gmit.basic.auth;
 
 public class AuthenticationBean {
 
