@@ -1,6 +1,7 @@
 package ie.gmit.springportal.jwt;
 
 import java.io.Serializable;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +17,8 @@ import io.jsonwebtoken.Clock;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.impl.DefaultClock;
+
+//	This file handles the JWT token processing
 
 @Component
 public class JwtTokenUtil implements Serializable {
