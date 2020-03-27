@@ -1,9 +1,7 @@
 //   data service method to call the REST API using AXIOS framework
 import axios from 'axios'
-
-const API_URL = 'http://localhost:8080'
-const GET_ALL_JOBS_URL = `${API_URL}/jobs/`
-const CREATE_JOB_URL = `${API_URL}/jobs/`
+import { GET_ALL_JOBS_URL } from '../Constants'
+import { CREATE_JOB_URL } from '../Constants'
 
 class JobDataService {
     retrieveAllJobs() {
@@ -12,7 +10,7 @@ class JobDataService {
     retrieveJob(employer, id) {
         return axios.get(`${GET_ALL_JOBS_URL}${id}`);
     }
-    deleteJob(userName, id) {   //  Name of user and id to delete
+    deleteJob(username, id) {   //  Name of user and id to delete
         return axios.delete(`${GET_ALL_JOBS_URL}${id}`);
     }
     updateJob(jobTitle, employer, id, job) {

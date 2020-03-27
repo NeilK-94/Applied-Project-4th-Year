@@ -27,7 +27,7 @@ export class UserApp extends Component {
                             <Route path="/" exact component={LoginComponent} />
                             <Route path="/login" component={LoginComponent} />
                             <AuthenticatedRoute path="/logout" component={LogoutComponent} />
-                            <AuthenticatedRoute path="/home/:userName" component={HomeComponent} />
+                            <AuthenticatedRoute path="/home/:username" component={HomeComponent} />
                             <AuthenticatedRoute path="/jobs/:id" component={UpdateJobComponent} />
                             {/*<AuthenticatedRoute path="/jobs/create/:id" component={NewJobComponent} />*/}
                             <AuthenticatedRoute path="/jobs" component={ListJobsComponent} />

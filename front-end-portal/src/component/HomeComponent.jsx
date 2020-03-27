@@ -7,7 +7,7 @@ class HomeComponent extends Component {
            <>
                 <h1>Welcome</h1>
                 <div className="container">
-                    Welcome {this.props.match.params.userName}. You can view the latest jobs <Link to="/jobs">here.</Link>
+                    Welcome {this.props.match.params.username}. You can view the latest jobs <Link to="/jobs">here.</Link>
                 </div>
             </>
         )

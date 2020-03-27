@@ -6,7 +6,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class BCryptEncoderTest {
 	public static void main(String[] args) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		CharSequence rawPassword = "gmit2020";
+		CharSequence rawPassword = "password";
 		
 		for(int i = 1; i<=10; i++) {
 			String encodedString = encoder.encode(rawPassword);

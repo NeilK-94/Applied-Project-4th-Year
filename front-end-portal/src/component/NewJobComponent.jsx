@@ -21,9 +21,9 @@
 //     if (this.state.id === -1) {
 //         return
 //     }
-//     let userName = AuthenticationService.getLoggedUser()
+//     let username = AuthenticationService.getLoggedUser()
 
-//     JobDataService.retrieveJob(userName, this.state.id)
+//     JobDataService.retrieveJob(username, this.state.id)
 //     .then(response => this.setState({
 //         description: response.data.description,
 //         employer: response.data.employer,

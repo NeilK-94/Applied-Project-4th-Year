@@ -34,9 +34,9 @@ class ListJobsComponent extends Component {
     }
 
     deleteJobClicked(id) {
-        let userName = AuthenticationService.getLoggedUser()
-        //console.log(id + userName)
-        JobDataService.deleteJob(userName, id)
+        let username = AuthenticationService.getLoggedUser()
+        //console.log(id + username)
+        JobDataService.deleteJob(username, id)
             .then(
                 response => {
                     console.log(response);
