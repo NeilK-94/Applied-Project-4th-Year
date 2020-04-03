@@ -86,6 +86,13 @@ public class JobService {
     public void deleteAllJobs() {
     	jobRepository.deleteAll();
     }
+    
+    public List<Job> getByEmployer(String employer) {
+    	return jobRepository.findByEmployer(employer);
+    }
+    public Job getByJobTitle(String jobTitle) {
+    	return jobRepository.findByJobTitle(jobTitle);
+    }
 //*******************************************************************************************************//
 
 }
