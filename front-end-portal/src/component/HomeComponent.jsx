@@ -10,7 +10,9 @@ class HomeComponent extends Component {
         this.state = { 
             jobs: [],
             searchQuery: 'Cisco',
+            hasSearchFailed: false
         }
+
         this.handleChange = this.handleChange.bind(this);
         this.searchClicked = this.searchClicked.bind(this);
         this.viewJobClicked = this.viewJobClicked.bind(this);
@@ -20,15 +22,21 @@ class HomeComponent extends Component {
     render() {
         return (
            <>
-                <h1>Welcome</h1>
+                <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h1 class="display-5">Welcome</h1>
+                    <hr class="my-4"></hr>
+                    <p class="lead">Welcome {this.props.match.params.username}. You can view the latest jobs <Link to="/jobs">here.</Link></p>
+                </div>
+                </div>
                 <div className="container">
-                    Welcome {this.props.match.params.username}. You can view the latest jobs <Link to="/jobs">here.</Link>
-                    <br></br>
                     <h4>Search a job</h4>
                     <p>You can search for jobs from a certain employer.</p>
                     <div className="container">
+                    {this.state.hasSearchFailed && <div className="alert alert-warning">Failed Search</div>}
+
                     <input type="text" name="searchQuery" value={this.state.searchQuery} onChange={this.handleChange}></input>
-                    <button className="btn btn-success" onClick={this.searchClicked}>Login</button>
+                    <button className="btn btn-success" onClick={this.searchClicked}>Search</button>
                     </div>
                     <div>
                     <br></br>
@@ -60,8 +68,8 @@ class HomeComponent extends Component {
         )
     }
 
-    viewJobClicked(){
-
+    viewJobClicked(id){
+        this.props.history.push(`/jobs/${id}`)
     }
 
     searchClicked(){
@@ -70,6 +78,12 @@ class HomeComponent extends Component {
             response => {
                 console.log(response.data);
                 this.setState({ jobs: response.data })
+                if(response.data.length < 1){
+                    this.setState({ hasSearchFailed: true })
+                }
+                else if(response.data.length > 0){
+                    this.setState({ hasSearchFailed: false })
+                }
             })
         }
             

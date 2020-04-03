@@ -16,13 +16,13 @@ import HeaderComponent from './HeaderComponent'
 import HomeComponent from './HomeComponent'
 import AuthenticatedRoute from './AuthenticatedRoute'
 
-
 export class UserApp extends Component {
     render() {
         return (
             <div className="UserApp">
                 <Router>
                     <HeaderComponent />
+
                         <Switch>
                             <Route path="/" exact component={LoginComponent} />
                             <Route path="/login" component={LoginComponent} />
