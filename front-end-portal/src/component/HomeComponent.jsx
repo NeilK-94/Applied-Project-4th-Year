@@ -1,41 +1,21 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import ReactSearchBox from 'react-search-box'
+import JobDataService from '../service/JobDataService';
+import AuthenticationService from '../service/AuthenticationService';
 
 class HomeComponent extends Component {
     constructor(props) {
         super(props)
 
-        this.state = {
-          searchQuery: 'Facebook...'
+        this.state = { 
+            searchQuery: 'Cisco',
         }
+        this.handleChange = this.handleChange.bind(this);
+        this.searchClicked = this.searchClicked.bind(this);
+
     }
 
-    data = [
-        {
-          key: 'john',
-          value: 'John Doe',
-        },
-        {
-          key: 'jane',
-          value: 'Jane Doe',
-        },
-        {
-          key: 'mary',
-          value: 'Mary Phillips',
-        },
-        {
-          key: 'robert',
-          value: 'Robert',
-        },
-        {
-          key: 'karius',
-          value: 'Karius',
-        },
-      ]
-
     render() {
-        let searchQuery = this.state
         return (
            <>
                 <h1>Welcome</h1>
@@ -45,19 +25,30 @@ class HomeComponent extends Component {
                     <h4>Search a job</h4>
                     <p>You can search for jobs from a certain employer.</p>
                     <div className="container">
-                    <ReactSearchBox
-                        placeholder="Placeholder"
-                        value="Doe"
-                        data={this.data}
-                        callback={record => console.log(record)}
-                    />
-                    </div>
-
-
-                    
+                    <input type="text" name="searchQuery" value={this.state.searchQuery} onChange={this.handleChange}></input>
+                    <button className="btn btn-success" onClick={this.searchClicked}>Login</button>
+                    </div>   
                 </div>
             </>
         )
+    }
+
+    searchClicked(){
+        JobDataService.retrieveJobByEmployer(this.state.searchQuery)
+        .then(  //  Decide what to do once call is made succesfully
+            response => {
+                console.log(response);
+            })
+        }
+            
+    
+
+    handleChange(event){
+        this.setState(
+            {
+                [event.target.name]: event.target.value
+            }
+        );
     }
 }
 

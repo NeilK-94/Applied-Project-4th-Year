@@ -2,6 +2,7 @@
 import axios from 'axios'
 import { GET_ALL_JOBS_URL } from '../Constants'
 import { CREATE_JOB_URL } from '../Constants'
+const EMPLOYER_URL = 'http://localhost:8080/employer'
 
 class JobDataService {
     retrieveAllJobs() {
@@ -18,6 +19,9 @@ class JobDataService {
     }
     createJob(jobTitle, employer, id, job) {
         return axios.post(`${CREATE_JOB_URL}`, job);    //  put user id here as url path
+    }
+    retrieveJobByEmployer(employer) {
+        return axios.get(`${EMPLOYER_URL}?employer=${employer}`);
     }
 }
 export default new JobDataService() //  create an instance of JobDataService and make it available for other components.
