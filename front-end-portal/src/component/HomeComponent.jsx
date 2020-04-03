@@ -8,10 +8,12 @@ class HomeComponent extends Component {
         super(props)
 
         this.state = { 
+            jobs: [],
             searchQuery: 'Cisco',
         }
         this.handleChange = this.handleChange.bind(this);
         this.searchClicked = this.searchClicked.bind(this);
+        this.viewJobClicked = this.viewJobClicked.bind(this);
 
     }
 
@@ -27,17 +29,47 @@ class HomeComponent extends Component {
                     <div className="container">
                     <input type="text" name="searchQuery" value={this.state.searchQuery} onChange={this.handleChange}></input>
                     <button className="btn btn-success" onClick={this.searchClicked}>Login</button>
-                    </div>   
+                    </div>
+                    <div>
+                    <br></br>
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th>Employer</th>
+                                <th>Job Title</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {   
+                                this.state.jobs.map(    //  map allows you to loop around items
+                                    job =>  //  a key is used to identify a row
+                                        <tr key={job.id}>
+                                            <td>{job.employer}</td>
+                                            <td>{job.jobTitle}</td>
+                                            <td>{job.description}</td>
+                                            <td><button className="btn btn-success" onClick={() => this.viewJobClicked(job.id)}>View</button></td>
+                                        </tr>
+                                )
+                            }
+                        </tbody>
+                    </table>
+                    </div>
                 </div>
             </>
         )
+    }
+
+    viewJobClicked(){
+
     }
 
     searchClicked(){
         JobDataService.retrieveJobByEmployer(this.state.searchQuery)
         .then(  //  Decide what to do once call is made succesfully
             response => {
-                console.log(response);
+                console.log(response.data);
+                this.setState({ jobs: response.data })
             })
         }
             
