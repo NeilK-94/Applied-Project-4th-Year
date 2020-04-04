@@ -6,9 +6,19 @@
     height: 40px;
     background-color: #222222;
   }
+  .jumbotron {
+    background: transparent !important;
+    text-emphasis: bold;
+  }
+  .modal {
+    background-color: transparent;
+  }
   
   .App {
     text-align: center;
+    background-image: url(https://mcdn.wallpapersafari.com/medium/21/0/i1dOC6.jpg);
+    background-size: cover;
+    color: white
   }
   
   .App-logo {

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import JobDataService from '../service/JobDataService';
-import AuthenticationService from '../service/AuthenticationService';
 
 class HomeComponent extends Component {
     constructor(props) {
@@ -12,21 +11,19 @@ class HomeComponent extends Component {
             searchQuery: 'Cisco',
             hasSearchFailed: false
         }
-
         this.handleChange = this.handleChange.bind(this);
         this.searchClicked = this.searchClicked.bind(this);
         this.viewJobClicked = this.viewJobClicked.bind(this);
-
-    }
+    }    
 
     render() {
         return (
            <>
-                <div class="jumbotron jumbotron-fluid">
-                <div class="container">
-                    <h1 class="display-5">Welcome</h1>
-                    <hr class="my-4"></hr>
-                    <p class="lead">Welcome {this.props.match.params.username}. You can view the latest jobs <Link to="/jobs">here.</Link></p>
+                <div className="jumbotron jumbotron-fluid">
+                <div className="container">
+                    <h1 className="display-5">Welcome</h1>
+                    <hr className="my-4"></hr>
+                    <p className="lead">Welcome {this.props.match.params.username}. You can view the latest jobs <Link to="/jobs">here.</Link></p>
                 </div>
                 </div>
                 <div className="container">
@@ -57,6 +54,7 @@ class HomeComponent extends Component {
                                             <td>{job.jobTitle}</td>
                                             <td>{job.description}</td>
                                             <td><button className="btn btn-success" onClick={() => this.viewJobClicked(job.id)}>View</button></td>
+                                            
                                         </tr>
                                 )
                             }

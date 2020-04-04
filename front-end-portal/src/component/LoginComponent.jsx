@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import AuthenticationService from '../service/AuthenticationService';
+
 class LoginComponent extends Component {
     constructor(props){
         super(props)
@@ -13,9 +14,10 @@ class LoginComponent extends Component {
         this.loginClicked = this.loginClicked.bind(this);
 
     }
+   
     render(){
         return (
-            <div>
+            <div className="container">
                 <h1>Login</h1>
                 <div className="container">
                     {this.state.hasLoginFailed && <div className="alert alert-warning">Failed Login</div>}
@@ -23,7 +25,17 @@ class LoginComponent extends Component {
                     Password: <input type="password" name="password" value={this.state.password} onChange={this.handleChange}></input>
                     <button className="btn btn-success" onClick={this.loginClicked}>Login</button>
                 </div>
+                <section className="container">
+                <div className="jumbotron">
+                <div className="container">
+                    <h1 className="display-5">Welcome</h1>
+                    <hr className="my-4"></hr>
+                    <p className="lead">HOW NOOOOOOOW!</p>
+                </div>
+                </div>
+            </section>
             </div>
+            
         )
     }
     //  This is a generic change handler rather than having to have a method for each element!
