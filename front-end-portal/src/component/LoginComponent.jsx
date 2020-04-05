@@ -12,7 +12,6 @@ class LoginComponent extends Component {
         }
         this.handleChange = this.handleChange.bind(this);
         this.loginClicked = this.loginClicked.bind(this);
-
     }
    
     render(){

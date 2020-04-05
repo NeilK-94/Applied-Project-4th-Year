@@ -29,7 +29,7 @@ export class UserApp extends Component {
                             <AuthenticatedRoute path="/logout" component={LogoutComponent} />
                             <AuthenticatedRoute path="/home/:username" component={HomeComponent} />
                             <AuthenticatedRoute path="/jobs/:id" component={UpdateJobComponent} />
-                            {/*<AuthenticatedRoute path="/jobs/create/:id" component={NewJobComponent} />*/}
+                            {/*<AuthenticatedRoute path="/jobs/view/:id" component={NewJobComponent} />*/}
                             <AuthenticatedRoute path="/jobs" component={ListJobsComponent} />
                             {/* <Route path="/users" component={ListUsersComponent} />
                             <Route path="/users/:id" component={UserComponent} /> */}

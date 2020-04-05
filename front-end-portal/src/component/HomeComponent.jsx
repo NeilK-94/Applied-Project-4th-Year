@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import Modal from 'react-awesome-modal';
+
 import JobDataService from '../service/JobDataService';
+import AuthenticationService from '../service/AuthenticationService';
 
 class HomeComponent extends Component {
     constructor(props) {
@@ -9,12 +12,85 @@ class HomeComponent extends Component {
         this.state = { 
             jobs: [],
             searchQuery: 'Cisco',
-            hasSearchFailed: false
+            hasSearchFailed: false,
+            hasDeleteSucceeded: false,
+            visible : false,
+            deleteSuccessful: false
         }
         this.handleChange = this.handleChange.bind(this);
         this.searchClicked = this.searchClicked.bind(this);
-        this.viewJobClicked = this.viewJobClicked.bind(this);
+        this.updateJobClicked = this.updateJobClicked.bind(this);
+        this.deleteJobClicked = this.deleteJobClicked.bind(this)
+        this.refreshJobs = this.refreshJobs.bind(this)
     }    
+
+    openModal() {
+        this.setState({
+            visible : true,
+            hasDeleteSucceeded: false,
+            deleteSuccessful: false
+        });
+    }
+    closeModal() {
+        let username = AuthenticationService.getLoggedUser()
+        this.setState({
+            visible : false,
+            hasDeleteSucceeded: false
+        });
+    }
+    refreshJobs() {
+        JobDataService.retrieveJobByEmployer(this.state.searchQuery)    //  Make call to the REST API
+            .then(  //  Decide what to do once call is made succesfully
+                response => {
+                    //console.log(response);
+                    this.setState({ jobs: response.data })  //  When response comes back with data, update the state.
+                    if(this.state.deleteSuccessful){
+                        this.setState({ hasDeleteSucceeded: true })
+                    }
+                },                
+            )   //  .catch handles unsuccessful. Add later
+    }
+
+    deleteJobClicked(id) {
+        let username = AuthenticationService.getLoggedUser()
+
+        JobDataService.deleteJob(username, id)
+            .then(
+                response => {
+                    this.state.deleteSuccessful = true;
+                    this.state.hasDeleteSucceeded = true;
+                    this.refreshJobs()
+                    this.closeModal()
+                }
+            )
+    }
+    updateJobClicked(id){
+        this.props.history.push(`/jobs/${id}`)
+    }
+
+    searchClicked(){
+        this.state.hasDeleteSucceeded = false
+        JobDataService.retrieveJobByEmployer(this.state.searchQuery)
+        .then(  //  Decide what to do once call is made succesfully
+            response => {
+                //console.log(response.data);
+                this.setState({ jobs: response.data })
+                if(response.data.length < 1){
+                    this.setState({ hasSearchFailed: true })
+                }
+                else if(response.data.length > 0){
+                    this.setState({ hasSearchFailed: false })
+                }
+            })
+    }
+        
+    handleChange(event){
+        this.setState(
+            {
+                [event.target.name]: event.target.value
+            }
+        );
+    }
 
     render() {
         return (
@@ -27,11 +103,11 @@ class HomeComponent extends Component {
                 </div>
                 </div>
                 <div className="container">
+                    {this.state.hasSearchFailed && <div className="alert alert-warning">Failed Search</div>}
+                    {this.state.hasDeleteSucceeded && <div className="alert alert-warning">Succesfully deleted the job posting</div>}
                     <h4>Search a job</h4>
                     <p>You can search for jobs from a certain employer.</p>
                     <div className="container">
-                    {this.state.hasSearchFailed && <div className="alert alert-warning">Failed Search</div>}
-
                     <input type="text" name="searchQuery" value={this.state.searchQuery} onChange={this.handleChange}></input>
                     <button className="btn btn-success" onClick={this.searchClicked}>Search</button>
                     </div>
@@ -53,8 +129,17 @@ class HomeComponent extends Component {
                                             <td>{job.employer}</td>
                                             <td>{job.jobTitle}</td>
                                             <td>{job.description}</td>
-                                            <td><button className="btn btn-success" onClick={() => this.viewJobClicked(job.id)}>View</button></td>
-                                            
+                                            <td><button className="btn btn-success" onClick={() => this.openModal(job.jobTitle)}>View</button></td>
+                                                <Modal visible={this.state.visible} width="500" height="400" effect="fadeInRight" onClickAway={() => this.closeModal()}>
+                                                    <tr><div className="popup">
+                                                        <td><h3>{job.jobTitle}</h3></td>
+                                                        <h4>{job.employer}</h4>
+                                                        <p>Some Contents</p>
+                                                        <button className="btn btn-info" onClick={() => this.closeModal()}>Close</button>
+                                                        <button className="btn btn-warning" onClick={() => this.deleteJobClicked(job.id)}>Delete</button>
+                                                        <button className="btn btn-success" onClick={() => this.updateJobClicked(job.id)}>Update</button>
+                                                    </div></tr>
+                                                </Modal>
                                         </tr>
                                 )
                             }
@@ -64,35 +149,6 @@ class HomeComponent extends Component {
                 </div>
             </>
         )
-    }
-
-    viewJobClicked(id){
-        this.props.history.push(`/jobs/${id}`)
-    }
-
-    searchClicked(){
-        JobDataService.retrieveJobByEmployer(this.state.searchQuery)
-        .then(  //  Decide what to do once call is made succesfully
-            response => {
-                console.log(response.data);
-                this.setState({ jobs: response.data })
-                if(response.data.length < 1){
-                    this.setState({ hasSearchFailed: true })
-                }
-                else if(response.data.length > 0){
-                    this.setState({ hasSearchFailed: false })
-                }
-            })
-        }
-            
-    
-
-    handleChange(event){
-        this.setState(
-            {
-                [event.target.name]: event.target.value
-            }
-        );
     }
 }
 

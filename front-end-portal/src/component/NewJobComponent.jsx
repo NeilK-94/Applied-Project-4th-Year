@@ -18,9 +18,12 @@
 
 //   }
 //   componentDidMount() {
-//     if (this.state.id === -1) {
-//         return
+//     if (this.state.id == -1) {
+//         console.log("Not mounting, (Create job)")
+//         return;
 //     }
+//     console.log(this.state.id)
+//     console.log("mounting, (Update job)")
 //     let username = AuthenticationService.getLoggedUser()
 
 //     JobDataService.retrieveJob(username, this.state.id)
@@ -44,9 +47,9 @@
 
 //   //    When save is clicked
 //   onSubmit(values) {
-//     let employer = this.state.employer
-//     let id = this.state.id
-//     let jobTitle = this.state.jobTitle
+//     // let employer = this.state.employer
+//     // let id = this.state.id
+//     // let jobTitle = this.state.jobTitle
 //     let job = {
 //         id: this.state.id,
 //         employer: values.employer,
@@ -56,10 +59,10 @@
 //     //  For create, if getting promise error check params in data service. 
 
 //     if (this.state.id === -1) {
-//         JobDataService.createJob(job)
+//         JobDataService.createJob(job.jobTitle, job.employer, this.state.id, job)
 //             .then(() => this.props.history.push('/jobs'))
 //     } else {
-//         JobDataService.updateJob(jobTitle, employer, id, job)
+//         JobDataService.updateJob(job.jobTitle, job.employer, this.state.id, job)
 //             .then(() => this.props.history.push('/jobs'))
 //     }
 //   }
@@ -68,10 +71,10 @@
 //   }
 
 //   render() {
-//     let { description, id, employer, jobTitle } = this.state
+//     let { description, employer, jobTitle } = this.state
 //     return (
 //         <div>            
-//             <h3>Create A Job</h3>
+//             <h3>Update {this.state.employer}'s {this.state.jobTitle} Job</h3>
 //             <div className="container">
 //                 <Formik
 //                     initialValues={{description: description, employer: employer, jobTitle: jobTitle}}
@@ -87,7 +90,6 @@
 //                         <Form>
 //                             <ErrorMessage name="description" component="div"
 //                                 className="alert alert-warning" />
-                            
 //                             <fieldset className="form-group">
 //                                 <label>Employer</label>
 //                                 <Field className="form-control" type="text" name="employer" />
