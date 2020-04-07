@@ -1,0 +1,58 @@
+\chapter{Introduction}
+\paragraph{The following document is a dissertation for my final year project in which I hope to achieve a B.Sc. (Hons.) in Software Development. This project was undertaken by just myself and all work shown is my own.}
+\paragraph{From the beginning of the year I knew I wanted to make a practical web application, a website that could actually be useful to people and would also provide me with a suitable challenge and rewarding, worthwhile learning outcomes. Much research went into what kind of project I would do and what technologies I would use to do it which will be discussed further on in the document.}
+\paragraph{The finished project however is a job site for software developers. I opted to use mainly React, a Javascript library for the front-end along with some accompanying frameworks and used Spring Boot for the back-end as well as MongoDB for the database.}
+
+\section{Early Research}
+\paragraph{Initially the project was going to take a much different shape in my mind. I had planned on it being more of a general purpose 'odd-job' type app where users could post or accept listings advertising a certain amount of pay for menial jobs such as mowing a lawn or cleaning up around a house etc.}
+% Put in reference to OAuth research as well as MEAN and MERN
+\paragraph{As the idea grew in my head I realised I would prefer it to be specific to my field of study. I decided my project would be a job site specifically for software developers. This way I could incorporate OAuthentification into the website with developers logging in via their LinkedIn or even Github accounts. This would tie in nicely to the general theme and purpose of the website. Sadly however, I never got around to adding this feature and instead opted for Jason Web Tokens.}
+\paragraph{I had planned on developing the project using the MEAN stack, however after discussing it with my supervisor, learned that this might not have appeared challenging enough to some as it had already been covered in the previous year. A big part of the applied project is to showcase self learning and the ability to understand foreign concepts that haven't been explicitly taught in class. Although I joined this year after 2 years out of college I agreed it would be better if I tried to show technologies not already covered on the curriculum and weren't seen before among this group of students.}
+
+\section{What the Project Brings}
+\paragraph{The premise of the project as touched on above, was to bring a small number of technologies together, and have them working efficiently and effectively with a clear reason for their use. As it was just myself in the group, I was generally happy for the scope to be a bit smaller as long as the project itself was an effective program functioning well across different levels in the stack.}
+\paragraph{The 3 main technologies effectively offer everything a web application would need to be deployed and used by an actual user.  }
+
+% mention technologies, go through each tier/stack and explain why you used this 
+\section{Scope}
+\paragraph{As mentioned earlier, I developed the project by myself. Taking this into consideration I felt as if the scope of the project was acceptable. The project's architecture consists of three unique tiers all communicating in a stack to form the web application. The three parts are as follows: }
+
+\subsection{Database/Backend Tier}
+\paragraph{I used MongoDB for my database technology. MongoDB is a NoSQL database, it is document oriented and it stores data in collections instead of tables \cite{parker2013comparing}.
+%The database should connect to a mongo atlas connection which in turn is connected to heroku which hosts spring server and restful api
+The main use of the database is to store user our user and job objects. The users of the website can perform basic CRUD functionality on the user and job object's stored in the database. Lastly, as this is a Mongo database, all of the data being sent to or from the database is sent in JSON format.}
+%Look into adding xml format too. Don't think it's hard
+
+\subsection{Server Side/Backend Tier}
+\paragraph{For my 'middle' tier I used Spring Boot. Spring Boot is a fantastic technology for quick painless development of a web application with almost no configuration. The RESTful API is contained in our Spring server and connects the React application to the Mongo database containing the user and job objects to be manipulated.}
+\paragraph{A deciding factor in choosing Spring boot as my server side technology was it's very powerful MongoDB connector. All you need to do is simply extend the MongoRepository class from a repository interface which contains plenty of generic methods already. Impressively, we do not need to manually implement these queries ourselves, instead we use Spring Boot's repository naming conventions, and the MongoRepository will intelligently construct the queries at runtime \cite{marchioni2015mongodb}.}
+
+\subsection{Front End Tier}
+\paragraph{For the front end of my web application I decided to use React. React is a Javascript library for building UI's. However, as it is only concerned with rendering data to the DOM. React requires  additional libraries for state management, sending HTTP requests and routing such as React Router and Axios \cite{wiki:xxx}. I use multiple Javascript libraries in my application to compliment React such as: } 
+%MENTION ALL FRONT END LLIBRARIES USED HERE 
+
+\section{Objectives}
+\paragraph{Like the vast majority of students in my year, my primary objective in developing this application was to learn a new set of skills and to become familiar with a new set of technologies. I believe by choosing three technologies I have had no previous experience with I definitely accomplished this objective. I set the following goals for my project from the very beginning of the year:}
+\begin{itemize}
+    \item I wanted my application to have a number of moving parts. I felt a 3 tier system would go a long way towards showing me how a production ready application might actually look in the working world. When developing across different levels you learn a lot about how each level of the stack works, how they communicate with each other, what works well together and what doesn't.
+    \item As I have a big interest in web development in particular, I specifically wanted to become very familiar with React. According to Stack Overflow's 2019 survey, more developers say they use React.js than Angular, a switch from last year \cite{Stack}. It ranked second overall behind JQuery.
+    \item Adding to what I said earlier about getting a taste for what a real world application might look, I felt it was very important to have genuine authentication. I landed on Jason Web Tokens or failing that, basic authentication.
+    \item I wanted users to be able to perform the basic CRUD functionalities with jobs.
+    \item I wanted the application to be deployed on Heroku.
+
+\end{itemize}
+
+\section{Documentation}
+\paragraph{This document will give a detailed description of my research, planning, reasoning and thought process throughout the development of my application. It is split up into six chapters. Each detailing a different aspect of the work put into the application itself. They are: }
+    \subsubsection{Introduction}
+    \paragraph{The current chapter, the introduction, has covered what my aims for the project were early on. What research I did before choosing to develop using the technologies I did and also my objectives for the project before beginning development.}
+    \subsubsection{Methodology}
+    \paragraph{This chapter will go over how I went about the development of my project at a more detailed level. It will cover how often I met with my supervisor and how often I dedicated each week to the project. It will essentially cover how I went about developing and planning the entire project, which project methodology was used and if I felt it was at the right level. }
+    \subsubsection{Technology Review}
+    \paragraph{This chapter will documents the outcome of my research into the technologies I used and how I used them to achieve my objectives. Every technology used in the development of the application will be described here, covering what they do in general and what they offer to my application specifically.}
+    \subsubsection{System Design}
+    \paragraph{This section will describe the architecture of the application. It will cover how each tier of the application communicate together to form the complete project. It will contain diagrams and screenshots to help visualise the structure and architecture of the application.}
+    \subsubsection{System Evaluation}
+    \paragraph{In this chapter I will do a full evaluation of the application as a whole. I will compare the final outcome of the application with the objectives I initially outlined in the Introduction chapter. I will also outline any limitations or difficulties I found in the project be it through technologies used or through my own decisions and mistakes.}
+    \subsubsection{Conclusion}
+    \paragraph{The conclusion will be a summary of the entire finished project. It will discuss my initial goals for the project and how well I managed to achieve them. I will cover what I feel I learned throughout the development of the project and the writing of the dissertation. It will also outline any regrets I have with the project be they from using the wrong technologies or other matters. Overall I hope it will provide a final piece of insight on my experience with the project and hopefully wrap up the documentation.}
