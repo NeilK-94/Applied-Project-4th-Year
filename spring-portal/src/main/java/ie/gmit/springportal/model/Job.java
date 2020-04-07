@@ -27,7 +27,7 @@ public class Job {
     @Size(max = 100)
 	private String jobTitle;
 	private String description;
-	//private float salary;
+	private boolean applied = false;
 	//	Can add salary and contract length etc.
 	
 	public long getId() {
@@ -54,12 +54,13 @@ public class Job {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-//	public float getSalary() {
-//		return salary;
-//	}
-//	public void setSalary(float salary) {
-//		this.salary = salary;
-//	}
+	public boolean isApplied() {
+		return applied;
+	}
+	public void setApplied(boolean applied) {
+		this.applied = applied;
+	}
+
 	
 	
 

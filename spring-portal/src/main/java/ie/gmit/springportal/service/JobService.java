@@ -50,7 +50,7 @@ public class JobService {
             jobUpdate.setEmployer(job.getEmployer());
             jobUpdate.setJobTitle(job.getJobTitle());
             jobUpdate.setDescription(job.getDescription());
-            //jobUpdate.setSalary(job.getSalary());
+            jobUpdate.setApplied(job.isApplied());
             jobRepository.save(jobUpdate);
             return jobUpdate;
         } else {
@@ -90,9 +90,12 @@ public class JobService {
     public List<Job> getByEmployer(String employer) {
     	return jobRepository.findByEmployer(employer);
     }
+    /*
     public Job getByJobTitle(String jobTitle) {
     	return jobRepository.findByJobTitle(jobTitle);
     }
+    */
+    //	isApplied..
 //*******************************************************************************************************//
 
 }
