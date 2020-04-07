@@ -64,6 +64,7 @@ class ListJobsComponent extends Component {
                         <button className="btn btn-success" onClick={this.addJobClicked}>Add</button>
                     </div>
                     <br></br>
+                    <div id="table-wrapper">
                     <table className="table table-hover">
                         <thead>
                             <tr>
@@ -89,6 +90,7 @@ class ListJobsComponent extends Component {
                             }
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
         )
