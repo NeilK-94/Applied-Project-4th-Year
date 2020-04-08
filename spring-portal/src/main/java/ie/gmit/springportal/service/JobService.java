@@ -49,6 +49,7 @@ public class JobService {
             jobUpdate.setId(job.getId());
             jobUpdate.setEmployer(job.getEmployer());
             jobUpdate.setJobTitle(job.getJobTitle());
+            jobUpdate.setCounty(job.getCounty());
             jobUpdate.setDescription(job.getDescription());
             jobUpdate.setApplied(job.isApplied());
             jobRepository.save(jobUpdate);
@@ -89,6 +90,9 @@ public class JobService {
     
     public List<Job> getByEmployer(String employer) {
     	return jobRepository.findByEmployer(employer);
+    }
+    public List<Job> getByCounty(String county) {
+    	return jobRepository.findByCounty(county);
     }
     /*
     public Job getByJobTitle(String jobTitle) {

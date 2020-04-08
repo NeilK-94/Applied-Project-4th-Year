@@ -13,6 +13,8 @@ import ie.gmit.springportal.model.User;
 @Repository
 public interface JobRepository extends MongoRepository < Job, Long > {
 	//	custom methods
-	public List <Job> findByEmployer(String employer);	//	might need to make lists
-	public Job findByJobTitle(String jobTitle);
+	public List <Job> findByEmployer(String employer);
+	public List <Job> findByCounty(String county);
+	
+	//public Job findByJobTitle(String jobTitle);
 }

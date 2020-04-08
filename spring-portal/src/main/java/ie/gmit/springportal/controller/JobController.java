@@ -87,5 +87,9 @@ public class JobController {
 	public List<Job> getByEmployer(@RequestParam String employer) {
 		return jobService.getByEmployer(employer);	
 	}
+	@GetMapping("/county")
+	public List<Job> getByCounty(@RequestParam String county) {
+		return jobService.getByCounty(county);	
+	}
 
 }

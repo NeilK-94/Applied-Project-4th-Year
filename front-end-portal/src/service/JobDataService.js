@@ -3,6 +3,7 @@ import axios from 'axios'
 import { GET_ALL_JOBS_URL } from '../Constants'
 import { CREATE_JOB_URL } from '../Constants'
 const EMPLOYER_URL = 'http://localhost:8080/employer'
+const COUNTY_URL = 'http://localhost:8080/county'
 
 class JobDataService {
     retrieveAllJobs() {
@@ -23,5 +24,7 @@ class JobDataService {
     retrieveJobByEmployer(employer) {
         return axios.get(`${EMPLOYER_URL}?employer=${employer}`);
     }
-}
+    retrieveJobByCounty(county) {
+        return axios.get(`${COUNTY_URL}?county=${county}`);
+    }}
 export default new JobDataService() //  create an instance of JobDataService and make it available for other components.

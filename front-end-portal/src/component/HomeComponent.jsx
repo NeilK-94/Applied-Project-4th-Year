@@ -11,14 +11,17 @@ class HomeComponent extends Component {
 
         this.state = { 
             jobs: [],
-            searchQuery: 'Cisco',
+            searchQueryEmployer: 'Cisco',
+            searchQueryLocation: 'Galway',
             hasSearchFailed: false,
             hasDeleteSucceeded: false,
             visible : false,
+            selected: 0,
             deleteSuccessful: false
         }
         this.handleChange = this.handleChange.bind(this);
         this.searchClicked = this.searchClicked.bind(this);
+        this.searchCountyClicked = this.searchCountyClicked.bind(this);
         this.updateJobClicked = this.updateJobClicked.bind(this);
         this.deleteJobClicked = this.deleteJobClicked.bind(this)
         this.refreshJobs = this.refreshJobs.bind(this)
@@ -39,7 +42,7 @@ class HomeComponent extends Component {
         });
     }
     refreshJobs() {
-        JobDataService.retrieveJobByEmployer(this.state.searchQuery)    //  Make call to the REST API
+        JobDataService.retrieveJobByEmployer(this.state.searchQueryEmployer)    //  Make call to the REST API
             .then(  //  Decide what to do once call is made succesfully
                 response => {
                     //console.log(response);
@@ -57,8 +60,11 @@ class HomeComponent extends Component {
         JobDataService.deleteJob(username, id)
             .then(
                 response => {
-                    this.state.deleteSuccessful = true;
-                    this.state.hasDeleteSucceeded = true;
+                    this.setState({ deleteSuccessful: true })
+                    this.setState({ hasDeleteSucceeded: true })
+
+                    // this.state.deleteSuccessful = true;
+                    // this.state.hasDeleteSucceeded = true;
                     this.refreshJobs()
                     this.closeModal()
                 }
@@ -69,8 +75,9 @@ class HomeComponent extends Component {
     }
 
     searchClicked(){
-        this.state.hasDeleteSucceeded = false
-        JobDataService.retrieveJobByEmployer(this.state.searchQuery)
+        this.setState({ hasDeleteSucceeded: false })
+        //this.state.hasDeleteSucceeded = false
+        JobDataService.retrieveJobByEmployer(this.state.searchQueryEmployer)
         .then(  //  Decide what to do once call is made succesfully
             response => {
                 //console.log(response.data);
@@ -83,7 +90,22 @@ class HomeComponent extends Component {
                 }
             })
     }
-        
+    searchCountyClicked(){
+        this.setState({ hasDeleteSucceeded: false })
+        //this.state.hasDeleteSucceeded = false
+        JobDataService.retrieveJobByCounty(this.state.searchQueryLocation)
+        .then(  //  Decide what to do once call is made succesfully
+            response => {
+                //console.log(response.data);
+                this.setState({ jobs: response.data })
+                if(response.data.length < 1){
+                    this.setState({ hasSearchFailed: true })
+                }
+                else if(response.data.length > 0){
+                    this.setState({ hasSearchFailed: false })
+                }
+            })
+    }        
     handleChange(event){
         this.setState(
             {
@@ -91,13 +113,22 @@ class HomeComponent extends Component {
             }
         );
     }
+    toggleEmployerClinked(){
+        console.log("Employer clicked")
+    }
+    toggleLocationClinked(){
+        console.log("Location clicked")
+
+    }
+
 
     render() {
+        let selected = this.state.selected
         return (
            <>
                 <div className="jumbotron jumbotron-fluid">
                 <div className="container">
-                    <h1 className="display-5">Welcome</h1>
+                    <h1 className="display-5">The Developer's Job Site</h1>
                     <hr className="my-4"></hr>
                     <p className="lead">Welcome {this.props.match.params.username}. You can view the latest jobs <Link to="/jobs">here.</Link></p>
                 </div>
@@ -106,18 +137,27 @@ class HomeComponent extends Component {
                     {this.state.hasSearchFailed && <div className="alert alert-warning">Failed Search</div>}
                     {this.state.hasDeleteSucceeded && <div className="alert alert-warning">Succesfully deleted the job posting</div>}
                     <h4>Search a job</h4>
-                    <p>You can search for jobs from a certain employer.</p>
+                    <p>You can search for jobs from a certain employer or by location.</p>
                     <div className="container">
-                    <input type="text" name="searchQuery" value={this.state.searchQuery} onChange={this.handleChange}></input>
-                    <button className="btn btn-success" onClick={this.searchClicked}>Search</button>
+                    <p id="toggle">
+                        <button className="btn btn-secondary" onClick={() => this.setState({ selected: 0 })}> Employer </button>
+                        <button className="btn btn-secondary" onClick={() => this.setState({ selected: 1 })}> Location </button>     
+                    </p>
+                        {(selected === 0) && <div id="employer">
+                        <input type="text" name="searchQueryEmployer" value={this.state.searchQueryEmployer} onChange={this.handleChange}></input>
+                        <button className="btn btn-success" onClick={this.searchClicked}>Search</button></div>}
+                        {(selected === 1) && <div id="right">
+                        <input type="text" name="searchQueryLocation" value={this.state.searchQueryLocation} onChange={this.handleChange}></input>
+                        <button className="btn btn-success" onClick={this.searchCountyClicked}>County</button></div>}
                     </div>
-                    <div>
+                    </div>
                     <br></br>
                     <table className="table">
                         <thead>
                             <tr>
                                 <th>Employer</th>
                                 <th>Job Title</th>
+                                <th>Location</th>
                                 <th>Description</th>
                             </tr>
                         </thead>
@@ -128,13 +168,15 @@ class HomeComponent extends Component {
                                         <tr key={job.id}>
                                             <td>{job.employer}</td>
                                             <td>{job.jobTitle}</td>
+                                            <td>{job.county}</td>
                                             <td>{job.description}</td>
                                             <td><button className="btn btn-success" onClick={() => this.openModal(job.jobTitle)}>View</button></td>
                                                 <Modal visible={this.state.visible} width="500" height="400" effect="fadeInRight" onClickAway={() => this.closeModal()}>
                                                     <tr><div className="popup">
                                                         <td><h3>{job.jobTitle}</h3></td>
                                                         <h4>{job.employer}</h4>
-                                                        <p>Some Contents</p>
+                                                        <h4>{job.county}</h4>
+                                                        <p>{job.description}</p>
                                                         <button className="btn btn-info" onClick={() => this.closeModal()}>Close</button>
                                                         <button className="btn btn-warning" onClick={() => this.deleteJobClicked(job.id)}>Delete</button>
                                                         <button className="btn btn-success" onClick={() => this.updateJobClicked(job.id)}>Update</button>
@@ -145,8 +187,8 @@ class HomeComponent extends Component {
                             }
                         </tbody>
                     </table>
-                    </div>
-                </div>
+                    
+                
             </>
         )
     }

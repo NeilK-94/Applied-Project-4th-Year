@@ -26,8 +26,10 @@ public class Job {
 	@NotBlank
     @Size(max = 100)
 	private String jobTitle;
+	private String county;
 	private String description;
 	private boolean applied = false;
+	
 	//	Can add salary and contract length etc.
 	
 	public long getId() {
@@ -59,6 +61,12 @@ public class Job {
 	}
 	public void setApplied(boolean applied) {
 		this.applied = applied;
+	}
+	public String getCounty() {
+		return county;
+	}
+	public void setCounty(String county) {
+		this.county = county;
 	}
 
 	
