@@ -13,6 +13,7 @@ class HomeComponent extends Component {
             jobs: [],
             searchQueryEmployer: 'Cisco',
             searchQueryLocation: 'Galway',
+            searchQueryJobTitle: 'Front End Developer',
             hasSearchFailed: false,
             hasDeleteSucceeded: false,
             visible : false,
@@ -20,8 +21,9 @@ class HomeComponent extends Component {
             deleteSuccessful: false
         }
         this.handleChange = this.handleChange.bind(this);
-        this.searchClicked = this.searchClicked.bind(this);
-        this.searchCountyClicked = this.searchCountyClicked.bind(this);
+        this.searchEmployerClicked = this.searchEmployerClicked.bind(this);
+        this.searchLocationClicked = this.searchLocationClicked.bind(this);
+        this.searchJobTitleClicked = this.searchJobTitleClicked.bind(this);
         this.updateJobClicked = this.updateJobClicked.bind(this);
         this.deleteJobClicked = this.deleteJobClicked.bind(this)
         this.refreshJobs = this.refreshJobs.bind(this)
@@ -73,7 +75,8 @@ class HomeComponent extends Component {
         this.props.history.push(`/jobs/${id}`)
     }
 
-    searchClicked(){
+    //  Too much repeat code with these 3 methods, can be more efficient. Like handle change method.
+    searchEmployerClicked(){
         this.setState({ hasDeleteSucceeded: false })
         //this.state.hasDeleteSucceeded = false
         JobDataService.retrieveJobByEmployer(this.state.searchQueryEmployer)
@@ -89,10 +92,26 @@ class HomeComponent extends Component {
                 }
             })
     }
-    searchCountyClicked(){
+    searchLocationClicked(){
         this.setState({ hasDeleteSucceeded: false })
         //this.state.hasDeleteSucceeded = false
-        JobDataService.retrieveJobByCounty(this.state.searchQueryLocation)
+        JobDataService.retrieveJobByLocation(this.state.searchQueryLocation)
+        .then(  //  Decide what to do once call is made succesfully
+            response => {
+                //console.log(response.data);
+                this.setState({ jobs: response.data })
+                if(response.data.length < 1){
+                    this.setState({ hasSearchFailed: true })
+                }
+                else if(response.data.length > 0){
+                    this.setState({ hasSearchFailed: false })
+                }
+            })
+    }
+    searchJobTitleClicked(){
+        this.setState({ hasDeleteSucceeded: false })
+        //this.state.hasDeleteSucceeded = false
+        JobDataService.retrieveJobByJobTitle(this.state.searchQueryJobTitle)
         .then(  //  Decide what to do once call is made succesfully
             response => {
                 //console.log(response.data);
@@ -112,14 +131,6 @@ class HomeComponent extends Component {
             }
         );
     }
-    toggleEmployerClinked(){
-        console.log("Employer clicked")
-    }
-    toggleLocationClinked(){
-        console.log("Location clicked")
-
-    }
-
 
     render() {
         let selected = this.state.selected
@@ -141,14 +152,18 @@ class HomeComponent extends Component {
                     <div className="container">
                     <span id="toggle">
                         <button className="btn btn-secondary" onClick={() => this.setState({ selected: 0 })}> Employer </button>
-                        <button className="btn btn-secondary" onClick={() => this.setState({ selected: 1 })}> Location </button>     
+                        <button className="btn btn-secondary" onClick={() => this.setState({ selected: 1 })}> Location </button>
+                        <button className="btn btn-secondary" onClick={() => this.setState({ selected: 2 })}> Job Title </button>     
                     </span>
                         {(selected === 0) && <div id="employer">
                         <input type="text" name="searchQueryEmployer" value={this.state.searchQueryEmployer} onChange={this.handleChange}></input>
-                        <button className="btn btn-success" onClick={this.searchClicked}>Search</button></div>}
-                        {(selected === 1) && <div id="right">
+                        <button className="btn btn-success" onClick={this.searchEmployerClicked}>Search</button></div>}
+                        {(selected === 1) && <div id="location">
                         <input type="text" name="searchQueryLocation" value={this.state.searchQueryLocation} onChange={this.handleChange}></input>
-                        <button className="btn btn-success" onClick={this.searchCountyClicked}>County</button></div>}
+                        <button className="btn btn-success" onClick={this.searchLocationClicked}>Search</button></div>}
+                        {(selected === 2) && <div id="jobTitle">
+                        <input type="text" name="searchQueryJobTitle" value={this.state.searchQueryJobTitle} onChange={this.handleChange}></input>
+                        <button className="btn btn-success" onClick={this.searchJobTitleClicked}>Search</button></div>}
                     </div>
                     </div>
                     {/*  Component ********** */}

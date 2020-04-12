@@ -16,8 +16,8 @@ public interface JobRepository extends MongoRepository < Job, Long > {
 	public List <Job> findByEmployer(String employer);
 
 	@Query(value = "{'county': {$regex : ?0, $options: 'i'}}")
-	public List <Job> findByLocationIgnoreCase(String county);
+	public List <Job> findByLocation(String county);
 	
 	@Query(value = "{'jobTitle': {$regex : ?0, $options: 'i'}}")
-	public Job findByJobTitle(String jobTitle);
+	public List <Job> findByJobTitle(String jobTitle);
 }

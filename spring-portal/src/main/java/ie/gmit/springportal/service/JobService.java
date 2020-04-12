@@ -98,18 +98,21 @@ public class JobService {
     	
     }
     public List<Job> findByLocation(String county) {
-    	List<Job> jobDb = this.jobRepository.findByLocationIgnoreCase(county);
+    	List<Job> jobDb = this.jobRepository.findByLocation(county);
     	if (jobDb.isEmpty()) {
     		throw new ResourceNotFoundException("No jobs found in: " + county);
         } else {
-        	return jobRepository.findByLocationIgnoreCase(county);
+        	return jobRepository.findByLocation(county);
         }
     }
-    /*
-    public Job getByJobTitle(String jobTitle) {
-    	return jobRepository.findByJobTitle(jobTitle);
+    public List<Job> findByJobTitle(String jobTitle) {
+    	List<Job> jobDb = this.jobRepository.findByJobTitle(jobTitle);
+    	if (jobDb.isEmpty()) {
+    		throw new ResourceNotFoundException("No jobs found with the job title: " + jobTitle);
+        } else {
+        	return jobRepository.findByJobTitle(jobTitle);
+        }
     }
-    */
     //	isApplied..
 //*******************************************************************************************************//
 
