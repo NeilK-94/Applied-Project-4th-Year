@@ -88,11 +88,22 @@ public class JobService {
     	jobRepository.deleteAll();
     }
     
-    public List<Job> getByEmployer(String employer) {
-    	return jobRepository.findByEmployer(employer);
+    public List<Job> findByEmployer(String employer) {
+    	List<Job> jobDb = this.jobRepository.findByEmployer(employer);
+    	if (jobDb.isEmpty()) {
+    		throw new ResourceNotFoundException("No jobs found from: " + employer);
+        } else {
+        	return jobRepository.findByEmployer(employer);
+        }
+    	
     }
-    public List<Job> getByCounty(String county) {
-    	return jobRepository.findByCounty(county);
+    public List<Job> findByLocation(String county) {
+    	List<Job> jobDb = this.jobRepository.findByLocationIgnoreCase(county);
+    	if (jobDb.isEmpty()) {
+    		throw new ResourceNotFoundException("No jobs found in: " + county);
+        } else {
+        	return jobRepository.findByLocationIgnoreCase(county);
+        }
     }
     /*
     public Job getByJobTitle(String jobTitle) {

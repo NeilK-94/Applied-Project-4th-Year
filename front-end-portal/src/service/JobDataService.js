@@ -26,5 +26,6 @@ class JobDataService {
     }
     retrieveJobByCounty(county) {
         return axios.get(`${COUNTY_URL}?county=${county}`);
-    }}
+    }
+}
 export default new JobDataService() //  create an instance of JobDataService and make it available for other components.

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import './bootstrap.css';
 
-import UserApp from './component/UserApp';
+import UserApp from './components/UserApp';
 
 class App extends Component {
   render() {
