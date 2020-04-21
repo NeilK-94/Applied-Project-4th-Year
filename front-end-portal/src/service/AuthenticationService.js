@@ -2,6 +2,8 @@ import axios from 'axios'
 import { BASIC_AUTH_API_URL } from '../Constants'
 import { JWT_AUTH_API_URL } from '../Constants'
 
+const HEROKU_JWT_AUTHENTICATE = 'https://spring-portal-api.herokuapp.com/authenticate'
+
 export const SESSION_USER_NAME = "User"
 
 class AuthenticationService {
@@ -16,8 +18,14 @@ class AuthenticationService {
     }
     //  Basic Authentication *********************************
 
+    // executeJwtAuthenticationService(username, password) {
+    //     return axios.post(`${JWT_AUTH_API_URL}`, {
+    //         username,
+    //         password
+    //     })
+    // }
     executeJwtAuthenticationService(username, password) {
-        return axios.post(`${JWT_AUTH_API_URL}`, {
+        return axios.post(`${HEROKU_JWT_AUTHENTICATE}`, {
             username,
             password
         })
