@@ -28,9 +28,10 @@
 
   .App {
     text-align: center;
-    background-image: url(https://mcdn.wallpapersafari.com/medium/21/0/i1dOC6.jpg);
+    background: url(https://mcdn.wallpapersafari.com/medium/21/0/i1dOC6.jpg); 
     background-size: cover;
-    color: white
+    color: white;
+    margin-bottom: 0;
   }
   
   .App-logo {

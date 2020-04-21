@@ -25,7 +25,7 @@ class JobDataService {
     retrieveJobByEmployer(employer) {
         return axios.get(`${EMPLOYER_URL}?employer=${employer}`);
     }
-    retrieveJobByCounty(county) {
+    retrieveJobByLocation(county) {
         return axios.get(`${LOCATION_URL}?county=${county}`);
     }
     retrieveJobByJobTitle(jobTitle) {
