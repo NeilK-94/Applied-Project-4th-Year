@@ -23,7 +23,7 @@ import ie.gmit.springportal.model.Job;
 import ie.gmit.springportal.service.JobService;
 
 //CrossOrigin allows requests from specific origins, in this case, our React address
-@CrossOrigin(origins = { "http://localhost:3000", "https://developer-job-site.herokuapp.com/"})
+@CrossOrigin(origins = { "http://localhost:3000", "https://developer-job-site.herokuapp.com"})
 @RestController
 public class JobController {
 

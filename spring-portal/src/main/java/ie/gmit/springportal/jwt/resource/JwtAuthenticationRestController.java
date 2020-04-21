@@ -25,7 +25,7 @@ import ie.gmit.springportal.jwt.JwtTokenUtil;
 import ie.gmit.springportal.jwt.JwtUserDetails;
 
 @RestController
-@CrossOrigin(origins="http://localhost:3000")
+@CrossOrigin(origins = { "http://localhost:3000", "https://developer-job-site.herokuapp.com"})
 public class JwtAuthenticationRestController {
 
   @Value("${jwt.http.request.header}")
