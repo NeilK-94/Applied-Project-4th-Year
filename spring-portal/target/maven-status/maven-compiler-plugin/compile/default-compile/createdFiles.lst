@@ -1,0 +1,5 @@
+ie\gmit\springportal\repository\JobRepository.class
+ie\gmit\springportal\model\Job.class
+ie\gmit\springportal\controller\JobController.class
+ie\gmit\springportal\service\JobService.class
+ie\gmit\springportal\SpringPortalApplication.class
