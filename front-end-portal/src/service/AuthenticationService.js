@@ -1,29 +1,34 @@
 import axios from 'axios'
-import { BASIC_AUTH_API_URL } from '../Constants'
-import { JWT_AUTH_API_URL } from '../Constants'
-
-const HEROKU_JWT_AUTHENTICATE = 'https://spring-portal-api.herokuapp.com/authenticate'
+import { BASIC_AUTH_API_URL, JWT_AUTH_API_URL, HEROKU_JWT_AUTHENTICATE } from '../Constants'
 
 export const SESSION_USER_NAME = "User"
 
 class AuthenticationService {
-    //  Basic Authentication *********************************
+    /* --- Basic Authentication ---
     executeBasicAuthenticationService(username, password){
         return axios.get(`${BASIC_AUTH_API_URL}`,
         {headers: {authorization: this.createBasicAuthToken(username, password)}});
     }
     createBasicAuthToken(username, password){
-        //  Create standard authentication header. Use base63 encoding
+        //  Create standard authentication header. Use base64 encoding
         return "Basic " + window.btoa(username + ":" + password)
     }
-    //  Basic Authentication *********************************
-
-    // executeJwtAuthenticationService(username, password) {
-    //     return axios.post(`${JWT_AUTH_API_URL}`, {
-    //         username,
-    //         password
-    //     })
-    // }
+    //  Add user name to session storage
+    registerLogin(username, password){
+        sessionStorage.setItem(SESSION_USER_NAME, username);
+        this.axiosInterceptor(this.createBasicAuthToken(username, password));
+    }
+    */
+    /* --- JWT Authentication ---*/
+    /* - Localhost Connection -
+    executeJwtAuthenticationService(username, password) {
+        return axios.post(`${JWT_AUTH_API_URL}`, {
+            username,
+            password
+        })
+    }
+    */
+    /* - Heroku Connection - */
     executeJwtAuthenticationService(username, password) {
         return axios.post(`${HEROKU_JWT_AUTHENTICATE}`, {
             username,
@@ -32,12 +37,6 @@ class AuthenticationService {
     }
     createJWTToken(token) {
         return 'Bearer ' + token
-    }
-
-    //  Add user name to session storage
-    registerLogin(username, password){
-        sessionStorage.setItem(SESSION_USER_NAME, username);
-        this.axiosInterceptor(this.createBasicAuthToken(username, password));
     }
 
     registerSuccessfulLoginForJwt(username, token) {

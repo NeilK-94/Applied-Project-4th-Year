@@ -15,6 +15,7 @@ import FooterComponent from './FooterComponent'
 import HeaderComponent from './HeaderComponent'
 import HomeComponent from './HomeComponent'
 import AuthenticatedRoute from './AuthenticatedRoute'
+import '../App.css';
 
 export class UserApp extends Component {
     render() {
@@ -22,7 +23,6 @@ export class UserApp extends Component {
             <div className="UserApp">
                 <Router>
                     <HeaderComponent />
-
                         <Switch>
                             <Route path="/" exact component={LoginComponent} />
                             <Route path="/login" component={LoginComponent} />
