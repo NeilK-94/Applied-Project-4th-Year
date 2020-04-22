@@ -12,6 +12,7 @@ class LoginComponent extends Component {
         }
         this.handleChange = this.handleChange.bind(this);
         this.loginClicked = this.loginClicked.bind(this);
+        this.enterPressed = this.enterPressed.bind(this);  
     }
 
     //  This is a generic change handler rather than having to have a method for each element!
@@ -52,7 +53,7 @@ class LoginComponent extends Component {
         // ).catch( ()=> {
         //     this.setState({hasLoginFailed: true})
         //     this.setState({SuccessfulLogin: false})
-        // })
+        // })*/
 
         AuthenticationService
             .executeJwtAuthenticationService(this.state.username, this.state.password)
@@ -64,6 +65,14 @@ class LoginComponent extends Component {
                 this.setState({ hasLoginFailed: true })
             })
     }
+
+    /*  --- Method to allow the user to submit with 'enter' instead of clicking the button ---  */
+    enterPressed(event) {
+        var code = event.keyCode || event.which;
+        if(code === 13) { //13 is the enter keycode
+            this.loginClicked()
+        } 
+    }
    
     render(){
         return (
@@ -72,8 +81,8 @@ class LoginComponent extends Component {
                 <div className="container">
                     {this.state.hasLoginFailed && <div className="alert alert-warning">Failed Login</div>}
                     User Name: <input type="text" name="username" value={this.state.username} onChange={this.handleChange}></input>
-                    Password: <input type="password" name="password" value={this.state.password} onChange={this.handleChange}></input>
-                    <button className="btn btn-success" onClick={this.loginClicked}>Login</button>
+                    Password: <input type="password" id="myInput" name="password" value={this.state.password} onChange={this.handleChange} onKeyPress={this.enterPressed.bind(this)}></input>
+                    <button className="btn btn-success" id="myBtn" onSubmit={this.loginClicked}>Login</button>
                 </div>
                 <section className="container">
                 <div className="jumbotron">
@@ -85,7 +94,6 @@ class LoginComponent extends Component {
                 </div>
             </section>
             </div>
-            
         )
     }
 }

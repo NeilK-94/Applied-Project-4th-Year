@@ -11,14 +11,16 @@ class ListJobsComponent extends Component {
         this.state = { 
             jobs: [],
             message: null,
+            sort: {
+                column: null,
+                direction: 'desc',
+              }
         }
         this.refreshJobs = this.refreshJobs.bind(this)
         this.deleteJobClicked = this.deleteJobClicked.bind(this)
         this.updateJobClicked = this.updateJobClicked.bind(this)
         this.addJobClicked = this.addJobClicked.bind(this)
-
     }
-
     componentDidMount() {   //  React makes componentDidMount be called as soon as the component is mounted
         this.refreshJobs(); //  Call refreshJobs
     }
