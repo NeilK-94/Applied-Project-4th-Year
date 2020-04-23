@@ -70,6 +70,7 @@ class LoginComponent extends Component {
     enterPressed(event) {
         var code = event.keyCode || event.which;
         if(code === 13) { //13 is the enter keycode
+            console.log("Clicked")
             this.loginClicked()
         } 
     }

@@ -1,13 +1,8 @@
-//  Path routes will go here.
-
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import ListJobsComponent from './ListJobsComponent';
 import UpdateJobComponent from './UpdateJobComponent';
-//import NewJobComponent from './NewJobComponent';
-// import ListUsersComponent from './ListUsersComponent';
-// import UserComponent from './UserComponent';
 import LoginComponent from './LoginComponent'
 import LogoutComponent from './LogoutComponent'
 import ErrorComponent from './ErrorComponent'
@@ -29,10 +24,7 @@ export class UserApp extends Component {
                             <AuthenticatedRoute path="/logout" component={LogoutComponent} />
                             <AuthenticatedRoute path="/home/:username" component={HomeComponent} />
                             <AuthenticatedRoute path="/jobs/:id" component={UpdateJobComponent} />
-                            {/*<AuthenticatedRoute path="/jobs/view/:id" component={NewJobComponent} />*/}
                             <AuthenticatedRoute path="/jobs" component={ListJobsComponent} />
-                            {/* <Route path="/users" component={ListUsersComponent} />
-                            <Route path="/users/:id" component={UserComponent} /> */}
                             <Route component={ErrorComponent} />
                         </Switch>
                     <FooterComponent />    
