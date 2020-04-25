@@ -17,6 +17,13 @@
     margin: 0px auto 0px auto;
     overflow: auto;
  }
+
+ .ellipsis {
+  display: block;
+  white-space: nowrap;
+  width: 200px;
+  overflow: hidden;
+}
   
   .popup {
     color: black;

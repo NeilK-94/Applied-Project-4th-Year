@@ -28,12 +28,7 @@ class HomeComponent extends Component {
                     <p className="lead">Welcome {this.props.match.params.username}. You can view the latest jobs <Link to="/jobs">here.</Link></p>
                 </div>
                 </div>
-                {/*  Component ********** */}
-                <SearchComponent />
-                {/*  Component ********** */}
-                
-                {/*  Component ********** */}
-                
+                <SearchComponent />                
             </>
         )
     }

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Modal from 'react-awesome-modal';
 import JobDataService from '../service/JobDataService';
 import AuthenticationService from '../service/AuthenticationService';
+import ApplyComponent from './ApplyComponent'
 import { withRouter } from 'react-router-dom';
 
 class ResultsComponent extends Component {
@@ -12,25 +13,12 @@ class ResultsComponent extends Component {
             jobs: [],
             hasSearchFailed: false,
             hasDeleteSucceeded: false,
-            visible : false,
-            deleteSuccessful: false
+            deleteSuccessful: false,
+            addModalShow: false
         }
         this.updateJobClicked = this.updateJobClicked.bind(this);
         this.deleteJobClicked = this.deleteJobClicked.bind(this)
         this.refreshJobs = this.refreshJobs.bind(this)
-    }
-    openModal() {
-        this.setState({
-            visible : true,
-            hasDeleteSucceeded: false,
-            deleteSuccessful: false
-        });
-    }
-    closeModal() {
-        this.setState({
-            visible : false,
-            hasDeleteSucceeded: false
-        });
     }
     refreshJobs() {
         JobDataService.retrieveJobByEmployer(this.props.searchQueryEmployer)    //  Make call to the REST API
@@ -64,8 +52,10 @@ class ResultsComponent extends Component {
     updateJobClicked(id){
         this.props.history.push(`/jobs/${id}`)
     }
+    
 
     render() {
+        let addModalClose =() => this.setState({addModalShow: false});
         return (
             <div>
                 <br></br>
@@ -87,18 +77,12 @@ class ResultsComponent extends Component {
                                             <td>{job.jobTitle}</td>
                                             <td>{job.county}</td>
                                             <td>{job.description}</td>
-                                            <td><button className="btn btn-success" onClick={() => this.openModal(job.jobTitle)}>View</button></td>
-                                                <Modal visible={this.state.visible} width="500" height="400" effect="fadeInRight" onClickAway={() => this.closeModal()}>
-                                                    <tr><div className="popup">
-                                                        <td><h3>{job.jobTitle}</h3></td>
-                                                        <h4>{job.employer}</h4>
-                                                        <h4>{job.county}</h4>
-                                                        <p>{job.description}</p>
-                                                        <button className="btn btn-info" onClick={() => this.closeModal()}>Close</button>
-                                                        <button className="btn btn-warning" onClick={() => this.deleteJobClicked(job.id)}>Delete</button>
-                                                        <button className="btn btn-success" onClick={() => this.updateJobClicked(job.id)}>Update</button>
-                                                    </div></tr>
-                                                </Modal>
+                                            <td><button className="btn btn-info" onClick={() => this.setState({addModalShow: true})}>Info</button></td>
+                                            <ApplyComponent 
+                                                show = {this.state.addModalShow}
+                                                onHide={addModalClose}
+                                                jobTitle={job.jobTitle}
+                                            />
                                         </tr>
                                 )
                             }

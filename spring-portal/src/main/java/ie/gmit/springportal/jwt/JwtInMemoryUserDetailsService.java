@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import ie.gmit.springportal.BCryptEncoderTest;
+
 @Service
 public class JwtInMemoryUserDetailsService implements UserDetailsService {
 
@@ -18,10 +20,7 @@ public class JwtInMemoryUserDetailsService implements UserDetailsService {
 	  inMemoryUserList.add(new JwtUserDetails(1L, "Neil",
 		        "$2a$10$xlGEJ8b8x9t/H/bPME2zoOzxHHBavMklOyjFRlIVCB1Guz3IQF2fS", "ROLE_USER_2"));
     inMemoryUserList.add(new JwtUserDetails(2L, "user",
-        "$2a$10$dUcUVcFVHo2nQ2HWLX3Ib.Ec4HNrys3IfrDN/ClhAuQRFNCXfKHcy", "ROLE_USER_2"));
-    
-    
-
+        "$2a$10$dUcUVcFVHo2nQ2HWLX3Ib.Ec4HNrys3IfrDN/ClhAuQRFNCXfKHcy", "ROLE_USER_2"));    
   }
 
 	@Override

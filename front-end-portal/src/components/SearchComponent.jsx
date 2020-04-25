@@ -8,7 +8,7 @@ export class SearchComponent extends Component {
 
         this.state = { 
             jobs: [],
-            searchQueryEmployer: 'Cisco',
+            searchQueryEmployer: 'SAP',
             searchQueryLocation: 'Galway',
             searchQueryJobTitle: 'Front End Developer',
             hasSearchFailed: false,
@@ -25,7 +25,6 @@ export class SearchComponent extends Component {
 
     searchEmployerClicked(){
         this.setState({ hasDeleteSucceeded: false })
-        //this.state.hasDeleteSucceeded = false
         JobDataService.retrieveJobByEmployer(this.state.searchQueryEmployer)
         .then(  //  Decide what to do once call is made succesfully
             response => {
@@ -41,7 +40,6 @@ export class SearchComponent extends Component {
     }
     searchLocationClicked(){
         this.setState({ hasDeleteSucceeded: false })
-        //this.state.hasDeleteSucceeded = false
         JobDataService.retrieveJobByLocation(this.state.searchQueryLocation)
         .then(  //  Decide what to do once call is made succesfully
             response => {
@@ -57,7 +55,6 @@ export class SearchComponent extends Component {
     }
     searchJobTitleClicked(){
         this.setState({ hasDeleteSucceeded: false })
-        //this.state.hasDeleteSucceeded = false
         JobDataService.retrieveJobByJobTitle(this.state.searchQueryJobTitle)
         .then(  //  Decide what to do once call is made succesfully
             response => {

@@ -80,10 +80,10 @@ class LoginComponent extends Component {
             <div className="container">
                 <h1>Login</h1>
                 <div className="container">
-                    {this.state.hasLoginFailed && <div className="alert alert-warning">Failed Login</div>}
-                    User Name: <input type="text" name="username" value={this.state.username} onChange={this.handleChange}></input>
+                    {this.state.hasLoginFailed && <div className="alert alert-warning alert-dismissible fade show" role="alert">Failed Login</div>}
+                    User Name: <input type="text" name="username" value={this.state.username} onChange={this.handleChange} onKeyPress={this.enterPressed.bind(this)}></input>
                     Password: <input type="password" id="myInput" name="password" value={this.state.password} onChange={this.handleChange} onKeyPress={this.enterPressed.bind(this)}></input>
-                    <button className="btn btn-success" id="myBtn" onSubmit={this.loginClicked}>Login</button>
+                    <button className="btn btn-success" id="myBtn" onClick={this.loginClicked}>Login</button>
                 </div>
                 <section className="container">
                 <div className="jumbotron">
