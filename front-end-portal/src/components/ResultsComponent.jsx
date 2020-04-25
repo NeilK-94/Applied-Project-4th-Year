@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Modal from 'react-awesome-modal';
 import JobDataService from '../service/JobDataService';
 import AuthenticationService from '../service/AuthenticationService';
 import ApplyComponent from './ApplyComponent'
@@ -53,6 +52,11 @@ class ResultsComponent extends Component {
         this.props.history.push(`/jobs/${id}`)
     }
     
+    checkApplied(applied){
+        if(applied === true){
+            return <img src="https://cdn3.iconfinder.com/data/icons/flat-actions-icons-9/792/Tick_Mark_Dark-512.png" width="25px" height="30px"/>
+        }
+    }
 
     render() {
         let addModalClose =() => this.setState({addModalShow: false});
@@ -65,6 +69,7 @@ class ResultsComponent extends Component {
                                 <th>Employer</th>
                                 <th>Job Title</th>
                                 <th>Location</th>
+                                <th>Applied</th>
                                 <th>Description</th>
                             </tr>
                         </thead>
@@ -76,6 +81,10 @@ class ResultsComponent extends Component {
                                             <td>{job.employer}</td>
                                             <td>{job.jobTitle}</td>
                                             <td>{job.county}</td>
+                                            {/* <td>{job.applied + ''}</td> */}
+                                            <td>
+                                                {this.checkApplied(job.applied)}
+                                            </td>
                                             <td>{job.description}</td>
                                             <td><button className="btn btn-info" onClick={() => this.setState({addModalShow: true})}>Info</button></td>
                                             <ApplyComponent 

@@ -7,7 +7,7 @@ export class ApplyComponent extends Component {
     }
     render() {
         return (
-            <div>
+            <div className="container">
                 <ReactBootstrap.Modal
                     {...this.props}
                     size="lg"
