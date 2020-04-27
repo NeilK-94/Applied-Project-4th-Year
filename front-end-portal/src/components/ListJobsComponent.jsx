@@ -54,6 +54,11 @@ class ListJobsComponent extends Component {
     addJobClicked() {
         this.props.history.push(`/jobs/-1`)
     }
+    checkApplied(applied){
+        if(applied === true){
+            return <img src="https://cdn3.iconfinder.com/data/icons/flat-actions-icons-9/792/Tick_Mark_Dark-512.png" width="25px" height="30px" alt="applied tick"/>
+        }
+    }
 
     render() {
         return (
@@ -72,7 +77,7 @@ class ListJobsComponent extends Component {
                             <tr>
                                 <th>Employer</th>
                                 <th>Job Title</th>
-                                <th>Description</th>
+                                <th>Applied</th>
                                 <th>Update</th>
                                 <th>Delete</th>
                             </tr>
@@ -84,7 +89,7 @@ class ListJobsComponent extends Component {
                                         <tr key={job.id}>
                                             <td>{job.employer}</td>
                                             <td>{job.jobTitle}</td>
-                                            <td className="ellipsis">{job.description}</td>
+                                            <td>{this.checkApplied(job.applied)}</td>
                                             <td><button className="btn btn-success" onClick={() => this.updateJobClicked(job.id)}>Update</button></td>
                                             <td><button className="btn btn-warning" onClick={() => this.deleteJobClicked(job.id)}>Delete</button></td>
                                         </tr>

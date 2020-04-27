@@ -57,7 +57,7 @@ public class Job {
 		this.description = description;
 	}
 	public boolean isApplied() {
-		return applied;
+		return applied = true;
 	}
 	public void setApplied(boolean applied) {
 		this.applied = applied;

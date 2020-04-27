@@ -1,6 +1,6 @@
 //   data service method to call the REST API using AXIOS framework
 import axios from 'axios'
-import { GET_ALL_JOBS_URL, CREATE_JOB_URL, EMPLOYER_URL } from '../Constants'
+//import { GET_ALL_JOBS_URL, CREATE_JOB_URL, EMPLOYER_URL } from '../Constants'
 import { HEROKU_URL, HEROKU_EMP, HEROKU_LOC, HEROKU_JOB } from '../Constants'
 
 
@@ -62,6 +62,9 @@ class JobDataService {
     
     retrieveJobByJobTitle(jobTitle) {
         return axios.get(`${HEROKU_JOB}?jobTitle=${jobTitle}`);
+    }
+    applyJob(id, job) {
+        return axios.put(`http://localhost:8080/jobs/apply/${id}`, job);
     }
 }
 export default new JobDataService() //  create an instance of JobDataService and make it available for other components.

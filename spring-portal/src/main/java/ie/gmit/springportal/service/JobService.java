@@ -10,9 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ie.gmit.springportal.exception.ResourceNotFoundException;
 import ie.gmit.springportal.model.Job;
-import ie.gmit.springportal.model.User;
 import ie.gmit.springportal.repository.JobRepository;
-import ie.gmit.springportal.repository.UserRepository;
 
 @Service
 @Transactional
@@ -36,7 +34,20 @@ public class JobService {
     	return jobRepository.save(job);
     	
     }
-
+    
+    public Job applyJob(Job job) {
+        Optional < Job > jobDb = this.jobRepository.findById(job.getId());
+        
+        if (jobDb.isPresent()) {
+            Job jobUpdate = jobDb.get();
+            jobUpdate.setApplied(job.isApplied());
+            jobRepository.save(jobUpdate);
+            return jobUpdate;
+        } else {
+            throw new ResourceNotFoundException("Record not found with id : " + job.getId());
+        }
+    }
+        
     public Job updateJob(Job job) {
         Optional < Job > jobDb = this.jobRepository.findById(job.getId());
 
@@ -51,7 +62,7 @@ public class JobService {
             jobUpdate.setJobTitle(job.getJobTitle());
             jobUpdate.setCounty(job.getCounty());
             jobUpdate.setDescription(job.getDescription());
-            jobUpdate.setApplied(job.isApplied());
+            //jobUpdate.setApplied(job.isApplied());
             jobRepository.save(jobUpdate);
             return jobUpdate;
         } else {

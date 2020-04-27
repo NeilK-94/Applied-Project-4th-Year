@@ -70,6 +70,12 @@ public class JobController {
 		job.setId(id);
 		return ResponseEntity.ok().body(this.jobService.updateJob(job));
 	}
+	
+	@PutMapping("/jobs/apply/{id}")
+	public ResponseEntity<Job> applyJob(@PathVariable long id, @RequestBody Job job) {
+		job.setId(id);
+		return ResponseEntity.ok().body(this.jobService.applyJob(job));
+	}
 
 	@DeleteMapping("/jobs/{id}")
 	public HttpStatus deleteJob(@PathVariable long id) {

@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { BASIC_AUTH_API_URL, JWT_AUTH_API_URL, HEROKU_JWT_AUTHENTICATE } from '../Constants'
+//import { BASIC_AUTH_API_URL, JWT_AUTH_API_URL } from '../Constants'
+import { HEROKU_JWT_AUTHENTICATE } from '../Constants'
 
 export const SESSION_USER_NAME = "User"
 

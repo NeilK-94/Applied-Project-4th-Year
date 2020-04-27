@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import JobDataService from '../service/JobDataService';
-import AuthenticationService from '../service/AuthenticationService';
+//import AuthenticationService from '../service/AuthenticationService';
 import ApplyComponent from './ApplyComponent'
 import { withRouter } from 'react-router-dom';
 
@@ -13,12 +13,11 @@ class ResultsComponent extends Component {
             hasSearchFailed: false,
             hasDeleteSucceeded: false,
             deleteSuccessful: false,
-            addModalShow: false
+            addModalShow: false,
         }
-        this.updateJobClicked = this.updateJobClicked.bind(this);
-        this.deleteJobClicked = this.deleteJobClicked.bind(this)
         this.refreshJobs = this.refreshJobs.bind(this)
     }
+    
     refreshJobs() {
         JobDataService.retrieveJobByEmployer(this.props.searchQueryEmployer)    //  Make call to the REST API
             .then(  //  Decide what to do once call is made succesfully
@@ -31,35 +30,14 @@ class ResultsComponent extends Component {
                 },                
             )   //  .catch handles unsuccessful. Add later
     }
-
-    deleteJobClicked(id) {
-        let username = AuthenticationService.getLoggedUser()
-
-        JobDataService.deleteJob(username, id)
-            .then(
-                response => {
-                    this.setState({ deleteSuccessful: true })
-                    this.setState({ hasDeleteSucceeded: true })
-
-                    // this.state.deleteSuccessful = true;
-                    // this.state.hasDeleteSucceeded = true;
-                    this.refreshJobs()
-                    this.closeModal()
-                }
-            )
-    }
-    updateJobClicked(id){
-        this.props.history.push(`/jobs/${id}`)
-    }
     
     checkApplied(applied){
         if(applied === true){
-            return <img src="https://cdn3.iconfinder.com/data/icons/flat-actions-icons-9/792/Tick_Mark_Dark-512.png" width="25px" height="30px"/>
+            return <img src="https://cdn3.iconfinder.com/data/icons/flat-actions-icons-9/792/Tick_Mark_Dark-512.png" width="25px" height="30px" alt="applied tick"/>
         }
     }
 
     render() {
-        let addModalClose =() => this.setState({addModalShow: false});
         return (
             <div>
                 <br></br>
@@ -70,7 +48,6 @@ class ResultsComponent extends Component {
                                 <th>Job Title</th>
                                 <th>Location</th>
                                 <th>Applied</th>
-                                <th>Description</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -85,12 +62,22 @@ class ResultsComponent extends Component {
                                             <td>
                                                 {this.checkApplied(job.applied)}
                                             </td>
-                                            <td>{job.description}</td>
-                                            <td><button className="btn btn-info" onClick={() => this.setState({addModalShow: true})}>Info</button></td>
+                                            <td><button className="btn btn-info"
+                                                onClick={() => {
+                                                // Use a computed property name to make it unique based on the ID
+                                                this.setState({ ['show_'+job.id]: true })
+                                                }}>Info</button></td>
                                             <ApplyComponent 
-                                                show = {this.state.addModalShow}
-                                                onHide={addModalClose}
-                                                jobTitle={job.jobTitle}
+                                                show={this.state['show_'+job.id]}
+                                                onHide={() => {
+                                                    // Follow the same process for closing
+                                                    this.setState({ ['show_'+job.id]: false}) 
+                                                }}  
+                                                id={job.id}
+                                                title={job.jobTitle}
+                                                employer={job.employer}
+                                                county={job.county}
+                                                description={job.description}
                                             />
                                         </tr>
                                 )

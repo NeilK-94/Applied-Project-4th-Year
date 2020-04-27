@@ -1,33 +1,58 @@
 import React, { Component } from 'react'
 import * as ReactBootstrap from 'react-bootstrap';
+import JobDataService from '../service/JobDataService';
 
 export class ApplyComponent extends Component {
     constructor(props){
-        super(props);
+        super(props)
+        this.state = {
+            username: 'Neil',
+            password: '',
+            hasApplied: false,
+        }
+        this.applyJob = this.applyJob.bind(this)
     }
+
+    applyJob(){
+        let job = {
+            id: this.props.id,
+            employer: this.props.employer,
+            jobTitle: this.props.jobTitle,
+            description: this.props.description,
+            county: this.props.county
+        }
+        JobDataService.applyJob(this.props.id, job)
+            .then(() => {
+                
+                this.setState({ hasApplied: true })
+            })
+    }
+    
     render() {
+       // console.log("job: " , this.props.id)
         return (
             <div className="container">
                 <ReactBootstrap.Modal
                     {...this.props}
+                    show={this.props.show}
                     size="lg"
                     aria-labelledby="contained-modal-title-vcenter"
                     centered
                 >
                 <ReactBootstrap.Modal.Header closeButton>
                     <ReactBootstrap.Modal.Title id="contained-modal-title-vcenter">
-                    Apply for job
+                    {this.props.title}
                     </ReactBootstrap.Modal.Title>
                 </ReactBootstrap.Modal.Header>
                 <ReactBootstrap.Modal.Body>
-                    <h4>{this.props.jobTitle}</h4>
-                    <p>
-                    Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-                    dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-                    consectetur ac, vestibulum at eros.
-                    </p>
+                    {console.log("job: " , this.props.id)}
+                    <h3>{this.props.employer}</h3>
+                    <h4>Would you like to apply to this job?</h4>
+                    <p>{this.props.description}</p>
                 </ReactBootstrap.Modal.Body>
                 <ReactBootstrap.Modal.Footer>
+                {this.state.hasApplied && <div className="alert alert-success" role="alert">Applied for job</div>}
+                   <button className="btn btn-primary" onClick={this.applyJob}>Apply</button>
                    <button className="btn btn-warning" onClick={this.props.onHide}>Close</button>
                 </ReactBootstrap.Modal.Footer>
                 </ReactBootstrap.Modal>

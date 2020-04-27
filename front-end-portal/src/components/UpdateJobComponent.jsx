@@ -18,7 +18,7 @@ class UpdateJobComponent extends Component {
 
   }
   componentDidMount() {
-    if (this.state.id == -1) {
+    if (this.state.id === -1) {
         console.log("Not mounting, (Create job)")
         return;
     }
@@ -30,7 +30,8 @@ class UpdateJobComponent extends Component {
     .then(response => this.setState({
         description: response.data.description,
         employer: response.data.employer,
-        jobTitle: response.data.jobTitle
+        jobTitle: response.data.jobTitle,
+        county: response.data.county
         }))
   }
 
@@ -41,6 +42,12 @@ class UpdateJobComponent extends Component {
         errors.description = 'Enter a description'
     } else if (values.description.length < 5) {
         errors.description = 'Description must be at least 5 characters long'
+    }
+    if (!values.jobTitle) {
+        errors.jobTitle = 'Enter a job title'
+    }
+    if (!values.employer) {
+        errors.employer = 'Enter an employer'
     }
     return errors
   }
@@ -54,7 +61,8 @@ class UpdateJobComponent extends Component {
         id: this.state.id,
         employer: values.employer,
         jobTitle: values.jobTitle,
-        description: values.description
+        description: values.description,
+        county: values.county
     }
     //  For create, if getting promise error check params in data service. 
 
@@ -71,13 +79,13 @@ class UpdateJobComponent extends Component {
   }
 
   render() {
-    let { description, employer, jobTitle } = this.state
+    let { county, description, employer, jobTitle } = this.state
     return (
         <div>            
             <h3>Update {this.state.employer}'s {this.state.jobTitle} Job</h3>
             <div className="container">
                 <Formik
-                    initialValues={{description: description, employer: employer, jobTitle: jobTitle}}
+                    initialValues={{county: county, description: description, employer: employer, jobTitle: jobTitle}}
                     
                     onSubmit={this.onSubmit}
                     validateOnChange={false}
@@ -97,6 +105,10 @@ class UpdateJobComponent extends Component {
                             <fieldset className="form-group">
                                 <label>Job Title</label>
                                 <Field className="form-control" type="text" name="jobTitle" />
+                            </fieldset>
+                            <fieldset className="form-group">
+                                <label>Location</label>
+                                <Field className="form-control" type="text" name="county" />
                             </fieldset>
                             <fieldset className="form-group">
                                 <label>Description</label>
