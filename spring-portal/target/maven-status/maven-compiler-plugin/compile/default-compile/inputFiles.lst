@@ -1,7 +1,6 @@
 C:\Users\neilk\eclipse-workspace\Applied-Project-4th-Year\spring-portal\src\main\java\ie\gmit\basic\auth\BasicAuthenticationController.java
 C:\Users\neilk\eclipse-workspace\Applied-Project-4th-Year\spring-portal\src\main\java\ie\gmit\springportal\service\JobService.java
 C:\Users\neilk\eclipse-workspace\Applied-Project-4th-Year\spring-portal\src\main\java\ie\gmit\springportal\SpringPortalApplication.java
-C:\Users\neilk\eclipse-workspace\Applied-Project-4th-Year\spring-portal\src\main\java\ie\gmit\springportal\controller\UserController.java
 C:\Users\neilk\eclipse-workspace\Applied-Project-4th-Year\spring-portal\src\main\java\ie\gmit\springportal\jwt\JwtInMemoryUserDetailsService.java
 C:\Users\neilk\eclipse-workspace\Applied-Project-4th-Year\spring-portal\src\main\java\ie\gmit\springportal\jwt\resource\JwtAuthenticationRestController.java
 C:\Users\neilk\eclipse-workspace\Applied-Project-4th-Year\spring-portal\src\main\java\ie\gmit\springportal\jwt\JwtTokenUtil.java
@@ -10,15 +9,13 @@ C:\Users\neilk\eclipse-workspace\Applied-Project-4th-Year\spring-portal\src\main
 C:\Users\neilk\eclipse-workspace\Applied-Project-4th-Year\spring-portal\src\main\java\ie\gmit\springportal\jwt\resource\JwtTokenResponse.java
 C:\Users\neilk\eclipse-workspace\Applied-Project-4th-Year\spring-portal\src\main\java\ie\gmit\basic\auth\AuthenticationBean.java
 C:\Users\neilk\eclipse-workspace\Applied-Project-4th-Year\spring-portal\src\main\java\ie\gmit\springportal\repository\JobRepository.java
-C:\Users\neilk\eclipse-workspace\Applied-Project-4th-Year\spring-portal\src\main\java\ie\gmit\springportal\repository\UserRepository.java
+C:\Users\neilk\eclipse-workspace\Applied-Project-4th-Year\spring-portal\src\main\java\ie\gmit\springportal\jwt\JwtSignUpController.java
 C:\Users\neilk\eclipse-workspace\Applied-Project-4th-Year\spring-portal\src\main\java\ie\gmit\springportal\jwt\resource\AuthenticationException.java
-C:\Users\neilk\eclipse-workspace\Applied-Project-4th-Year\spring-portal\src\main\java\ie\gmit\springportal\model\User.java
 C:\Users\neilk\eclipse-workspace\Applied-Project-4th-Year\spring-portal\src\main\java\ie\gmit\springportal\jwt\JwtTokenAuthorizationOncePerRequestFilter.java
 C:\Users\neilk\eclipse-workspace\Applied-Project-4th-Year\spring-portal\src\main\java\ie\gmit\springportal\controller\JobController.java
 C:\Users\neilk\eclipse-workspace\Applied-Project-4th-Year\spring-portal\src\main\java\ie\gmit\springportal\jwt\JWTWebSecurityConfig.java
 C:\Users\neilk\eclipse-workspace\Applied-Project-4th-Year\spring-portal\src\main\java\ie\gmit\springportal\jwt\JwtUnAuthorizedResponseAuthenticationEntryPoint.java
 C:\Users\neilk\eclipse-workspace\Applied-Project-4th-Year\spring-portal\src\main\java\ie\gmit\springportal\jwt\resource\JwtTokenRequest.java
 C:\Users\neilk\eclipse-workspace\Applied-Project-4th-Year\spring-portal\src\main\java\ie\gmit\springportal\exception\ResourceNotFoundException.java
-C:\Users\neilk\eclipse-workspace\Applied-Project-4th-Year\spring-portal\src\main\java\ie\gmit\springportal\service\UserService.java
 C:\Users\neilk\eclipse-workspace\Applied-Project-4th-Year\spring-portal\src\main\java\ie\gmit\basic\auth\SpringSecurityConfigurationBasicAuth.java
 C:\Users\neilk\eclipse-workspace\Applied-Project-4th-Year\spring-portal\src\main\java\ie\gmit\springportal\model\Job.java

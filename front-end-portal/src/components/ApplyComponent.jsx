@@ -19,12 +19,14 @@ export class ApplyComponent extends Component {
             employer: this.props.employer,
             jobTitle: this.props.jobTitle,
             description: this.props.description,
-            county: this.props.county
+            county: this.props.county,
+            applied: this.props.applied
         }
-        JobDataService.applyJob(this.props.id, job)
+        JobDataService.applyJob(this.props.id, this.props.applied, job)
             .then(() => {
                 
                 this.setState({ hasApplied: true })
+                console.log(this.props)
             })
     }
     

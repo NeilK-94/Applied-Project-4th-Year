@@ -40,7 +40,7 @@ public class JobService {
         
         if (jobDb.isPresent()) {
             Job jobUpdate = jobDb.get();
-            jobUpdate.setApplied(job.isApplied());
+            jobUpdate.setApplied(true);
             jobRepository.save(jobUpdate);
             return jobUpdate;
         } else {
@@ -62,7 +62,7 @@ public class JobService {
             jobUpdate.setJobTitle(job.getJobTitle());
             jobUpdate.setCounty(job.getCounty());
             jobUpdate.setDescription(job.getDescription());
-            //jobUpdate.setApplied(job.isApplied());
+            jobUpdate.setApplied(job.isApplied());
             jobRepository.save(jobUpdate);
             return jobUpdate;
         } else {

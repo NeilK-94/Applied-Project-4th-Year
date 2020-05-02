@@ -78,6 +78,7 @@ class ResultsComponent extends Component {
                                                 employer={job.employer}
                                                 county={job.county}
                                                 description={job.description}
+                                                applied={job.applied}
                                             />
                                         </tr>
                                 )

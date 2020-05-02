@@ -5,7 +5,7 @@ import { HEROKU_JWT_AUTHENTICATE } from '../Constants'
 export const SESSION_USER_NAME = "User"
 
 class AuthenticationService {
-    /* --- Basic Authentication ---
+    /* --- Basic Authentication ---------
     executeBasicAuthenticationService(username, password){
         return axios.get(`${BASIC_AUTH_API_URL}`,
         {headers: {authorization: this.createBasicAuthToken(username, password)}});
@@ -20,7 +20,7 @@ class AuthenticationService {
         this.axiosInterceptor(this.createBasicAuthToken(username, password));
     }
     */
-    /* --- JWT Authentication ---*/
+    /* --- JWT Authentication ---------*/
     /* - Localhost Connection -
     executeJwtAuthenticationService(username, password) {
         return axios.post(`${JWT_AUTH_API_URL}`, {
