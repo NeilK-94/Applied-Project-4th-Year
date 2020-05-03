@@ -23,7 +23,7 @@
 The main use of the database is to store user our user and job objects. The users of the website can perform basic CRUD functionality on the user and job object's stored in the database. Lastly, as this is a Mongo database, all of the data being sent to or from the database is sent in JSON format.}
 %Look into adding xml format too. Don't think it's hard
 
-\subsection{Server Side/Backend Tier}
+\subsection{Server Side/Middle Tier}
 \paragraph{For my 'middle' tier I used Spring Boot. Spring Boot is a fantastic technology for quick painless development of a web application with almost no configuration. The RESTful API is contained in our Spring server and connects the React application to the Mongo database containing the user and job objects to be manipulated.}
 \paragraph{A deciding factor in choosing Spring boot as my server side technology was it's very powerful MongoDB connector. All you need to do is simply extend the MongoRepository class from a repository interface which contains plenty of generic methods already. Impressively, we do not need to manually implement these queries ourselves, instead we use Spring Boot's repository naming conventions, and the MongoRepository will intelligently construct the queries at runtime \cite{marchioni2015mongodb}.}
 

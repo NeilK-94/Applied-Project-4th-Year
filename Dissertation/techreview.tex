@@ -118,8 +118,72 @@ Heroku is a container-based cloud Platform as a Service (PaaS). Developers use H
     \item Application verifies whether or not the user is logged in (via session storage) and the JWT and then processes the request.
 \end{itemize} 
 
-% Not sure whther to go into detail here on how JWT is implemented in my project. Would take up at least two more pages with all the screenshots that would be neccessary
+% Not sure whether to go into detail here on how JWT is implemented in my project. Would take up at least two more pages with all the screenshots that would be neccessary
 
-
+%RESTful api?
 \section{Secondary Technologies}
-\paragraph{mention postman, and frameworks like axios etc. Also gthub.}
+\paragraph{In this section I'll briefly analyze some of the secondary technologies and programs I used throughout the project that I found useful in development and think would be worthwhile mentioning.}
+\subsection{Postman}
+\paragraph{Postman is a fantastic collaboration platform for API development. It makes it easy for developers to test and document their API as well as save requests in collections and share them with peers. Users can send basic HTTP requests or configure complex requests detailing a range of different authentication types, as well as read their responses. It also lets you send and receive data in a number of different formats such as XML, JSON or even HTML.}
+\paragraph{Postman is much more pleasant than using a browser and displays data really well. Below (Figure ~\ref{postman_label}) I have outlined some of the main components of my Postman environment:}
+\begin{enumerate}
+    \item This area displays  the collections I created. Initially I just had one collection - 'Job API'. This grouped requests connecting to my locally hosted API, however after deploying the API to Heroku, I created a second collection for requests to that. Each collection groups requests into the 4 main HTTP request methods.
+    \item This is where you enter the address and endpoint of the API you wish to connect to as well as the HTTP request method type.
+    \item This is the request section. As shown below, I am making a POST request to the '/authenticate' endpoint, I'm passing it a username and password. If I was making a request to a different endpoint, I would include a JWT token in the 'Authorization' tab.
+    \item This is the response section. As we can see, the server sent me back a JWT token. This area also shows the status of the request, in this case, '200 OK'. 
+\end{enumerate}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=0.3]{Images/postman.png} 
+    \label{postman_label}
+    \caption{Postman home screen}
+\end{figure}
+
+\subsection{GitHub}
+\paragraph{As touched on in the Methodology chapter, GitHub was used throughout development to provide a back-up of my work and to document consistent progress over the seven or eight months I have been planning and developing the application. It's also very useful for version control and makes it easy to revert any changes to a project if a mistake is made via the commit history.}
+\paragraph{As I had mentioned, I regret not using more of GitHub's features to their fullest such as the Wiki or the Issues tracker. I did make some entries to the 'Issues' tracker late on in the project when I realised it would've been beneficial (Figure ~\ref{postman_label}). I documented my thoughts and progress mostly in Trello and a simple Word document but would've made better use of these features given a second run at the project.}
+\begin{figure}[h]
+    \centering
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[scale=0.25]{Images/github1.png} 
+        \label{git1_label}
+        \caption{GitHub repository}
+    \end{minipage}\hfill
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[scale=0.25]{Images/github2.png}
+        \label{git2_label}
+        \caption{GitHub issues tracker}
+    \end{minipage}
+\end{figure}
+
+\subsection{React Frameworks}
+\subsubsection{Many different frameworks were used alongside the React library to develop the front end application, some of the most notable are the following:}
+
+\subsubsection{1. Bootstrap}
+\paragraph{Bootstrap is an invaluable CSS framework which helps style web pages. I used it throughout my application and is used to style almost every component. I initially imported the Bootstrap CSS via the site 'UNPKG'. This is a useful content delivery site for everything on NPM. I simply added the URL to a 'bootstrap.css' file and then imported it into my app (Figure ~\ref{boot_label}). Later on in development I added it via NPM also for easier use of features such as forms.}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.4]{Images/bootstrap1.png} 
+    \label{boot_label}
+    \caption{Bootstrap CSS file}
+\end{figure}
+
+\subsubsection{2. Axios}
+\paragraph{Axios is a promise based HTTP client used to perform HTTP requests on API's. This framework was used for all requests coming and going from my front-end application.}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.5]{Images/axios.png} 
+    \label{axios_label}
+    \caption{An Axios request}
+\end{figure}
+
+\subsubsection{3. React Router}
+\paragraph{The React Router framework handles all the routing between components in my application. React Router is a widely used framework for React and can be found in most React applications. I used this framework extensively in my 'UserApp' component which acts as the central hub of my application. From here I control which web-pages are shown to the user(Figure ~\ref{router_label}), it is also used for authenticating all routes.}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.35]{Images/router.png} 
+    \label{router_label}
+    \caption{Main component using Router}
+\end{figure}

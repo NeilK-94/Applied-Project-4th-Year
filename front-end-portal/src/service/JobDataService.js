@@ -1,7 +1,7 @@
 //   data service method to call the REST API using AXIOS framework
 import axios from 'axios'
 //import { GET_ALL_JOBS_URL, CREATE_JOB_URL, EMPLOYER_URL } from '../Constants'
-import { HEROKU_URL, HEROKU_EMP, HEROKU_LOC, HEROKU_JOB, HEROKU_APPLY, APPLY_URL, EMPLOYER_URL } from '../Constants'
+import { HEROKU_URL, HEROKU_EMP, HEROKU_LOC, HEROKU_JOB, HEROKU_APPLY } from '../Constants'
 
 
 class JobDataService {

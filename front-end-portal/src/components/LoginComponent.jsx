@@ -88,9 +88,11 @@ class LoginComponent extends Component {
                 <section className="container">
                 <div className="jumbotron">
                 <div className="container">
-                    <h1 className="display-5">Welcome</h1>
+                    <h1 className="display-5">The Developer's Job Site</h1>
                     <hr className="my-4"></hr>
-                    <p className="lead">HOW NOOOOOOOW!</p>
+                    <h3>Welcome to the developer's job site</h3>
+                    <hr className="my-4"></hr>
+                    <p className="lead">On this site you can search and apply for current software developer jobs in your area</p>
                 </div>
                 </div>
             </section>

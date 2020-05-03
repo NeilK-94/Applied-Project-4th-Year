@@ -12,7 +12,7 @@ export class ApplyComponent extends Component {
         }
         this.applyJob = this.applyJob.bind(this)
     }
-
+    //  Should probably move this method to the parent component then pass it as prop. Like onHide
     applyJob(){
         let job = {
             id: this.props.id,

@@ -10,9 +10,9 @@ import ie.gmit.springportal.model.Job;
 
 //	Spring boot will generate all the basic CRUD operations for the job class against the mongodb database
 @Repository
-public interface JobRepository extends MongoRepository < Job, Long > {
+public interface JobRepository extends MongoRepository < Job, Long > {	//	extends mongo repository
 	//	custom methods
-	@Query(value = "{'employer': {$regex : ?0, $options: 'i'}}")
+	@Query(value = "{'employer': {$regex : ?0, $options: 'i'}}")	//	This annotation simply ignores casing when searching
 	public List <Job> findByEmployer(String employer);
 
 	@Query(value = "{'county': {$regex : ?0, $options: 'i'}}")
