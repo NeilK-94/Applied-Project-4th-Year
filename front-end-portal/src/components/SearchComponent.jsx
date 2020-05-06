@@ -92,7 +92,7 @@ export class SearchComponent extends Component {
                         <button className="btn btn-secondary" onClick={() => this.setState({ selected: 2 })}> Job Title </button>     
                     </span>
                         {(selected === 0) && <div id="employer">
-                        <input type="text" name="searchQueryEmployer" value={this.state.searchQueryEmployer} onChange={this.handleChange}></input>
+                        <input type="text" data-testid="search-button" placeholder="SAP" name="searchQueryEmployer" value={this.state.searchQueryEmployer} onChange={this.handleChange}></input>
                         <button className="btn btn-success" onClick={this.searchEmployerClicked}>Search</button></div>}
                         {(selected === 1) && <div id="county">
                         <input type="text" name="searchQueryLocation" value={this.state.searchQueryLocation} onChange={this.handleChange}></input>

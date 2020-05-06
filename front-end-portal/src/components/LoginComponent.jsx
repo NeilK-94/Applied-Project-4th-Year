@@ -25,36 +25,6 @@ class LoginComponent extends Component {
     }
 
     loginClicked(){
-        // if(this.state.username === "Neil" && this.state.password === "password"){
-        //     //  Send username and password to authentication service
-        //     AuthenticationService.registerLogin(this.state.username, this.state.password)
-        //     this.setState(
-        //         {
-        //             SuccessfulLogin: true,
-        //             hasLoginFailed: false,
-        //         }
-        //     )
-        //     this.props.history.push(`/home/${this.state.username}`)
-        // } else{
-        //     this.setState(
-        //         {
-        //             hasLoginFailed: true,
-        //             SuccessfulLogin: false
-        //         }
-        //     )
-        // }
-        // AuthenticationService.executeBasicAuthenticationService(this.state.username, this.state.password)
-        // .then(
-        //     () => {
-        //         AuthenticationService.registerLogin(this.state.username, this.state.password)
-        //         this.setState({ SuccessfulLogin: true, hasLoginFailed: false})  //  dont need!!!!!!!!!!!!!!!!!!
-        //         this.props.history.push(`/home/${this.state.username}`)
-        //     }
-        // ).catch( ()=> {
-        //     this.setState({hasLoginFailed: true})
-        //     this.setState({SuccessfulLogin: false})
-        // })*/
-
         AuthenticationService
             .executeJwtAuthenticationService(this.state.username, this.state.password)
             .then((response) => {
@@ -81,9 +51,12 @@ class LoginComponent extends Component {
                 <h1>Login</h1>
                 <div className="container">
                     {this.state.hasLoginFailed && <div className="alert alert-warning alert-dismissible fade show" role="alert">Failed Login</div>}
-                    User Name: <input type="text" name="username" value={this.state.username} onChange={this.handleChange} onKeyPress={this.enterPressed.bind(this)}></input>
+                    User Name: <input type="text" placeholder="Neil" name="username" value={this.state.username} onChange={this.handleChange} onKeyPress={this.enterPressed.bind(this)}></input>
                     Password: <input type="password" id="myInput" name="password" value={this.state.password} onChange={this.handleChange} onKeyPress={this.enterPressed.bind(this)}></input>
-                    <button className="btn btn-success" id="myBtn" onClick={this.loginClicked}>Login</button>
+                    <hr></hr>
+                    <div data-testid="button">
+                        <button className="btn btn-success" id="myBtn" onClick={this.loginClicked}>Login</button>
+                    </div>
                 </div>
                 <section className="container">
                 <div className="jumbotron">
