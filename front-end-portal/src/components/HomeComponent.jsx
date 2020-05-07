@@ -1,23 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import SearchComponent from './SearchComponent'
-
-
+/*  This component just greets the user. It has child components that perform services*/
 class HomeComponent extends Component {
-    constructor(props) {
-        super(props)
-
-        this.state = { 
-            jobs: [],
-            searchQueryEmployer: 'Cisco',
-            searchQueryLocation: 'Galway',
-            hasSearchFailed: false,
-            hasDeleteSucceeded: false,
-            visible : false,
-            selected: 0,
-            deleteSuccessful: false
-        }
-    }    
     render() {
         return (
            <>
@@ -33,5 +18,4 @@ class HomeComponent extends Component {
         )
     }
 }
-
 export default HomeComponent

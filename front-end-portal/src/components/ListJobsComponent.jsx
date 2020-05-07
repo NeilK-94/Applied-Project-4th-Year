@@ -1,13 +1,10 @@
-//  Component for listing all jobs
-
 import React, { Component } from 'react';
 import JobDataService from '../service/JobDataService';
 import AuthenticationService from '../service/AuthenticationService';
-
+/*  This component lists all jobs on our mongo database */
 class ListJobsComponent extends Component {
     constructor(props) {
         super(props)
-         //  To display jobs, need to make them available to the component. We add jobs to the state of the component and initialize it in the constructor.
         this.state = { 
             jobs: [],
             message: null,
@@ -47,13 +44,15 @@ class ListJobsComponent extends Component {
                 }
             )
     }
+    //  Push user to UpdateJobComponent as an update using jobId
     updateJobClicked(id) {
-        //console.log('update ' + id)
         this.props.history.push(`/jobs/${id}`)
     }
+    //  Push user to UpdateJobComponent as a 'create' job 
     addJobClicked() {
         this.props.history.push(`/jobs/-1`)
     }
+    //  If applied is true, display image from url
     checkApplied(applied){
         if(applied === true){
             return <img src="https://cdn3.iconfinder.com/data/icons/flat-actions-icons-9/792/Tick_Mark_Dark-512.png" width="25px" height="30px" alt="applied tick"/>

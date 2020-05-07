@@ -1,18 +1,17 @@
 import React, { Component } from 'react'
 import * as ReactBootstrap from 'react-bootstrap';
 import JobDataService from '../service/JobDataService';
-
+/*  This component is a 'modal'. It displays job details and allows a user to apply for a job    */
 export class ApplyComponent extends Component {
     constructor(props){
         super(props)
         this.state = {
-            username: 'Neil',
-            password: '',
+            //  Used to trigger a bootstrap alert
             hasApplied: false,
         }
         this.applyJob = this.applyJob.bind(this)
     }
-    //  Should probably move this method to the parent component then pass it as prop. Like onHide
+    //  Sends the job to the applyJob axios method in the dataService file. 
     applyJob(){
         let job = {
             id: this.props.id,
@@ -23,16 +22,16 @@ export class ApplyComponent extends Component {
             applied: this.props.applied
         }
         JobDataService.applyJob(this.props.id, this.props.applied, job)
-            .then(() => {
-                
-                this.setState({ hasApplied: true })
-                console.log(this.props)
-            })
+        .then(() => {
+            //  Set hasApplied to true, triggering alert
+            this.setState({ hasApplied: true })
+            //console.log(this.props)
+        })
     }
     
     render() {
-       // console.log("job: " , this.props.id)
         return (
+            //  Display a bootstrap modal
             <div className="container">
                 <ReactBootstrap.Modal
                     {...this.props}
@@ -47,7 +46,7 @@ export class ApplyComponent extends Component {
                     </ReactBootstrap.Modal.Title>
                 </ReactBootstrap.Modal.Header>
                 <ReactBootstrap.Modal.Body>
-                    {console.log("job: " , this.props.id)}
+                    {/*{console.log("job: " , this.props.id)}*/}
                     <h3>{this.props.employer}</h3>
                     <h4>Would you like to apply to this job?</h4>
                     <p>{this.props.description}</p>
@@ -62,5 +61,4 @@ export class ApplyComponent extends Component {
         )
     }
 }
-
 export default ApplyComponent

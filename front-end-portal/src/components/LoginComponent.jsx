@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import AuthenticationService from '../service/AuthenticationService';
-
+/*  This component is where the user logs in using their predefined username and password   */
 class LoginComponent extends Component {
     constructor(props){
         super(props)
@@ -23,24 +23,27 @@ class LoginComponent extends Component {
             }
         );
     }
-
+    //  This method is called when the 'login' button is clicked
     loginClicked(){
-        AuthenticationService
-            .executeJwtAuthenticationService(this.state.username, this.state.password)
-            .then((response) => {
-                AuthenticationService.registerSuccessfulLoginForJwt(this.state.username, response.data.token)
-                this.props.history.push(`/home/${this.state.username}`)
-            }).catch(() => {
-                this.setState({ showSuccessMessage: false })
-                this.setState({ hasLoginFailed: true })
-            })
+        //  Sends the values entered to the axios functions in the AuthenticatedService file
+        AuthenticationService.executeJwtAuthenticationService(this.state.username, this.state.password)
+        .then((response) => {
+            //  Then call the loginJwt function which adds the username and jwt token to local storage
+            AuthenticationService.registerSuccessfulLoginForJwt(this.state.username, response.data.token)
+            //  Move the user to the homepage
+            this.props.history.push(`/home/${this.state.username}`)
+        //  catch any errors
+        }).catch(() => {
+            this.setState({ showSuccessMessage: false })
+            this.setState({ hasLoginFailed: true })
+        })
     }
 
-    /*  --- Method to allow the user to submit with 'enter' instead of clicking the button ---  */
+    //  Method to allow the user to submit with 'enter' instead of clicking the button
     enterPressed(event) {
         var code = event.keyCode || event.which;
         if(code === 13) { //13 is the enter keycode
-            console.log("Clicked")
+            //console.log("Clicked")
             this.loginClicked()
         } 
     }

@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
 import JobDataService from '../service/JobDataService';
-//import AuthenticationService from '../service/AuthenticationService';
 import ApplyComponent from './ApplyComponent'
 import { withRouter } from 'react-router-dom';
-
+/*  This component is a child of 'SearchComponent' and displays the results of that search in a table*/
 class ResultsComponent extends Component {
     constructor(props) {
         super(props)
-
         this.state = {
             jobs: [],
             hasSearchFailed: false,
@@ -28,9 +26,9 @@ class ResultsComponent extends Component {
                         this.setState({ hasDeleteSucceeded: true })
                     }
                 },                
-            )   //  .catch handles unsuccessful. Add later
+            )
     }
-    
+    //  If applied is true, display image from url
     checkApplied(applied){
         if(applied === true){
             return <img src="https://cdn3.iconfinder.com/data/icons/flat-actions-icons-9/792/Tick_Mark_Dark-512.png" width="25px" height="30px" alt="applied tick"/>

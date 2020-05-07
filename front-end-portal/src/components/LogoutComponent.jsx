@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+/*  This component is another that is bypassed but was used early during development*/
 class LogoutComponent extends Component {
     render() {
         return (

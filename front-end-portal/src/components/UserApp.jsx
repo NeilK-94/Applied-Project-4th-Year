@@ -11,7 +11,7 @@ import HeaderComponent from './HeaderComponent'
 import HomeComponent from './HomeComponent'
 import AuthenticatedRoute from './AuthenticatedRoute'
 import '../App.css';
-
+/*  This component acts as the hub of the application. t uses React Router to Route everything.*/
 export class UserApp extends Component {
     render() {
         return (

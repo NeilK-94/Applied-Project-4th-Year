@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import AuthenticationService from '../service/AuthenticationService'
 import { withRouter } from 'react-router';
-
+/*  This component represents the navbar in my application. It uses react router doms 'link'
+    to navigate the user around the application.    */
 export class HeaderComponent extends Component {
     render() {
         const isLoggedIn = AuthenticationService.isLoggedIn()

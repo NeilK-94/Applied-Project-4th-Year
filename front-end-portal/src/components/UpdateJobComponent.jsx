@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import JobDataService from '../service/JobDataService';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import AuthenticationService from '../service/AuthenticationService';
-
+/*  This component allows the user to both create a new job and update a current one
+    It uses the Formik framework for the form.*/
 class UpdateJobComponent extends Component {
   constructor(props) {
       super(props)
@@ -22,8 +23,6 @@ class UpdateJobComponent extends Component {
         console.log("Not mounting, (Create job)")
         return;
     }
-    console.log(this.state.id)
-    console.log("mounting, (Update job)")
     let username = AuthenticationService.getLoggedUser()
 
     JobDataService.retrieveJob(username, this.state.id)
@@ -37,7 +36,7 @@ class UpdateJobComponent extends Component {
 
   //    Error handling for form
   validate(values) {
-    let errors = {} //  add validation for every field!!!!!!
+    let errors = {}
     if (!values.description) {
         errors.description = 'Enter a description'
     } else if (values.description.length < 5) {
@@ -54,9 +53,6 @@ class UpdateJobComponent extends Component {
 
   //    When save is clicked
   onSubmit(values) {
-    // let employer = this.state.employer
-    // let id = this.state.id
-    // let jobTitle = this.state.jobTitle
     let job = {
         id: this.state.id,
         employer: values.employer,
@@ -64,7 +60,6 @@ class UpdateJobComponent extends Component {
         description: values.description,
         county: values.county
     }
-    //  For create, if getting promise error check params in data service. 
 
     if (this.state.id === -1) {
         JobDataService.createJob(job.jobTitle, job.employer, this.state.id, job)
@@ -74,6 +69,7 @@ class UpdateJobComponent extends Component {
             .then(() => this.props.history.push('/jobs'))
     }
   }
+  //    Go back in the router
   backButton(){
     this.props.history.goBack();
   }

@@ -3,7 +3,8 @@ import axios from 'axios'
 import { HEROKU_JWT_AUTHENTICATE } from '../Constants'
 
 export const SESSION_USER_NAME = "User"
-
+/*  This file is used for JWT authentication when logging in
+    It uses interceptors to attack the returned JWT token to every request made afterwards*/
 class AuthenticationService {
     /* --- Basic Authentication ---------
     executeBasicAuthenticationService(username, password){
@@ -31,6 +32,7 @@ class AuthenticationService {
     */
     /* - Heroku Connection - */
     executeJwtAuthenticationService(username, password) {
+        console.log("Logging in")
         return axios.post(`${HEROKU_JWT_AUTHENTICATE}`, {
             username,
             password
