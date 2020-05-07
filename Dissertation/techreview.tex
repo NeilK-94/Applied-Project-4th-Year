@@ -116,9 +116,7 @@ Heroku is a container-based cloud Platform as a Service (PaaS). Developers use H
     \item The JWT and username are committed to the browser's session storage (not the password as it is sensitive data), this allows for verification on future requests.
     \item All subsequent API calls contain this JWT in their  authorization header using 'axios interceptors'.
     \item Application verifies whether or not the user is logged in (via session storage) and the JWT and then processes the request.
-\end{itemize} 
-
-% Not sure whether to go into detail here on how JWT is implemented in my project. Would take up at least two more pages with all the screenshots that would be neccessary
+\end{itemize}
 
 %RESTful api?
 \section{Secondary Technologies}
@@ -138,11 +136,25 @@ Heroku is a container-based cloud Platform as a Service (PaaS). Developers use H
     \label{postman_label}
     \caption{Postman home screen}
 \end{figure}
+\subsection{Jest \& React Testing Library}
+\paragraph{For testing my React application I used two frameworks, \textbf{Jest} and \textbf{React Testing Library}.}
+\subsubsection{Jest}
+\paragraph{Jest is a testing library developed by Facebook that can be used for regular Javascript applications as well as React applications. It comes pre-installed with React applications that are built using \textbf{Create-React-App}. In my application, to use Jest alone, no pre configuring was required.}
+
+\subsubsection{React Testing Library}
+\paragraph{The React Testing Library makes it easy to test React components. \textbf{react-testing-library} runs tests that use actual DOM nodes rather than instances of React components. It also exposes a recommended way to find elements by a 'data-testid' (Figure ~\ref{testid_label}) as an "escape hatch" for elements where the text content and label do not make sense or is not practical \cite{TestingLibrary}.}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.6]{Images/test1.png} 
+    \label{testid_label}
+    \caption{Identifying a button for testing using 'testid'}
+\end{figure}
 
 \subsection{GitHub}
 \paragraph{As touched on in the Methodology chapter, GitHub was used throughout development to provide a back-up of my work and to document consistent progress over the seven or eight months I have been planning and developing the application. It's also very useful for version control and makes it easy to revert any changes to a project if a mistake is made via the commit history.}
 \paragraph{As I had mentioned, I regret not using more of GitHub's features to their fullest such as the Wiki or the Issues tracker. I did make some entries to the 'Issues' tracker late on in the project when I realised it would've been beneficial (Figure ~\ref{postman_label}). I documented my thoughts and progress mostly in Trello and a simple Word document but would've made better use of these features given a second run at the project.}
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \begin{minipage}{0.5\textwidth}
         \centering
@@ -180,7 +192,7 @@ Heroku is a container-based cloud Platform as a Service (PaaS). Developers use H
 \end{figure}
 
 \subsubsection{3. React Router}
-\paragraph{The React Router framework handles all the routing between components in my application. React Router is a widely used framework for React and can be found in most React applications. I used this framework extensively in my 'UserApp' component which acts as the central hub of my application. From here I control which web-pages are shown to the user(Figure ~\ref{router_label}), it is also used for authenticating all routes.}
+\paragraph{The React Router framework handles all the routing between components in my application. React Router is a widely used framework for React and can be found in most React applications. I used this framework extensively in my 'UserApp' component which acts as the central hub of my application. From here I control which web-pages are shown to the user (Figure ~\ref{router_label}), it is also used for authenticating all routes.}
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.35]{Images/router.png} 

@@ -1,13 +1,18 @@
 \chapter{System Design}
-\section{Architecture}% make a diagram detailing each tier with technologies
-\paragraph{The architecture of this project is comprised of three different tiers.}
+\section{Architecture}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=0.35]{Images/Project Architecture.png} 
+    \label{proj_label}
+    \caption{Project architecture diagram}
+\end{figure}
+\paragraph{The architecture (Figure ~\ref{proj_label}) of this project is comprised of three different tiers.}
 \begin{enumerate}
     \item The \textbf{Front-End} consists of the React application and of course all of the frameworks that go with it.
     \item The \textbf{Middle-tier} consists of my Spring Boot server which configures the REST API endpoints as well as the JWT API. These API's are of course, also hosted on Heroku and are in use by the front-end application to make requests.
     \item Lastly the \textbf{Back-End} which acts as a data tier includes a MongoDB database which stores all of the job details. I deployed the database on MongoDB Atlas to ensure the data is always available.
 \end{enumerate}
 \paragraph{In the following sections I will detail the design for each tier and explain why I made the decisions I did.}
-% insert diagram here
 
 \section{Front End}
 \paragraph{As this section contains the user interface, the only part of the application that the end user will actually see, I will go into extensive detail on it and provide many screenshots of each page and feature as well as provide some code snippets on how each feature was implemented.}
@@ -22,7 +27,7 @@
 
 \subsection{Header \& Footer}
 \paragraph{There is a navigation bar (Figure ~\ref{header_label}) at the top of every page in my application. This is useful for moving between pages and navigating the site. All routes in my application are authenticated meaning they cannot be accessed unless the user is logged in. Beginning from the left, it is comprised of;}
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics[scale=0.35]{Images/header.png} 
     \label{header_label}
@@ -87,7 +92,7 @@
 
 \section{Middle Tier}
 \paragraph{This section consists of a lot of the logic and actual computation in my application. The most important part of this tier is of course the REST API. This is what the front-end communicates with to manipulate or remove data. This tier also contains a JWT API which allows users to request new tokens and prove authentication. Both of these API's are hosted on Heroku.}
-\newpage
+
 \subsection{Spring Boot Project Structure}
 \paragraph{The REST API hosted on Heroku was built using Spring Boot. In this section I will summarize my project setup (Figure ~\ref{setup_label}) and design for building the API.}
 \begin{figure}[ht]
@@ -98,19 +103,26 @@
 \end{figure}
 %Might want to go into more detail on these..
 \paragraph{My Boot project consists of four main packages;}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=0.4]{Images/API UML.png} 
+    \label{api_label}
+    \caption{UML diagram of my API}
+\end{figure}
 \begin{itemize}
     \item The \textbf{Model} package describes the model that we want to work with, in this case a job. This is what is persisted to the MongoDB database and what is displayed at our front-end.
     \item The \textbf{Repository} package configures the MongoDB repository. The 'JobRepository' is used for accessing data from the database. It automatically implements all the basic CRUD operations one might want to perform on a database, I also added three custom methods for searching (Figure ~\ref{repo_label}). Spring Boot tries to auto-configure most of the stuff for you based on the dependencies that you have added in the pom.xml file.
     Since I added a 'spring-boot-starter-data-mongodb' dependency, Spring Boot automatically tries to build a connection with MongoDB by reading the database configuration from the 'application.properties' file.
-    \item The \textbf{Service} package describes the service layer. This package contains a lot of the business logic. The 'JobService' class connects with the 'JobRepository' class to perform CRUD operations on the database.
-    \item Finally the \textbf{Controller} package contains the 'JobController' class. This is the API which will be exposed to the front-end users.
-\end{itemize}
-\begin{figure}[ht]
+    \begin{figure}[h]
     \centering
     \includegraphics[scale=0.5]{Images/repo.png} 
     \label{repo_label}
     \caption{Mongo repository}
-\end{figure}
+    \end{figure}
+    \item The \textbf{Service} package describes the service layer. This package contains a lot of the business logic. The 'JobService' class connects with the 'JobRepository' class to perform CRUD operations on the database.
+    \item Finally the \textbf{Controller} package contains the 'JobController' class. This is the API which will be exposed to the front-end users.
+\end{itemize}
+
 
 \paragraph{Aside from the listed packages there are;}
 \begin{itemize}
@@ -121,6 +133,12 @@
             \item The resource package contains the resources we want to relate to the REST resource and most importantly the 'JWTAuthenticationRestController'. This is the API we send requests to to receive JWT tokens.
             \item The JWT package contains all of the actual logic for creating the JWT token and the user details required to do so.
         \end{itemize}
+        \begin{figure}[ht]
+        \centering
+        \includegraphics[scale=0.4]{Images/JWT UML.png} 
+        \label{jwtuml_label}
+        \caption{UML diagram for JWT packages}
+        \end{figure}
         \item The \textbf{pom.xml} file contains project information and configuration information for maven to build the project such as dependencies, build directory and source directories. Maven reads the pom. xml file, then executes the goal \cite{POM}. Here (Figure ~\ref{pom_label}) I specified many dependencies to aid in building the API.
         \item Lastly, the \textbf{application.properties} file is used to keep project properties in a single file to run the application in a different environment.
 \end{itemize}
@@ -154,4 +172,37 @@ git push heroku master
 \end{verbatim}
 
 \section{Back-End}
-\subsection{}
+\paragraph{The back-end tier stores all of my job data. I deployed a my database online using MongoDB Atlas. This makes it available at all times to the API. }
+\subsection{MongoDB Atlas}
+\paragraph{There were a number of steps required to deploy my database on Atlas.}
+\begin{enumerate}
+    \item Create a MongoDB Atlas account.
+    \item Create a free tier cluster by clicking "Build a new cluster". From here choose a cloud provider and region. Finally Choose the free tier cluster option, selecting the M0 sandbox (free tier) and name your cluster.
+    \begin{itemize}
+        \item Atlas Free Tier clusters provide a small-scale development environment to host your data. Free Tier clusters never expire, and provide access to a subset of Atlas features and functionality \cite{Atlas}.
+    \end{itemize}
+    \item Next, when the cluster is created, click 'Connect'. Here we white-list our IP address. Secondly, add yourself as a database user admin to allow for full access.
+    \item Now we are ready to connect the cluster to the Spring Boot project. Click connect, configure the project settings and copy the string (Figure ~\ref{atlas1_label}).
+    \item Head over to the 'application.properties' file and paste in the string, replacing the blank username and password with your own.
+\end{enumerate}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.37]{Images/atlas2.png}
+    \label{atlas2_label}
+    \caption{Database with its 'jobs' collection}
+\end{figure}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=0.5]{Images/atlas.png} 
+    \label{atlas1_label}
+    \caption{Application connection string}
+\end{figure}
+\paragraph{It may have been noticed I never specified a name for the database or a name for the collection anywhere on MongoDB Atlas. All of this is configured in my Spring Boot application. I specify these details using the Spring data annotations provided for use with MongoDB. I also specify a few other settings for the 'Job' documents using these annotations (Figure ~\ref{atlas3_label}) such as the \textbf{@Id} of the document which is the identifier for every mongo document, as well as more basic annotations such as \textbf{@NotBlank} which forbids empty values and \textbf{@Size} which allows a user to set a max input size.}
+\paragraph{I define the collection name in the database above the class declaration with \textbf{@Document(collection = "jobs")}. Finally the database name is declared in the 'application.properties' file with \newline \textbf{spring.data.mongodb.database=job\_website}.}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=0.5]{Images/atlas3.png}
+    \label{atlas3_label}
+    \caption{Job model outlining some mongo configurations using Spring-Mongo annotations.}
+\end{figure}
+
