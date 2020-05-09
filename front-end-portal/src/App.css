@@ -10,6 +10,17 @@
     background: transparent !important;
     text-emphasis: bold;
   }
+  .modal-body {
+    background: url(https://mcdn.wallpapersafari.com/medium/21/0/i1dOC6.jpg); 
+    color: whitesmoke;
+    background-size: cover;
+  }
+  .modal-footer  {
+    /* background-color: gray;
+    color: black; */
+    background: url(https://www.kindpng.com/picc/m/135-1356093_colorful-purple-smoke-stickers-myedit-transparent-background-purple.png); 
+    background-size: cover;
+  }
 
   #table-wrapper {
     height: 500px;
