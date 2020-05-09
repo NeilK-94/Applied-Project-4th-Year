@@ -11,7 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 import ie.gmit.springportal.exception.ResourceNotFoundException;
 import ie.gmit.springportal.model.Job;
 import ie.gmit.springportal.repository.JobRepository;
-
+/**
+ * @author neilk
+ * The service class performs the business logic n a different layer from the RESTController
+ */
 @Service
 @Transactional
 public class JobService {
@@ -19,22 +22,16 @@ public class JobService {
     @Autowired
     private JobRepository jobRepository;
 
-//*******************************************************************************************************//
-//			WORKING
-//    public Job createJob(long id, Job job) {
-//    	job.setId(id);
-//    	job.getId();
-//        return jobRepository.save(job);
-//    }
+    //	Method to add a job 
     public Job createJob(Job job) {
     	if(job.getId() == -1 || job.getId() == 0) {
     		job.setId(++idCounter);
         	jobRepository.insert(job); 
     	}
     	return jobRepository.save(job);
-    	
     }
     
+    //	Method to mark a job as applied
     public Job applyJob(Job job) {
         Optional < Job > jobDb = this.jobRepository.findById(job.getId());
         
@@ -48,10 +45,12 @@ public class JobService {
         }
     }
         
+    //	method to update jobs
     public Job updateJob(Job job) {
         Optional < Job > jobDb = this.jobRepository.findById(job.getId());
 
-        if(job.getId() == -1) {	//	Bad practice but can't get it to use POST controller method
+        //	If job is marked as a 'create' divert to correct method
+        if(job.getId() == -1) {
         	createJob(job);
         	return job;
         }
@@ -70,10 +69,12 @@ public class JobService {
         }
     }
 
+    //	Method to retrieve all jobs
     public List < Job > getAllJob() {
         return this.jobRepository.findAll();
     }
 
+    //	Method to retrieve specific jobs by id
     public Job getJobById(long jobId) {
         Optional < Job > jobDb = this.jobRepository.findById(jobId);
 
@@ -84,6 +85,7 @@ public class JobService {
         }
     }
 
+    //	Method to delete a job by id
     public void deleteJob(long jobId) {
         Optional < Job > jobDb = this.jobRepository.findById(jobId);
 
@@ -95,10 +97,12 @@ public class JobService {
 
     }
     
+    //	Method to delete all jobs, not accessible via front-end application
     public void deleteAllJobs() {
     	jobRepository.deleteAll();
     }
     
+    //	Method to retrieve jobs by employer attribute
     public List<Job> findByEmployer(String employer) {
     	List<Job> jobDb = this.jobRepository.findByEmployer(employer);
     	if (jobDb.isEmpty()) {
@@ -108,6 +112,8 @@ public class JobService {
         }
     	
     }
+    
+    //	Method to retrieve job by location attribute
     public List<Job> findByLocation(String county) {
     	List<Job> jobDb = this.jobRepository.findByLocation(county);
     	if (jobDb.isEmpty()) {
@@ -116,6 +122,8 @@ public class JobService {
         	return jobRepository.findByLocation(county);
         }
     }
+    
+    //	Method to retrieve job by jobTitle
     public List<Job> findByJobTitle(String jobTitle) {
     	List<Job> jobDb = this.jobRepository.findByJobTitle(jobTitle);
     	if (jobDb.isEmpty()) {
@@ -124,7 +132,4 @@ public class JobService {
         	return jobRepository.findByJobTitle(jobTitle);
         }
     }
-    //	isApplied..
-//*******************************************************************************************************//
-
 }

@@ -1,7 +1,10 @@
 package ie.gmit.springportal.jwt.resource;
 
 import java.io.Serializable;
-
+/**
+ * Token response contains the token
+ * 
+ */
 public class JwtTokenResponse implements Serializable {
 
   private static final long serialVersionUID = 8317676219297719109L;

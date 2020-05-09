@@ -81,8 +81,7 @@ class UpdateJobComponent extends Component {
             <h3>Update {this.state.employer}'s {this.state.jobTitle} Job</h3>
             <div className="container">
                 <Formik
-                    initialValues={{county: county, description: description, employer: employer, jobTitle: jobTitle}}
-                    
+                    initialValues={{county, description, employer, jobTitle}}
                     onSubmit={this.onSubmit}
                     validateOnChange={false}
                     validateOnBlur={false}
@@ -115,7 +114,7 @@ class UpdateJobComponent extends Component {
                                     <button className="btn btn-success" type="submit">Save</button>
                                 </div>
                                 <div className="btn-group mr-2" role="group" aria-label="Second group">
-                                    <button className="btn btn-sm" onClick={this.backButton}>Back</button>
+                                    <button className="btn btn-sm" type="back  " onClick={this.backButton}>Back</button>
                                 </div>
                             </div>
                         </Form>

@@ -1,8 +1,4 @@
 package ie.gmit.springportal.controller;
-
-/**
- * The JobController exposes the REST API endpoints. 
- */
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +17,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import ie.gmit.springportal.model.Job;
 import ie.gmit.springportal.service.JobService;
-
+/**
+ * The JobController exposes the REST API endpoints. 
+ */
 //CrossOrigin allows requests from specific origins, in this case, our React address
 @CrossOrigin(origins = { "http://localhost:3000", "https://developer-job-site.herokuapp.com"})
 @RestController

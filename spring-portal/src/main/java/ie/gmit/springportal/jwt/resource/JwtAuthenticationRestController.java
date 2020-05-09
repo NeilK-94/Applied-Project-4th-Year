@@ -23,7 +23,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ie.gmit.springportal.jwt.JwtTokenUtil;
 import ie.gmit.springportal.jwt.JwtUserDetails;
-
+/**
+ * This class contains the method to handle my resources
+ * Need refresh and create authentication methods
+ */
 @RestController
 @CrossOrigin(origins = { "http://localhost:3000", "https://developer-job-site.herokuapp.com"})
 public class JwtAuthenticationRestController {
@@ -40,26 +43,32 @@ public class JwtAuthenticationRestController {
   @Autowired
   private UserDetailsService jwtInMemoryUserDetailsService;
 
+  //	RequestMapping is being picked up from the application.properties file '/authenticate'
   @RequestMapping(value = "${jwt.get.token.uri}", method = RequestMethod.POST)
   public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtTokenRequest authenticationRequest)
       throws AuthenticationException {
-
+	//	Using spring security, check if username and password is correct
     authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
+    //	Load the user details
     final UserDetails userDetails = jwtInMemoryUserDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 
+    //	Create the token
     final String token = jwtTokenUtil.generateToken(userDetails);
 
     return ResponseEntity.ok(new JwtTokenResponse(token));
   }
 
+  //	RequestMapping is being picked up from the application.properties file '/refresh'
   @RequestMapping(value = "${jwt.refresh.token.uri}", method = RequestMethod.GET)
   public ResponseEntity<?> refreshAndGetAuthenticationToken(HttpServletRequest request) {
+	//	First check if token is valid
     String authToken = request.getHeader(tokenHeader);
     final String token = authToken.substring(7);
     String username = jwtTokenUtil.getUsernameFromToken(token);
+    //	Get user details
     JwtUserDetails user = (JwtUserDetails) jwtInMemoryUserDetailsService.loadUserByUsername(username);
-
+    //	Check expiration date and return if all good
     if (jwtTokenUtil.canTokenBeRefreshed(token)) {
       String refreshedToken = jwtTokenUtil.refreshToken(token);
       return ResponseEntity.ok(new JwtTokenResponse(refreshedToken));

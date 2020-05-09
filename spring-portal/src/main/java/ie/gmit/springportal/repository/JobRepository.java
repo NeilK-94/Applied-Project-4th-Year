@@ -7,10 +7,14 @@ import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import ie.gmit.springportal.model.Job;
-
-//	Spring boot will generate all the basic CRUD operations for the job class against the mongodb database
+/**
+ * @author neilk
+ * The JobRepository interface extends the Mongo repository.
+ * Auto generates basic CRUD functions based on Job objects attributes
+ */
+//	Repository annotation indicates class is a repository 
 @Repository
-public interface JobRepository extends MongoRepository < Job, Long > {	//	extends mongo repository
+public interface JobRepository extends MongoRepository < Job, Long > {	//	extends mongo repository, specify document class and id type
 	//	custom methods
 	@Query(value = "{'employer': {$regex : ?0, $options: 'i'}}")	//	This annotation simply ignores casing when searching
 	public List <Job> findByEmployer(String employer);

@@ -71,7 +71,7 @@ export class SearchComponent extends Component {
                     <p>You can search for jobs from a certain employer or by location.</p>
                     <div className="container">
                     <span id="toggle">
-                        <button className="btn btn-secondary" onClick={() => this.setState({ selected: 0 })}> Employer </button>
+                        <button className="btn btn-secondary" id="reloadButton" onClick={() => this.setState({ selected: 0 })}> Employer </button>
                         <button className="btn btn-secondary" onClick={() => this.setState({ selected: 1 })}> Location </button>
                         <button className="btn btn-secondary" onClick={() => this.setState({ selected: 2 })}> Job Title </button>     
                     </span>

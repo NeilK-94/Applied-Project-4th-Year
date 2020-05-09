@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import JobDataService from '../service/JobDataService';
 import ApplyComponent from './ApplyComponent'
 import { withRouter } from 'react-router-dom';
 /*  This component is a child of 'SearchComponent' and displays the results of that search in a table*/
@@ -13,21 +12,8 @@ class ResultsComponent extends Component {
             deleteSuccessful: false,
             addModalShow: false,
         }
-        this.refreshJobs = this.refreshJobs.bind(this)
     }
-    
-    refreshJobs() {
-        JobDataService.retrieveJobByEmployer(this.props.searchQueryEmployer)    //  Make call to the REST API
-            .then(  //  Decide what to do once call is made succesfully
-                response => {
-                    console.log(response);
-                    this.setState({ jobs: response.data })  //  When response comes back with data, update the state.
-                    if(this.state.deleteSuccessful){
-                        this.setState({ hasDeleteSucceeded: true })
-                    }
-                },                
-            )
-    }
+
     //  If applied is true, display image from url
     checkApplied(applied){
         if(applied === true){
@@ -56,28 +42,29 @@ class ResultsComponent extends Component {
                                             <td>{job.employer}</td>
                                             <td>{job.jobTitle}</td>
                                             <td>{job.county}</td>
-                                            {/* <td>{job.applied + ''}</td> */}
+                                            <td>{this.checkApplied(job.applied)}</td>
                                             <td>
-                                                {this.checkApplied(job.applied)}
-                                            </td>
-                                            <td><button className="btn btn-info"
+                                                <button className="btn btn-info"
                                                 onClick={() => {
                                                 // Use a computed property name to make it unique based on the ID
                                                 this.setState({ ['show_'+job.id]: true })
-                                                }}>Info</button></td>
-                                            <ApplyComponent 
-                                                show={this.state['show_'+job.id]}
-                                                onHide={() => {
-                                                    // Follow the same process for closing
-                                                    this.setState({ ['show_'+job.id]: false}) 
-                                                }}  
-                                                id={job.id}
-                                                title={job.jobTitle}
-                                                employer={job.employer}
-                                                county={job.county}
-                                                description={job.description}
-                                                applied={job.applied}
-                                            />
+                                                }}>Info</button>
+                                            </td>
+                                            <td>
+                                                <ApplyComponent 
+                                                    show={this.state['show_'+job.id]}
+                                                    onHide={() => {
+                                                        // Follow the same process for closing
+                                                        this.setState({ ['show_'+job.id]: false})
+                                                    }}  
+                                                    id={job.id}
+                                                    title={job.jobTitle}
+                                                    employer={job.employer}
+                                                    county={job.county}
+                                                    description={job.description}
+                                                    //applied={job.applied}
+                                                />
+                                            </td>
                                         </tr>
                                 )
                             }

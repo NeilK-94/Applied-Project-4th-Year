@@ -17,9 +17,13 @@ import io.jsonwebtoken.Clock;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.impl.DefaultClock;
-
-//	This file handles the JWT token processing
-
+/**
+ * This class handles JWT token processing
+ * from creating a token to getting details from a token
+ * It also handles token expiration date processing
+ * https://jwt.io/
+ * Uses the imported library 'jwts' class extensively
+ */
 @Component
 public class JwtTokenUtil implements Serializable {
 

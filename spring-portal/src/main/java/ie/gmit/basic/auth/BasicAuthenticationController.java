@@ -3,8 +3,12 @@ package ie.gmit.basic.auth;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-//	API to check if a user is authenticated or not
+/**
+ * @author neilk
+ * API used for basic authentication. Not in use,
+ * was used to get familiar with authentication concepts
+ */
+//	Allow cross origin requests from specified address
 @CrossOrigin(origins="http://localhost:3000")
 @RestController
 public class BasicAuthenticationController {

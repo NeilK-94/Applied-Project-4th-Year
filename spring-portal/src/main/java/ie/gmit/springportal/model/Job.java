@@ -1,8 +1,3 @@
-/**
- * A model object Job.java
- * 
- */
-
 package ie.gmit.springportal.model;
 
 import javax.validation.constraints.NotBlank;
@@ -11,7 +6,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
+/**
+ * @author neilk
+ * The Job object model. This is the object we perform requests on
+ */
 //	The @Document annotation defines an object to be persisted to the MongoDB database
 //@XmlRootElement
 @Document(collection = "jobs")
@@ -19,18 +17,16 @@ public class Job {
 	protected Job() {
 		
 	}
-	//	The @Id annotation is the identifier for every MongoDB document
-	@Id
+	
+	@Id	//	The @Id annotation is the identifier for every MongoDB document
     private long id;
 	private String employer;
-	@NotBlank
-    @Size(max = 100)
+	@NotBlank	//	Ensures the attribute can't be empty
+    @Size(max = 100)	//	Ensures the length of the attribute isn't over 100 characters
 	private String jobTitle;
 	private String county;
 	private String description;
 	private boolean applied = false;
-	
-	//	Can add salary and contract length etc.
 	
 	public long getId() {
 		return id;

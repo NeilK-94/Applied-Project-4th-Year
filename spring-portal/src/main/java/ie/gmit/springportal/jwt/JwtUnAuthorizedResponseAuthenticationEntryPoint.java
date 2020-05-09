@@ -9,9 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
-
-//	By default it wants to use the jwt authentification. However we want to use the one from the spring framework. 
-//	Hnece removed the jwt authentication import and added spring security core
+/**
+ * Exception class for request's without JWT in header
+ * Implements spring securities AuthenticationEntryPoint. I'm using spring's authentication not JWT's.
+ */
 @Component
 public class JwtUnAuthorizedResponseAuthenticationEntryPoint implements AuthenticationEntryPoint, Serializable {
 

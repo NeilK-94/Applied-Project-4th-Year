@@ -1,8 +1,9 @@
 package ie.gmit.springportal;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-//	Simple class to encode a string.
+/**
+ * Class to encode a password using BCryptPasswordEncoder. Used to encode JWT raw password.
+ */
 public class BCryptEncoderTest {
 	private static String encodedString;
 	
