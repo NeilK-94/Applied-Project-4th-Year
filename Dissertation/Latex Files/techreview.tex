@@ -2,7 +2,7 @@
 In this section I'll examine the different technologies that were used in the application. I'll explain why I chose to implement each one specifically and whether or not I feel they were the right choice. As well as the major technologies used I'll touch on frameworks or libraries I feel are relevant to mention for the corresponding technology. The core technologies used that I will scrutinize the most in this section are; Spring Boot, React, MongoDB and Heroku.
 
 \section{MongoDB}
-MongoDB is a NoSQL document oriented database program. A MongoDB database can contain multiple collections, each record in a collection is document. Documents are a structure composed of file and value pairs, similar to JSON objects or other mapping data types \cite{Mongo:doc}. The table below (Figure ~\ref{mongo2_label}) illustrates some differences between a MongoDB database and a relational database.
+MongoDB is a NoSQL document oriented database program. A MongoDB database can contain multiple collections, each record in a collection is a document. Documents are a structure composed of file and value pairs, similar to JSON objects or other mapping data types \cite{Mongo:doc}. The table below (Figure ~\ref{mongo2_label}) illustrates some differences between a MongoDB database and a relational database.
 
 Not only Sequential Query Language (NoSQL) is a database type that provides a mechanism for storage and retrieval of data which is modelled by means other than the tabular relations used in relational databases, in the case of MongoDB, it is document based. NoSQL databases are a favored solution for 'Big Data' storage as they incorporate a schema-less data model \cite{wiki:nosql}. 'Schema-less' means the database doesn't have fixed data structure. A NoSQL database provides increased scalability and ﬂexibility compared to relational databases.
 
@@ -24,7 +24,7 @@ Atlas uses clusters to manage the data in a MongoDB project. Clusters are simply
     \label{mongo3_label}
     \caption{My MongoDB Project Cluster}
 \end{figure}
-A replica-set means there are multiple instances (in my case three) of MongoDB which each mirror all the data of the other. A replica-set consists of one primary node (master) and one or more secondary nodes (slaves). Read-operations can be served by any slave, but write-operations always take place on the master of the replica-set and are then propagated to the slaves. Replica-sets offer fault-tolerance as when one of the members of the replica-set goes down, the others take over. When the master goes down, the slaves will elect a new master.
+A replica-set means there are multiple instances (in my case three) of MongoDB each mirroring all the data of the other. A replica-set consists of one primary node (master) and one or more secondary nodes (slaves). Read-operations can be served by any slave, but write-operations always take place on the master of the replica-set and are then propagated to the slaves. Replica-sets offer fault-tolerance as when one of the members of the replica-set goes down, the others take over. When the master goes down, the slaves will elect a new master.
 
 \newpage
 \subsubsection{Atlas In My Application}
@@ -73,7 +73,7 @@ Once I generated the Spring Boot project from the 'Initializr' I simply needed t
 I mentioned earlier in the document I wanted my project to mimic what it would be like to develop a real website. Of course, my application can hardly hold a light to a user ready website we could find on the web at this moment, however, I did want it to be deployed in order to understand what is required to deploy a large application with multiple different technologies and tiers working together.
 
 With this in mind, I decided to use Heroku as I had some experience with it from the module 'Software Engineering' already this semester.
-Heroku is a container-based cloud Platform as a Service (PaaS). PAAS is a category of cloud computing that provides a platform allowing customers to develop, run, and manage applications without the complexity of building and maintaining the infrastructure typically associated with developing and launching an app \cite{wiki:paas}. Developers use Heroku to deploy, manage, and scale modern apps \cite{Heroku:about}.
+Heroku is a container-based cloud Platform as a Service (PaaS). PaaS is a category of cloud computing that provides a platform allowing customers to develop, run, and manage applications without the complexity of building and maintaining the infrastructure typically associated with developing and launching an app \cite{wiki:paas}. Developers use Heroku to deploy, manage, and scale modern apps \cite{Heroku:about}.
 
 To get my application fully hosted on Heroku I had to do three thing;
 \subsubsection{1. Deploy my Spring Boot API}
@@ -118,7 +118,7 @@ Another notable features of React would be its use of 'Javascript-XML' (JSX). Re
 \subsection{Creating React Application}
 Like I did for creating my Spring Boot application, I made use of a very popular tool to help me speed up or 'bootstrap' the process of getting a React application off the ground. 'Create-React-App' is an official environment creator provided by the creators of React (Facebook) to help developers get set up to code within minutes. This powerful tool gets an application setup with the right set of dependencies such as babel, react-dom and ES6 without the developer ever having to worry.
 
-To use 'Create-React-App' one must have Node and Node-Package-Manager (NPM) installed. Then they simply run 'npx create-react-app <application name>' and let their environment get setup.
+To use 'Create-React-App' one must have Node and Node-Package-Manager (NPM) installed. Then they simply run 'npx create-react-app (application name)' and let their environment get setup.
 
 Lastly, to run the react application in development mode we use the command 'npm start'. This runs the application on 'localhost:3000'.
 
@@ -138,7 +138,7 @@ Specifically, JWT was used for authenticating and authorizing requests to and fr
     \item The credentials are verified on the back end and a JWT is returned using a secret.
     \item The JWT and username are committed to the browser's session storage (not the password as it is sensitive data), this allows for verification on future requests.
     \item All subsequent API calls contain this JWT in their  authorization header using 'axios interceptors'.
-    \item Application verifies whether or not the user is logged in (via session storage) and the JWT and then processes the request.
+    \item Application verifies whether or not the user is logged in (via session storage) and then processes the request.
 \end{itemize}
 
 
@@ -201,10 +201,10 @@ As I had mentioned, I regret not using more of GitHub's features to their fulles
 \end{figure}
 
 \subsection{React Frameworks}
-\subsubsection{Many different frameworks were used alongside the React library to develop the front end application, some of the most notable are the following:}
+Many different frameworks were used alongside the React library to develop the front end application, some of the most notable are the following:
 
 \subsubsection{1. Bootstrap}
-Bootstrap is an invaluable CSS framework which helps style web pages. I used it throughout my application and is used to style almost every component. I initially imported the Bootstrap CSS via the site 'UNPKG'. This is a useful content delivery site for everything on NPM. I simply added the URL to a 'bootstrap.css' file and then imported it into my app (Figure ~\ref{boot_label}). Later on in development I added it via NPM also for easier use of features such as forms.
+Bootstrap is an invaluable CSS framework which helps style web pages. I used it throughout my application and it is used to style almost every component. I initially imported the Bootstrap CSS via the site 'UNPKG'. This is a useful content delivery site for everything on NPM. I simply added the URL to a 'bootstrap.css' file and then imported it into my app (Figure ~\ref{boot_label}). Later on in development I added it via NPM also for easier use of features such as forms.
 
 \begin{figure}[h]
     \centering

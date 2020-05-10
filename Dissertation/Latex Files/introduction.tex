@@ -1,5 +1,5 @@
 \chapter{Introduction}
-The following document is a dissertation for my final year project in which I hope to achieve a B.Sc. (Hons.) in Software Development. This project was undertaken by just myself and all work shown is my own.
+The following document is a dissertation for my final year project in which I hope to achieve a B.Sc. (Hons.) in Software Development. This project was undertaken by just myself and all work shown is my own unless referenced otherwise.
 
 From the beginning of the year I knew I wanted to make a practical web application, a website that could actually be useful to people and would also provide me with a suitable challenge and rewarding, worthwhile learning outcomes. Much research went into what kind of project I would do and what technologies I would use to do it which will be discussed further on in the document.
 
@@ -20,10 +20,10 @@ After deciding against the MEAN stack, I looked into the MERN stack (MongoDB, Ex
 I decided I was trying too hard to conform to a predefined 'stack' and realised I didn't have to choose a set of technologies that work well together just because they form a nice acronym. I wanted to have a back-end built in a language other than JavaScript and for developing RESTful web services you don't need to look much farther than DropWizard or Spring Boot.
 
 \subsubsection{Dropwizard}
-Dropwizard is a Java framework for developing web services in Java. Dropwizard makes use of multiple different packages such as \textbf{Jetty, Jersey and Jackson} that let you deploy a micro-service with relative ease\cite{dropwizard}. On top of that, we were actually using Dropwizard in our first semester for the module 'Distributed Systems' so I would have had the added help of knowledge gained from these assignments.
+Dropwizard is a Java framework for developing web services in Java. Dropwizard makes use of multiple different packages such as \textbf{Jetty, Jersey and Jackson} that let you deploy a micro-service with relative ease \cite{dropwizard}. On top of that, we were actually using Dropwizard in our first semester for the module 'Distributed Systems' so I would have had the added help of knowledge gained from these assignments.
 
 \subsubsection{Spring Boot}
-The other technology I looked into was Spring Boot. Like Dropwizard, Boot makes it all too easy to get a Java web application up and running in mere minutes. Spring Boot is a Spring framework module which provides Rapid Application Development (RAD) feature to the Spring framework. It is highly dependent on the starter templates feature which is very powerful and works flawlessly \cite{boot:howto}.
+The other technology I looked into was Spring Boot. Like Dropwizard, Boot makes it all too easy to get a Java web application up and running in mere minutes. Spring Boot is a Spring framework module which provides Rapid Application Development (RAD) features to the Spring framework. It is highly dependent on the starter templates feature which is very powerful and works flawlessly \cite{boot:howto}.
 
 I did a lot of research into these two technologies and found that I was only one of a great many developers unsure about which one to go for. There are countless articles and websites online going into great details comparing the two frameworks and I found it quite easy to get bogged down by an overload of information on the two (Figure ~\ref{drop_label}). In the end I opted for Spring Boot, I found examples of how well it interacts with MongoDB and decided that would be very useful in my application. I don't think development of the API would have suffered at all had I gone for Dropwizard, they're both clearly two very popular technologies for Java web development.
 
@@ -51,7 +51,7 @@ For my 'middle' tier I used Spring Boot. Spring Boot is a fantastic variation of
 A deciding factor in choosing Spring boot as my server side technology was it's very powerful MongoDB connector. All you need to do is simply extend the 'MongoRepository' class from a repository interface which contains plenty of generic methods already. Impressively, you do not need to manually implement these queries yourself, instead you can use Spring Boot's repository naming conventions, and the 'MongoRepository' will intelligently construct the queries at run-time \cite{marchioni2015mongodb}.
 
 \subsection{Front-End Tier}
-For the front end of my web application I decided to use React. React is a Javascript library for building UI's. However, as it is only concerned with rendering data to the DOM. React requires  additional libraries for state management, sending HTTP requests and routing such as React Router and Axios \cite{wiki:xxx}. I use multiple Javascript libraries in my application to compliment React such and will examine them later in the document.
+For the front end of my web application I decided to use React. React is a Javascript library for building UI's. However, as it is only concerned with rendering data to the DOM, React requires  additional libraries for state management, sending HTTP requests and routing such as React Router and Axios \cite{wiki:xxx}. I use multiple Javascript libraries in my application to compliment React and will examine them later in the document.
 
 I performed testing on the front-end application using two testing frameworks, 'Jest' and 'React-Testing-Library'.
 
@@ -61,8 +61,8 @@ Like the vast majority of students in my year, my primary objective in developin
 \begin{itemize}
     \item I wanted my application to have a number of moving parts and to be a real 'Full Stack Application'. I felt a 3 tier system would go a long way towards showing me how a production ready application might actually look in the working world. When developing across different levels you learn a lot about how each level of the stack works, how they communicate with each other, what works well together and what doesn't.
     \item As I have a big interest in web development in particular, I specifically wanted to become very familiar with React. According to Stack Overflow's 2019 survey, more developers say they use React.js than Angular, a switch from last year \cite{Stack}. It ranked second overall behind JQuery.
-    \item Adding to what I said earlier about getting a taste for what a real world application might look, I felt it was very important to have genuine authentication. I initially wanted OAuthentication but opted instead for JSON Web Tokens or failing that, basic authentication.
-    \item I wanted users to be able to perform the basic CRUD functionalities with jobs.
+    \item Adding to what I said earlier about getting a taste for how a real world application might look, I felt it was very important to have genuine authentication. I initially wanted OAuthentication but opted instead for JSON Web Tokens or failing that, basic authentication.
+    \item I wanted users to at least be able to perform the basic CRUD functionalities on jobs.
     \item I wanted the application to be deployed on Heroku.
 
 \end{itemize}
@@ -74,16 +74,16 @@ This document will give a detailed description of my research, planning, reasoni
     The current chapter, the introduction, has covered what my aims for the project were early on. What research I did before choosing to develop using the technologies I did and also my objectives for the project before beginning development.
     
     \subsubsection{Methodology}
-    This chapter will go over how I went about the development of my project at a more detailed level. It will cover how often I met with my supervisor and how often I dedicated each week to the project. It will essentially cover how I went about developing and planning the entire project, which project methodology was used and if I felt it was at the right level. 
+    This chapter will go over how I went about the development of my project at a more detailed level. It will cover how often I met with my supervisor and how often I dedicated each week to the project. It will essentially cover how I went about developing and planning the entire project and if I felt it was at the right level. 
     
     \subsubsection{Technology Review}
-    This chapter will documents the outcome of my research into the technologies I used and how I used them to achieve my objectives. Every technology used in the development of the application will be described here, covering what they do in general and what they offer to my application specifically.
+    This chapter will document the outcome of my research into the technologies I used and how I used them to achieve my objectives. Every technology used in the development of the application will be described here, covering what they do in general and what they offer to my application specifically.
     
     \subsubsection{System Design}
     This section will describe the architecture of the application. It will cover how each tier of the application communicate together to form the complete project. It will contain diagrams and screenshots to help visualise the structure and architecture of the application.
     
     \subsubsection{System Evaluation}
-    In this chapter I will do a full evaluation of the application as a whole. I will compare the final outcome of the application with the objectives I initially outlined in the Introduction chapter. I will also outline any limitations or difficulties I found in the project be it through technologies used or through my own decisions and mistakes. I will also suggest improvements I believe could be made on the application.
+    In this chapter I will do a full evaluation of the application as a whole. I will compare the final outcome of the application with the objectives I initially outlined in the Introduction chapter. I will also outline any limitations or difficulties I found in the project, be it through technologies used or through my own decisions and mistakes. I will also suggest improvements I believe could be made on the application.
     
     \subsubsection{Conclusion}
     The conclusion will be a summary of the entire finished project. It will discuss my initial goals for the project and how well I managed to achieve them. I will cover what I feel I learned throughout the development of the project and the writing of the dissertation. It will also outline any regrets I have with the project be they from using the wrong technologies or other matters. Overall I hope it will provide a final piece of insight on my experience with the project and hopefully wrap up the documentation.

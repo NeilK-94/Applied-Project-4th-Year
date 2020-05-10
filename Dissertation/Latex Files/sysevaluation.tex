@@ -12,7 +12,7 @@ My first objective was to build an application 'with a number of moving parts'. 
 My second objective was to become 'very familiar' with React. Again I do feel that I have accomplished this objective. I would say technology wise, the project consists of about 60\% React/Javascript code while the rest is made up of Java and a few others. I had wanted to become familiar with React as it is an ever increasing language in terms of popularity and I wish to focus on web development once I graduate. I'm far from an expert with React having finished the application but I will say I feel I developed genuine knowledge on the technology that I can use as a base to build on in the future.
 
 \subsubsection{Objective 3}
-My third objective was for the application to have authentication. I decided ideally, the application would have JSON web tokens but failing that would use basic authentication. Thankfully, I managed to implement JSON web tokens. I initially implemented basic authentication and from there moved on to JSON web tokens.
+My third objective was for the application to have authentication. I decided ideally, the application would use JWT but failing that would use basic authentication. I initially implemented basic authentication and from there managed to upgrade the project authentication to JWT.
 
 \subsubsection{Objective 4}
 My fourth objective was for the user to be able to perform the basic CRUD functions on the API. This was one of the first things I achieved and added to by implementing custom searches.
@@ -56,7 +56,7 @@ By default \textbf{Jest} expects to find files to test in a '\_\_test\_\_' folde
 \subsubsection{LoginComponent Tests}
 In the 'LoginComponent' I run three tests, the first two are contained in the first 'describe'. \textbf{Describe} is a function name, along with \textbf{it} in a lot of testing framework. It essentially groups together tests into suites.
 
-The first test suite checks to see first, that our component renders correctly, and then to see that out login button renders correctly, with the correct content inside it(Login)
+The first test suite checks to see first, that the component renders correctly, and then to see that the login button renders correctly, with the correct content inside it(Login).
 
 The second tests to ensure that the input box containing the placeholder text, 'Neil' updates on change. It passes the value 'test' into it using a \textbf{fireEvent}. fireEvents are useful for performing an action in a test. Finally, we use the \textbf{expect} function to tell our test what value to expect the searchInput value to be.
 

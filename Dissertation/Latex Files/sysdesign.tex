@@ -20,7 +20,7 @@ In the following sections I will detail the design for each tier and explain why
 As this section contains the user interface, the only part of the application that the end user will actually see, I will go into extensive detail on it and provide many screenshots of each page and feature as well as provide some code snippets on how each feature was implemented.
 
 \subsection{Login Page}
-The login page (Figure ~\ref{login_label}) is the first page the user sees when they use my application They cannot progress to any other pages in my application as all routes are authenticated. It consists of two text-boxes for entering user credentials, as well as a Bootstrap button for beginning the login sequence. If a user enters incorrect credentials they are alerted via a 'Bootstrap alert' Further down the page there is a 'jumbotron' for styling purposes.
+The login page (Figure ~\ref{login_label}) is the first page the user sees when they use my application. They cannot progress to any other pages in my application as all routes are authenticated. It consists of two text-boxes for entering user credentials, as well as a Bootstrap button for beginning the login sequence. If a user enters incorrect credentials they are alerted via a 'Bootstrap alert'. Further down the page there is a 'jumbotron' for styling purposes.
 
 \begin{figure}[ht]
     \centering
@@ -76,7 +76,7 @@ This component (Figure ~\ref{apply_label}) is a 'modal' that displays more detai
 \end{figure}
 
 \subsection{Jobs Page}
-This page (Figure ~\ref{jobs_label})contains a 'Add' button which brings the user to the 'UpdateJobComponent'. The page also contains a table listing all the jobs in the database as well as two buttons in every row;
+This page (Figure ~\ref{jobs_label}) contains a 'Add' button which brings the user to the 'UpdateJobComponent'. The page also contains a table listing all the jobs in the database as well as two buttons in every row;
 
 \begin{itemize}
     \item The \textbf{Delete button} removes a job listing from the database and refreshes the page.
@@ -156,7 +156,7 @@ Aside from the listed packages there are;
         \label{jwtuml_label}
         \caption{UML diagram for JWT packages}
         \end{figure}
-        \item The \textbf{pom.xml} file contains project information and configuration information for maven to build the project such as dependencies, build directory and source directories. Maven reads the pom. xml file, then executes the goal \cite{POM}. Here (Figure ~\ref{pom_label}) I specified many dependencies to aid in building the API.
+        \item The \textbf{pom.xml} file contains project information and configuration information for maven to build the project such as dependencies, build directory and source directories. Maven reads the pom.xml file, then executes the goal \cite{POM}. Here (Figure ~\ref{pom_label}) I specified many dependencies to aid in building the API.
         \item Lastly, the \textbf{application.properties} file is used to keep project properties in a single file to run the application in a different environment.
 \end{itemize}
 \begin{figure}[ht]
@@ -194,7 +194,7 @@ git push heroku master
 \end{verbatim}
 
 \section{Back-End}
-The back-end tier stores all of my job data. I deployed a my database online using MongoDB Atlas. This makes it available at all times to the API.
+The back-end tier stores all of my job data. I deployed my database online using MongoDB Atlas. This makes it available at all times to the API.
 
 \subsection{MongoDB Atlas}
 There were a number of steps required to deploy my database on Atlas.
