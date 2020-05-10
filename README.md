@@ -67,5 +67,14 @@ Now you can visit `localhost:3000` to access the React application.
   - Execute the jar file located in the target folder inside the *spring-portal* directory using: `java -jar spring-portal-0.0.1-snapshot.jar`
 The API is now running on `localhost:8080` and will now handles requests from the front-end.
 
+There are two profiles to log in:
+ - Username: Neil
+ - Password: password   
+
+Or:
+ - Username: user
+ - Password: gmit2020
+
+
 ## Video Demonstration
 Insert youtube link..
