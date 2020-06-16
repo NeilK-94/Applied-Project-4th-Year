@@ -1,7 +1,7 @@
 
 # Software Developers Job Portal
 **Neil Kyne**
-This repository contains my final year project along with its accompanying dissertation, a video demonstration of the application as well as a README. The project itself is a a full stack web application with JWT authentication hosted on Heroku. Detailed documentation on the technologies employed in the project can be found in the dissertation along with API and front-end system design rationale. There is also an accompanying screencast provided demonstrating my application in action. Issues encountered during development can be found in the Issues tracker. Lastly, the README provides a brief examination of the project and  repository leaving a more comprehensive study of the application to the dissertation provided.
+This rpository contains my final year project along with its accompanying dissertation, a video demonstration of the application as well as a README. The project itself is a a full stack web application with JWT authentication hosted on Heroku. Detailed documentation on the technologies employed in the project can be found in the dissertation along with API and front-end system design rationale. There is also an accompanying screencast provided demonstrating my application in action. Issues encountered during development can be found in the Issues tracker. Lastly, the README provides a brief examination of the project and  repository leaving a more comprehensive study of the application to the dissertation provided.
 
 ## Project Overview
 This application is a job portal aimed specifically at software developers. Users can:
