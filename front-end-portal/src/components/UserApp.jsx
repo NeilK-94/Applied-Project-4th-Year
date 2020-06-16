@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ListJobsComponent from './ListJobsComponent';
 import UpdateJobComponent from './UpdateJobComponent';
 import LoginComponent from './LoginComponent'
+import LoginComponent1 from './LoginComponent1'
 import LogoutComponent from './LogoutComponent'
 import ErrorComponent from './ErrorComponent'
 import FooterComponent from './FooterComponent'
@@ -19,8 +20,8 @@ export class UserApp extends Component {
                 <Router>
                     <HeaderComponent />
                         <Switch>
-                            <Route path="/" exact component={LoginComponent} />
-                            <Route path="/login" component={LoginComponent} />
+                            <Route path="/" exact component={LoginComponent1} />
+                            <Route path="/login" component={LoginComponent1} />
                             <AuthenticatedRoute path="/logout" component={LogoutComponent} />
                             <AuthenticatedRoute path="/home/:username" component={HomeComponent} />
                             <AuthenticatedRoute path="/jobs/:id" component={UpdateJobComponent} />

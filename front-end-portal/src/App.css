@@ -36,6 +36,10 @@
   overflow: hidden;
 }
 
+.userNameBox {
+  margin-right: 10px;
+}
+
   .popup {
     color: black;
     padding: 60px;
