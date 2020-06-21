@@ -6,14 +6,14 @@ import AuthenticationService from "../service/AuthenticationService";
 export const LoginComponent1 = () => {
   const [userName, setUserName] = useState("Neil");
   const [password, setPassword] = useState("");
-  var [failedLogin, setFailedLogin] = useState(false);
+  const [message, setMessage] = useState("");
+
+  let history = useHistory();
 
   const handler = {
     userName: setUserName,
     password: setPassword,
   };
-
-  let history = useHistory();
 
   const handleChange = (event) => {
     handler[event.target.name](event.target.value);
@@ -29,7 +29,7 @@ export const LoginComponent1 = () => {
         history.push(`/home/${userName}`);
       })
       .catch(() => {
-        setFailedLogin((failedLogin = true));
+        setMessage("Failed login");
       });
   };
 
@@ -42,12 +42,9 @@ export const LoginComponent1 = () => {
     <div className="container">
       <h1>Login</h1>
       <div className="container">
-        {failedLogin && (
-          <div
-            className="alert alert-warning alert-dismissible fade show"
-            role="alert"
-          >
-            Failed Login
+        {message && (
+          <div className="alert alert-warning" role="alert">
+            {message}
           </div>
         )}
         User Name:{" "}
